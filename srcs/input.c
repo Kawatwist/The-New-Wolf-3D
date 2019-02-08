@@ -52,6 +52,17 @@ void	input(t_acz *az)
 	else
 	{
 		state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
+		state[SDL_SCANCODE_UP] && !state[SDL_SCANCODE_DOWN]  && az->info->editx > 9 ? az->info->editx -= 10 : 0;
+		state[SDL_SCANCODE_DOWN] && !state[SDL_SCANCODE_UP]  && az->info->editx < 590 ? az->info->editx += 10 : 0;
+		state[SDL_SCANCODE_LEFT] && !state[SDL_SCANCODE_RIGHT]  && az->info->edity > 9 ? az->info->edity -= 10 : 0;
+		state[SDL_SCANCODE_RIGHT] && !state[SDL_SCANCODE_LEFT]  && az->info->edity < 590 ? az->info->edity += 10 : 0;
 		printf("Editor\n");
+		state[SDL_SCANCODE_KP_0] ? az->info->editbrush = 0 : 0;
+		state[SDL_SCANCODE_KP_1] ? az->info->editbrush = 1 : 0;
+		state[SDL_SCANCODE_KP_2] ? az->info->editbrush = 2 : 0;
+		if (state[SDL_SCANCODE_RETURN])
+		{
+			az->info->editmap[az->info->edity / 10][az->info->editx / 10] = az->info->editbrush;
+		}
 	}
 }

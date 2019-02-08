@@ -12,6 +12,20 @@
 
 #include "../includes/wolf3d.h"
 
+static void		initeditmap(int	map[60][60])
+{
+	int i;
+	int j;
+
+	j = -1;
+	while (++j < 60)
+	{
+		i = -1;
+		while (++i < 60)
+			map[j][i] = 0;
+	}
+}
+
 static void		init_sdl(t_acz *az)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -27,12 +41,16 @@ static void		init_info(t_info *info)
 {
 	info->x = 1;
 	info->y = 1;
+	info->editx = 5;
+	info->edity = 5;
+	info->editbrush = 1;
 }
 
 static void		call_init(t_acz *az)
 {
 	init_info(az->info);
 	init_sdl(az);
+	initeditmap(az->info->editmap);
 	loadmenu(az);
 	loadoption(az);
 	az->interface = 0;

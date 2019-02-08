@@ -2,8 +2,13 @@
 
 static void	printedit(t_acz *az)
 {
-	SDL_SetRenderDrawColor(az->main->rend, 100, 100, 100, 0);
+	SDL_SetRenderDrawColor(az->main->rend, 30, 30, 30, 0);
 	SDL_RenderClear(az->main->rend);
+	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
+	printgrill(az);
+	SDL_SetRenderDrawColor(az->main->rend, 250, 120, 0, 0);
+	SDL_RenderDrawLine(az->main->rend, 0, az->info->editx, YSCREEN, az->info->editx);
+	SDL_RenderDrawLine(az->main->rend, az->info->edity, 0,  az->info->edity, 600);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
 }

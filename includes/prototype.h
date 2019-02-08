@@ -1,6 +1,7 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		printgrill(t_acz *az);
 void		map(t_acz *az);
 void		loadmenu(t_acz *az);
 void		loadoption(t_acz *az);

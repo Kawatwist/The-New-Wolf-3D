@@ -23,6 +23,10 @@ typedef struct			s_info
 {
 	int					x;
 	int					y;
+	int					editx;
+	int					edity;
+	int					editmap[60][60];
+	int					editbrush;
 }						t_info;
 
 typedef struct			s_ray
