@@ -1,0 +1,151 @@
+.TH Fdf 6 "December 8, 2018"
+.SH NAME
+Fdf - 
+.B "Fil de fer projet"
+@42
+
+.SH DESCRIPTION
+"all programs you have written so far only ran in text mode in your device. Now
+let's discover something more exciting: how to open a 
+.B graphic 
+window and draw
+in? To start your journey in the country of graphic programming, FdF proposes to
+represent the 
+.B mesh in "wire of a field" in 3D."
+Fdf project @ 42
+
+.SH INCLUDE LIB
+
+.B mlx.h
+should be included for a correct use of the MiniLibX API.
+
+.B fcntl.h
+should be included for open your file.
+
+.B unistd.h
+should be included for reading and print error (usage...).
+
+.B stdlib.h
+should be included for the string and struct mallocation.
+
+.SH Variables modifications
+.B -V 
+.I [s, o, c, h, min, max]
+.nf
+
+ -Vs (char) : Set the Scale value
+ -Vo (unsigned char) : Set the opacity value
+ -Vc (int) : Choose one basic color map (1 - 10)
+ -Vh (int) : Choose the high of the map
+ -Vmin (int) : Minimal Value print
+ -Vmax (int) : Maximal Value print
+.fi
+
+.SH Prints modes
+.B -M 
+.I [t, h, i]
+.nf
+ -Mt : Trace mode
+ -Mh : Map with Hexa Value
+ -Mi : Unavailable
+.fi
+
+.SH Window Size
+.B -Size 
+.I (int) (int) 
+: Set the X and Y screen
+
+.SH Show basic vue
+.B -Vue (Value)
+ Choose one Basic vue (1 - 3)
+
+.SH Menu windowed
+.B -Menu
+ Set the menu in the new window
+
+.SH Pixel size
+.B -Pixel
+(
+.I int
+) or "
+.I auto
+"
+ Set the Size of Zoomed pixel or in Auto mode
+
+.SH Infinite map
+.B -Inf
+
+ Set the mode map to infinite
+
+.SH Link
+.B -Link
+
+ Disable the linked mode
+
+.SH CONTROLS
+.nf
+	Escape	: Shutdown the program properly
+	Space 	: Enable/disable trace mode
+	W 		: Fast move upside
+	A 		: Fast move left
+	S 		: Fast move down
+	D 		: Fast move right
+	O		: Next color mode
+	P		: Last color mode
+	R		: Not activate already
+	+		: Increase the scale value
+	-		: Decrease the scale value
+	5 / 2	: Rotation on X's side
+	1 / 3	: Rotation on Y's side
+	left    : Slow move left
+	right	: Slow move right
+	up		: Slow move up
+	down    : Slow move down
+	f15		: Debug key
+.fi
+
+.SH Examples :
+.B ./fdf 
+.I [source_file] 
+.B -Size 
+.I 230 230 
+.B -Vc 
+.I 2 
+.B -Vmin 
+.I 0 
+.B -Vmax 
+.I 500
+.B -Vs 
+.I 1
+
+.B ./fdf 
+.I [source_file] 
+.B -Mt  
+.B -Vh 
+.I 1 
+.B -Vs 
+.I 1 
+.B -Vh 
+.I 1
+
+.SH COMPILATION
+.BManual :
+.B gcc 
+(file in 
+.B srcs path
+) 
+.B ./includes/mlx.h includes/fdf.h ./libft/libft.a ./includes/libmlx.a -framework OpenGl -framework AppKit
+
+.B Make rules : 
+(all) (re) (clean) (fclean)
+
+.SH CAUTION
+.B THE LIBFT SHOULD BE ALREADY COMPILED BEFORE THE MANUAL COMPILATION
+
+.SH AUTHOR
+
+.B fdf author :
+Lomasse - 2018 - lomasse@student.42.fr
+
+.B mlx author :
+Copyright ol@ - 2002-2014 - Olivier Crouzet
