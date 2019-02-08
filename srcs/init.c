@@ -18,6 +18,8 @@ static void		init_sdl(t_acz *az)
 	IMG_Init(IMG_INIT_PNG);
 	az->main->window = SDL_CreateWindow("Wolf3D", 0, SDL_WINDOWPOS_CENTERED, XSCREEN, YSCREEN, SDL_WINDOW_SHOWN);
 	az->main->rend = SDL_CreateRenderer(az->main->window, -1, SDL_RENDERER_PRESENTVSYNC);
+	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
+	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
 }
 
@@ -31,6 +33,9 @@ static void		call_init(t_acz *az)
 {
 	init_info(az->info);
 	init_sdl(az);
+	loadmenu(az);
+	loadoption(az);
+	az->interface = 0;
 }
 
 void			initialization(t_acz **az)
@@ -45,6 +50,7 @@ void			initialization(t_acz **az)
 	while (++i < 800)
 		((*az)->ray[i] = (t_ray *)malloc(sizeof(t_ray))) == NULL ? stop_exec("Dosnt malloc ray struct\n") : 0;
 	((*az)->menu = (t_menu *)malloc(sizeof(t_menu))) == NULL ? stop_exec("Dosnt malloc menu struct\n") : 0;
+	((*az)->option = (t_menu *)malloc(sizeof(t_menu))) == NULL ? stop_exec("Dosnt malloc option struct\n") : 0;
 	((*az)->info = (t_info *)malloc(sizeof(t_info))) == NULL ? stop_exec("Dosnt malloc info struct\n") : 0;
 	call_init(*az);
 }

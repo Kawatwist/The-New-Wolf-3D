@@ -30,7 +30,7 @@ MAKELIB			= make re -C libft/
 
 LIBFT			= -Llibft/ -lft
 
-LIBMLX			= -L ./libui -lSDL2 -lSDL2_image
+LIBMLX			= -L ./libui -lSDL2 -lSDL2_image -lSDL2_mixer
 
 FRAME			= -framework OpenGL -framework AppKit
 

@@ -8,6 +8,7 @@
 # include "../libft/libft.h"
 # include <math.h>
 # include "../libui/SDL2/SDL.h"
+# include "../libui/SDL2/SDL_mixer.h"
 # include "../libui/SDL2/SDL_image.h"
 
 # define	TRUE	1
@@ -50,6 +51,7 @@ typedef struct			s_menu
 	SDL_Surface			*choices;
 	SDL_Texture			*bg;
 	SDL_Texture			*choice;
+	SDL_Rect			rchoice;
 	int					mode;
 	int					difficulty;
 }						t_menu;
@@ -57,11 +59,15 @@ typedef struct			s_menu
 typedef struct			s_window
 {
 	SDL_Window			*window;
-	SDL_Renderer		*rend;
-	SDL_Surface			*background;
-	SDL_Surface			*more;
-	SDL_Rect			bgpos;
-	SDL_Rect			morepos;
+	SDL_Renderer			*rend;
+	SDL_Texture			*tbg;
+	SDL_Texture			*tother;
+	SDL_Surface			*sbg;
+	SDL_Surface			*sother;
+	SDL_Rect			rbg;
+	SDL_Rect			rother;
+	Mix_Music			*song;
+	Mix_Chunk			*Effect;
 }						t_window;
 
 typedef struct			s_acz	// ARCZURE
@@ -73,7 +79,11 @@ typedef struct			s_acz	// ARCZURE
 	t_ray				*ray[XSCREEN];
 	t_info				*info;
 	t_menu				*menu;
+	t_menu				*option;
 	SDL_Event			ev;
+	int					interface;
+	Uint8					time;
+	Uint8					time2;
 	int					twodactif;
 }						t_acz;
 

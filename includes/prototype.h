@@ -1,6 +1,11 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		map(t_acz *az);
+void		loadmenu(t_acz *az);
+void		loadoption(t_acz *az);
+void		load_texture(SDL_Renderer *render, SDL_Texture **texture, char *path);
+void		print(t_acz *az);
 void		collision(t_acz* az);
 void		input(t_acz *az);
 void		running(t_acz **az);
