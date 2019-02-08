@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:36:05 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/08 15:41:58 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/08 16:47:09 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void stop_exec(void *msg)
 int	main(int argc, char **argv)
 {
 	t_acz	*az;
-	if (argc < 2)
+	if (argc < 3 && argc > 3)
 		stop_exec("Erreur du nombre d'argument\n");
-	initialization(az);
-	map_parse(az->map);
-	running(az);
+	initialization(&az);
+	map_parse(&az, argv[1]);
+	running(&az);
 	return (0);
 }

@@ -15,6 +15,14 @@
 # define	XSCREEN	800
 # define	YSCREEN	600
 # define	DEG2RAD	0.0174532778
+# define	SPAWN	3
+# define	SBLOCK 	75
+
+typedef struct			s_info
+{
+	int					x;
+	int					y;
+}						t_info;
 
 typedef struct			s_ray
 {
@@ -63,7 +71,9 @@ typedef struct			s_acz	// ARCZURE
 	t_map				*map;
 	t_inv				*inv;
 	t_ray				*ray[XSCREEN];
+	t_info				*info;
 	t_menu				*menu;
+	SDL_Event			ev;
 	int					twodactif;
 }						t_acz;
 
