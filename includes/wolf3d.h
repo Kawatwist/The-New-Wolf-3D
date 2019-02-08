@@ -67,7 +67,7 @@ typedef struct			s_window
 	SDL_Rect			rbg;
 	SDL_Rect			rother;
 	Mix_Music			*song;
-	Mix_Chunk			*Effect;
+	Mix_Chunk			*effect;
 }						t_window;
 
 typedef struct			s_acz	// ARCZURE

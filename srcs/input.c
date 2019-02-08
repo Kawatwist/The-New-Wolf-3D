@@ -31,6 +31,7 @@ void	input(t_acz *az)
 		state[SDL_SCANCODE_UP] && az->menu->mode > 0 ? az->menu->mode -= 1 : 0;
 		if (state[SDL_SCANCODE_RETURN])
 		{
+			Mix_PlayChannel(-1, az->main->effect, 0);
 			az->menu->mode == 0 ? az->interface = 1 : 0;
 			az->menu->mode == 1 ? az->interface = 2 : 0;
 			az->menu->mode == 2 ? az->interface = 3 : 0;
