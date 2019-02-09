@@ -19,6 +19,24 @@
 # define	SPAWN	2
 # define	SBLOCK 	75
 
+typedef struct			s_dda
+{
+	int			i;
+	int			x;
+	int			y;
+	int			pasx;
+	int			pasy;
+	int			distx;
+	int			disty;
+	double			dist;
+	double			convdist;
+	int			side;
+	int			dx;
+	int			dy;
+	int			e;
+	int			pente;
+}				t_dda;
+
 typedef struct			s_info
 {
 	int					range;
@@ -35,7 +53,11 @@ typedef struct			s_ray
 {
 	double				posy;
 	double				posx;
-	double				dst;
+	double				obs;
+	double				obsother;
+	int				other;
+	int				facex;
+	int				facey;
 }						t_ray;
 
 typedef struct			s_inv

@@ -1,5 +1,21 @@
 #include "../includes/wolf3d.h"
 
+void	printline(t_acz *az)
+{
+	int	i;
+
+	i = 0;
+	raycast(az);
+	while (i < XSCREEN)
+	{
+		SDL_SetRenderDrawColor(az->main->rend, 0, 0, 255, 0);
+		SDL_RenderDrawLine(az->main->rend, i, 0, i, (YSCREEN/2) - ((int)az->ray[i]->obs * (YSCREEN / 2) / az->info->range));
+		SDL_SetRenderDrawColor(az->main->rend, 0, 255, 0, 0);
+		SDL_RenderDrawLine(az->main->rend, i, (YSCREEN/2) + ((int)az->ray[i]->obs * (YSCREEN / 2) / az->info->range), i, YSCREEN);
+		i++;
+	}
+}
+
 void	printgrill(t_acz *az)
 {
 	int		j;

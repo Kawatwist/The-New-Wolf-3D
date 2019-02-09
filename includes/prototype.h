@@ -1,6 +1,8 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		printline(t_acz *az);
+void		raycast(t_acz *az);
 void		save_map(t_acz *az);
 void		printgrill(t_acz *az);
 void		map(t_acz *az);

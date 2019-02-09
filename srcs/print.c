@@ -24,8 +24,9 @@ static void	printoption(t_acz *az)
 
 static void	printgame(t_acz *az)
 {
-	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 150, 0);
+	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
 	SDL_RenderClear(az->main->rend);
+	printline(az);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
 }

@@ -67,13 +67,14 @@ void	map(t_acz *az)
 	perso.y = YSCREEN /2 - 17.5;
 	perso.w = 35;
 	perso.h = 35;
+	raycast(az);
 	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
 	SDL_RenderClear(az->main->rend);
 	SDL_SetRenderDrawColor(az->main->rend, 150, 150, 150, 0);
 	draw_obstacle(az);
 	SDL_SetRenderDrawColor(az->main->rend, 150, 0, 150, 0);
 	SDL_RenderFillRect(az->main->rend, &perso);
-	SDL_SetRenderDrawColor(az->main->rend, 0, 150, 0, 0);
+	SDL_SetRenderDrawColor(az->main->rend, 150, 50, 50, 250);
 	draw_ray(az);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);

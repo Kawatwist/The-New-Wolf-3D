@@ -14,7 +14,16 @@
 
 void		collision(t_acz *az)
 {
-
+	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 1)
+	{
+		az->map->persox -= az->map->lastmovx;
+		az->map->persoy -= az->map->lastmovy;
+	}
+	else if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 4)
+	{
+		az->inv->key += 1;
+		az->map->map[(int)az->map->persoy][(int)az->map->persox] = 0;
+	}
 }
 
 static void	input_menu(Uint8 *state, t_acz *az)
@@ -55,11 +64,11 @@ static void	mouvement(t_acz *az, int move)
 	if (move == 0 || move == 2)
 	{
 		az->map->lastmovx = 0;
-		az->map->lastmovy = 0.1;
+		az->map->lastmovy = (move == 2 ? 0.07 : -0.07);
 	}
 	else
 	{
-		az->map->lastmovx = 0.1;
+		az->map->lastmovx = (move == 3 ? 0.07 : -0.07);
 		az->map->lastmovy = 0;
 	}
 	tmp = (az->map->lastmovx * cos(az->info->angle)) + (az->map->lastmovy * -sin(az->info->angle));
@@ -72,12 +81,12 @@ static void	mouvement(t_acz *az, int move)
 
 static void	input_game(Uint8 *state, t_acz *az)
 {
-	state[SDL_SCANCODE_A] ? mouvement(az, 3)/*az->map->persox -= 0.1*/ : 0;
+	state[SDL_SCANCODE_A] ? mouvement(az, 3) : 0;
 	state[SDL_SCANCODE_D] ? mouvement(az, 1) : 0;
 	state[SDL_SCANCODE_W] ? mouvement(az, 2) : 0;
 	state[SDL_SCANCODE_S] ? mouvement(az, 0) : 0;
-	state[SDL_SCANCODE_LEFT] ? az->info->angle -= 0.01 : 0;
-	state[SDL_SCANCODE_RIGHT] ? az->info->angle += 0.01 : 0;
+	state[SDL_SCANCODE_LEFT] ? az->info->angle -= 0.07 : 0;
+	state[SDL_SCANCODE_RIGHT] ? az->info->angle += 0.07 : 0;
 	state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
 	state[SDL_SCANCODE_ESCAPE] ? az->interface = 0 : 0;
 	rotate_perso(az);
@@ -116,6 +125,7 @@ void		input(t_acz *az)
 	SDL_PollEvent(&az->ev);
 	state = (Uint8*)SDL_GetKeyboardState(NULL);
 	az->twodactif = (state[SDL_SCANCODE_M] ? 1 : 0);
+	//az->twodactif = 1;
 		if (az->interface == 0)
 			input_menu(state, az);
 		else if (az->interface == 1)

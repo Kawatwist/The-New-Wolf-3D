@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   link.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lomasse <madda.in@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:01:54 by lomasse           #+#    #+#             */
 /*   Updated: 2019/02/07 15:18:17 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
+
 #include "../includes/wolf3d.h"
 
 static int ft_abs(int n)
@@ -19,127 +19,113 @@ static int ft_abs(int n)
 	return (n);
 }
 
-static void initray(t_ray *r)
+static void initdda(t_dda *dda)
 {
-	r->pasx = 0;
-	r->pasy = 0;
-	r->distx = 0;
-	r->disty = 0;
-	r->dist = 0;
-	r->side = 0;
-	r->dx = 0;
-	r->dy = 0;
-	r->e = 0;
-	r->pente = 0;
+	dda->pasx = 0;
+	dda->pasy = 0;
+	dda->distx = 0;
+	dda->disty = 0;
+	dda->dist = 0;
+	dda->side = 0;
+	dda->dx = 0;
+	dda->dy = 0;
+	dda->e = 0;
+	dda->pente = 0;
 }
 
-static int	get_side(t_ray *r, t_win *wn)
+/*
+static int	get_side(t_dda *dda, t_win *wn)
 {
 	// 1 - Nord , 2 - Sud , 3 - Ouest , 4 -Est , 0 - coin
-	if (((wn->map[(r->y - 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX) &&
-		((wn->map[(r->y + 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX))
+	if (((wn->map[(dda->y - 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX) &&
+		((wn->map[(dda->y + 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX))
 	{
-		if (r->pasx == -1)
+		if (dda->pasx == -1)
 			return (3);
 		return (4);
 	}
-	if (((wn->map[r->y * wn->y / wn->yscreen][(r->x - 1) * wn->x / wn->xscreen]) == BOX) &&
-		((wn->map[r->y * wn->y / wn->yscreen][(r->x + 1) * wn->x / wn->xscreen]) == BOX))
+	if (((wn->map[dda->y * wn->y / wn->yscreen][(r->x - 1) * wn->x / wn->xscreen]) == BOX) &&
+		((wn->map[dda->y * wn->y / wn->yscreen][(r->x + 1) * wn->x / wn->xscreen]) == BOX))
 	{
-		if (r->pasy == -1)
+		if (dda->pasy == -1)
 			return (1);
 		return (2);
 	}
 	return (0);
-}
-void	raycast(t_win *wn)
-{
-	t_ray r;
+}*/
 
-	r.i = 0;
-	while (r.i < FOV)
+void	raycast(t_acz *az)
+{
+	t_dda dda;
+
+	dda.i = 0;
+	while (dda.i < XSCREEN)
 	{
-		//printf("Target %d %d\n", (int)wn->perso->vue[r.i].x, (int)wn->perso->vue[r.i].y);
-		initray(&r);
-		r.x = (int)wn->perso->posx;
-		r.y = (int)wn->perso->posy;
-		r.pasx = (r.dx = (int)wn->perso->vue[r.i].x - r.x) < 0 ? -1 : 1;
-		r.pasy = (r.dy = (int)wn->perso->vue[r.i].y - r.y) < 0 ? -1 : 1;
-		r.dx = ft_abs(r.dx);
-		r.dy = ft_abs(r.dy);
-		if (r.dx > r.dy)
+		initdda(&dda);
+		dda.x = (int)az->map->persox;
+		dda.y = (int)az->map->persoy;
+		dda.pasx = (dda.dx = (int)az->ray[dda.i]->posx - dda.x) < 0 ? -1 : 1;
+		dda.pasy = (dda.dy = (int)az->ray[dda.i]->posy - dda.y) < 0 ? -1 : 1;
+		dda.dx = ft_abs(dda.dx);
+		dda.dy = ft_abs(dda.dy);
+		if (dda.dx > dda.dy)
 		{
-			r.pente = 1;
-			r.e = r.dx;
+			dda.pente = 1;
+			dda.e = dda.dx;
 		}
 		else
-			r.e = r.dy;
-		r.dx = r.dx * 2;
-		r.dy = r.dy * 2;
-		while (r.dist < wn->perso->range)
+			dda.e = dda.dy;
+		dda.dx = dda.dx * 2;
+		dda.dy = dda.dy * 2;
+		while (dda.dist < az->info->range)
 		{
-			if (r.pente == 1)
+			if (dda.pente == 1)
 			{
-				r.distx++;
-				r.x += r.pasx;
-				r.e = r.e - r.dy;
-				if (r.e < 0)
+				dda.distx++;
+				dda.x += dda.pasx;
+				dda.e = dda.e - dda.dy;
+				if (dda.e < 0)
 				{
-					r.disty++;
-					r.y += r.pasy;
-					r.e += r.dx;
+					dda.disty++;
+					dda.y += dda.pasy;
+					dda.e += dda.dx;
 				}
 			}
 			else
 			{
-				r.disty++;
-				r.y += r.pasy;
-				r.e = r.e - r.dx;
-				if (r.e < 0)
+				dda.disty++;
+				dda.y += dda.pasy;
+				dda.e = dda.e - dda.dx;
+				if (dda.e < 0)
 				{
-					r.distx++;
-                    r.x+= r.pasx;
-                    r.e += r.dy;
+					dda.distx++;
+			                dda.x+= dda.pasx;
+                    			dda.e += dda.dy;
 				}
 			}
-			r.dist = sqrt((r.distx * r.distx) + (r.disty * r.disty));
-			if (wn->dbug == 1)
+			dda.dist = sqrt((dda.distx * dda.distx) + (dda.disty * dda.disty));
+			if ((az->map->map[dda.y][dda.x]) != 0)
 			{
-				SDL_SetRenderDrawColor(wn->debug->rend, 0, 0, 0, SDL_ALPHA_OPAQUE);
-				SDL_RenderDrawPoint(wn->debug->rend, r.x, r.y);
-			}
-			if (r.i == FOV/2 && wn->dbug == 1)
-			{
-				SDL_SetRenderDrawColor(wn->debug->rend, 255, 0, 255, SDL_ALPHA_OPAQUE);
-				SDL_RenderDrawPoint(wn->debug->rend, r.x, r.y);
-			}
-			if ((wn->map[r.y * wn->y / wn->yscreen][r.x * wn->x / wn->xscreen]) != GROUND)
-			{
-				if ((wn->map[r.y * wn->y / wn->yscreen][r.x * wn->x / wn->xscreen]) == BOX)
+				if ((az->map->map[dda.y][dda.x]) == 1)
 				{
-					//on calcule side 
-					r.side = get_side(&r, wn);
-					//printf("%d ", r.side);
-					r.dist = (r.dist * cos((r.i - (FOV / 2)) * (1 / FOV)));
-					r.dist = (r.dist != 0 ? (75 / r.dist * 255) : 0);
-					wn->perso->vue[r.i].facey = r.y * wn->y / wn->yscreen;
-					wn->perso->vue[r.i].facex = r.x * wn->x / wn->yscreen;
-					wn->perso->vue[r.i].obs = r.dist;
+					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * (1 / 60) * 0.00144 ));
+					dda.dist = (dda.dist != 0 ? (75 / dda.dist * 255) : 0);
+					az->ray[dda.i]->facey = dda.y * 60 / YSCREEN;
+					az->ray[dda.i]->facex = dda.x * 60 / YSCREEN;
+					az->ray[dda.i]->obs = dda.dist;
 					break ;
 				}
-				else if (wn->perso->vue[r.i].other == GROUND)
+				/*else if (az->ray[dda.i]->other == -1)
 				{
-					r.convdist = (r.dist * cos((r.i - (FOV / 2)) * (1 / FOV)));
-					r.convdist = (r.dist != 0 ? (75 / r.dist * 255) : 0);
-					wn->perso->vue[r.i].other = wn->map[r.y * wn->y / wn->yscreen][r.x * wn->x / wn->xscreen];
-					wn->perso->vue[r.i].obsother = r.convdist;
-				} 
+					dda.convdist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * (1 / 66)));
+					dda.convdist = (dda.dist != 0 ? (75 / dda.dist * 255) : 0);
+					az->ray[dda.i]->other = az->map->map[dda.y * 60 / YSCREEN][dda.x * 60 / XSCREEN];
+					az->ray[dda.i]->obsother = dda.convdist;
+				}*/ 
 			}
 		}
-		//printf("\n");
-		if (r.dist == wn->perso->range)
-			wn->perso->vue[r.i].obs = r.dist;
-		r.i += 1;
+		if (dda.dist == az->info->range)
+			az->ray[dda.i]->obs = dda.dist;
+		dda.i += 1;
 	}
-	//printf("\n");
-}*/
+}

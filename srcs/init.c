@@ -21,7 +21,7 @@ static void		initray(t_acz *az)
 	while (current < XSCREEN)
 	{
 		ang = current * 0.00144;
-		az->ray[current]->dst = -1;
+		az->ray[current]->obs = -1;
 		az->ray[current]->posx = (az->info->range * cos(ang)) + (az->info->range * -sin(ang)) + (az->map->persox * SBLOCK);
 		az->ray[current]->posy = (az->info->range * sin(ang)) + (az->info->range * cos(ang)) + (az->map->persoy * SBLOCK);
 		current++;
@@ -60,7 +60,7 @@ static void		init_info(t_info *info)
 	info->editx = 5;
 	info->edity = 5;
 	info->editbrush = 1;
-	info->range = 500;
+	info->range = 6000;
 	info->angle = 0;
 }
 
