@@ -6,11 +6,27 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/08 17:04:26 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/09 16:07:00 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+static void		initray(t_acz *az)
+{
+	int 	current;
+	double	ang;
+
+	current = 0;
+	while (current < XSCREEN)
+	{
+		ang = current * 0.00144;
+		az->ray[current]->dst = -1;
+		az->ray[current]->posx = (az->info->range * cos(ang)) + (az->info->range * -sin(ang)) + (az->map->persox * SBLOCK);
+		az->ray[current]->posy = (az->info->range * sin(ang)) + (az->info->range * cos(ang)) + (az->map->persoy * SBLOCK);
+		current++;
+	}
+}
 
 static void		initeditmap(int	map[60][60])
 {
@@ -32,7 +48,7 @@ static void		init_sdl(t_acz *az)
 	IMG_Init(IMG_INIT_PNG);
 	az->main->window = SDL_CreateWindow("Wolf3D", 0, SDL_WINDOWPOS_CENTERED, XSCREEN, YSCREEN, SDL_WINDOW_SHOWN);
 	az->main->rend = SDL_CreateRenderer(az->main->window, -1, SDL_RENDERER_PRESENTVSYNC);
-	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
+	Mix_OpenAudio(17050, MIX_DEFAULT_FORMAT, 2, 4096);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
 }
@@ -44,6 +60,8 @@ static void		init_info(t_info *info)
 	info->editx = 5;
 	info->edity = 5;
 	info->editbrush = 1;
+	info->range = 500;
+	info->angle = 0;
 }
 
 static void		call_init(t_acz *az)
@@ -51,6 +69,7 @@ static void		call_init(t_acz *az)
 	init_info(az->info);
 	init_sdl(az);
 	initeditmap(az->info->editmap);
+	initray(az);
 	loadmenu(az);
 	loadoption(az);
 	az->interface = 0;

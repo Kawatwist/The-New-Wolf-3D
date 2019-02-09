@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:21:03 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/08 16:55:29 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/09 15:08:28 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	map_stock(t_acz *az, t_map *map, int fd)
 				map->map[y][x] = ft_atoi(&line[index]);
 				if (map->map[y][x] == SPAWN)
 				{
-					map->persox = x * (SBLOCK / 2);
-					map->persoy = y * (SBLOCK / 2);
+					map->persox = x;
+					map->persoy = y;
 				}
 				while (line[index] != ' ' && line[index] != '\0')
 					index++;

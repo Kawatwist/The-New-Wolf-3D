@@ -16,11 +16,13 @@
 # define	XSCREEN	800
 # define	YSCREEN	600
 # define	DEG2RAD	0.0174532778
-# define	SPAWN	3
+# define	SPAWN	2
 # define	SBLOCK 	75
 
 typedef struct			s_info
 {
+	int					range;
+	double				angle;
 	int					x;
 	int					y;
 	int					editx;
@@ -31,6 +33,8 @@ typedef struct			s_info
 
 typedef struct			s_ray
 {
+	double				posy;
+	double				posx;
 	double				dst;
 }						t_ray;
 
@@ -47,6 +51,8 @@ typedef struct			s_map
 	int					**map;
 	double				persox;
 	double				persoy;
+	double				lastmovx;
+	double				lastmovy;
 }						t_map;
 
 typedef struct			s_menu
@@ -86,9 +92,10 @@ typedef struct			s_acz	// ARCZURE
 	t_menu				*option;
 	SDL_Event			ev;
 	int					interface;
-	Uint8					time;
-	Uint8					time2;
+	Uint8				time;
+	Uint8				time2;
 	int					twodactif;
+	char				*name_save;
 }						t_acz;
 
 # include "prototype.h"
