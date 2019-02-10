@@ -9,6 +9,9 @@ static void	printedit(t_acz *az)
 	SDL_SetRenderDrawColor(az->main->rend, 250, 120, 0, 0);
 	SDL_RenderDrawLine(az->main->rend, 0, az->info->editx, YSCREEN, az->info->editx);
 	SDL_RenderDrawLine(az->main->rend, az->info->edity, 0,  az->info->edity, 600);
+	rectpos(az);
+	SDL_RenderCopy(az->main->rend, az->menu->editor, NULL, &az->menu->redit);
+	SDL_RenderCopy(az->main->rend, az->menu->select, NULL, &az->menu->rselect);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
 }
@@ -26,6 +29,9 @@ static void	printgame(t_acz *az)
 {
 	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
 	SDL_RenderClear(az->main->rend);
+	showsky(az);
+	SDL_RenderCopy(az->main->rend, az->game->sky, &az->game->rsky2, &az->game->rsky);
+	SDL_RenderCopy(az->main->rend, az->game->ground, NULL, &az->game->rground);
 	printline(az);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);

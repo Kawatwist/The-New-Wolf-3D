@@ -21,21 +21,21 @@
 
 typedef struct			s_dda
 {
-	int			i;
-	int			x;
-	int			y;
-	int			pasx;
-	int			pasy;
-	int			distx;
-	int			disty;
-	double			dist;
-	double			convdist;
-	int			side;
-	int			dx;
-	int			dy;
-	int			e;
-	int			pente;
-}				t_dda;
+	int					i;
+	int					x;
+	int					y;
+	int					pasx;
+	int					pasy;
+	int					distx;
+	int					disty;
+	double				dist;
+	double				convdist;
+	int					side;
+	int					dx;
+	int					dy;
+	int					e;
+	int					pente;
+}						t_dda;
 
 typedef struct			s_info
 {
@@ -81,12 +81,28 @@ typedef struct			s_menu
 {
 	SDL_Surface			*background;
 	SDL_Surface			*choices;
+	SDL_Surface			*edit;
 	SDL_Texture			*bg;
+	SDL_Texture			*editor;
+	SDL_Texture			*select;
 	SDL_Texture			*choice;
 	SDL_Rect			rchoice;
+	SDL_Rect			redit;
+	SDL_Rect			rselect;
 	int					mode;
 	int					difficulty;
 }						t_menu;
+
+typedef struct			s_game
+{
+	SDL_Texture			*sky;
+	SDL_Texture			*ground;
+	SDL_Surface			*ssky;
+	SDL_Surface			*sground;
+	SDL_Rect			rsky;
+	SDL_Rect			rsky2;
+	SDL_Rect			rground;
+}						t_game;
 
 typedef struct			s_window
 {
@@ -105,18 +121,19 @@ typedef struct			s_window
 typedef struct			s_acz	// ARCZURE
 {
 	t_window			*main;
-	t_window			*twod;
 	t_map				*map;
 	t_inv				*inv;
 	t_ray				*ray[XSCREEN];
 	t_info				*info;
 	t_menu				*menu;
 	t_menu				*option;
+	t_game				*game;
 	SDL_Event			ev;
 	int					interface;
 	Uint8				time;
 	Uint8				time2;
 	int					twodactif;
+	int					mute;
 	char				*name_save;
 }						t_acz;
 

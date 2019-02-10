@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/09 16:07:00 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/10 19:01:58 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ static void		call_init(t_acz *az)
 	initray(az);
 	loadmenu(az);
 	loadoption(az);
+	loadedit(az);
+	loadgame(az);
 	az->interface = 0;
+	az->mute = -1;
+	az->name_save = ft_strdup("./save/map0");
 }
 
 void			initialization(t_acz **az)
@@ -89,5 +93,6 @@ void			initialization(t_acz **az)
 	((*az)->menu = (t_menu *)malloc(sizeof(t_menu))) == NULL ? stop_exec("Dosnt malloc menu struct\n") : 0;
 	((*az)->option = (t_menu *)malloc(sizeof(t_menu))) == NULL ? stop_exec("Dosnt malloc option struct\n") : 0;
 	((*az)->info = (t_info *)malloc(sizeof(t_info))) == NULL ? stop_exec("Dosnt malloc info struct\n") : 0;
+	((*az)->game = (t_game *)malloc(sizeof(t_game))) == NULL ? stop_exec("Dosnt malloc game struct\n") : 0;
 	call_init(*az);
 }

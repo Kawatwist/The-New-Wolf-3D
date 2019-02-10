@@ -35,7 +35,10 @@ static void	draw_obstacle(t_acz *az)
 		while (x < (int)az->map->persox + 6)
 		{
 			while (x < 0)
+			{
 				x++;
+				x1++;
+			}
 			if (x > 60 || y > 60 || y < 0)
 				break ;
 			az->map->map[y][x] == 0 ? SDL_SetRenderDrawColor(az->main->rend, 150, 150, 150, 0) : 0;
@@ -55,10 +58,6 @@ static void	draw_obstacle(t_acz *az)
 	}
 }
 
-static void	draw_perso(t_acz *az)
-{
-}
-
 void	map(t_acz *az)
 {
 	SDL_Rect	perso;
@@ -67,7 +66,6 @@ void	map(t_acz *az)
 	perso.y = YSCREEN /2 - 17.5;
 	perso.w = 35;
 	perso.h = 35;
-	raycast(az);
 	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
 	SDL_RenderClear(az->main->rend);
 	SDL_SetRenderDrawColor(az->main->rend, 150, 150, 150, 0);
@@ -78,5 +76,4 @@ void	map(t_acz *az)
 	draw_ray(az);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
-	printf("Bonjour je suis la map\n");
 }

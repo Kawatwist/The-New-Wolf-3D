@@ -1,11 +1,15 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		rectpos(t_acz *az);
 void		printline(t_acz *az);
 void		raycast(t_acz *az);
 void		save_map(t_acz *az);
 void		printgrill(t_acz *az);
 void		map(t_acz *az);
+void		showsky(t_acz *az);
+void		loadgame(t_acz *az);
+void		loadedit(t_acz *az);
 void		loadmenu(t_acz *az);
 void		loadoption(t_acz *az);
 void		load_texture(SDL_Renderer *render, SDL_Texture **texture, char *path);

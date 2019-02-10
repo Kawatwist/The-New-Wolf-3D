@@ -6,7 +6,7 @@
 /*   By: lomasse <madda.in@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:01:54 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/07 15:18:17 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/10 13:25:20 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,24 @@ static void initdda(t_dda *dda)
 }
 
 /*
-static int	get_side(t_dda *dda, t_win *wn)
+   static int	get_side(t_dda *dda, t_win *wn)
+   {
+// 1 - Nord , 2 - Sud , 3 - Ouest , 4 -Est , 0 - coin
+if (((wn->map[(dda->y - 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX) &&
+((wn->map[(dda->y + 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX))
 {
-	// 1 - Nord , 2 - Sud , 3 - Ouest , 4 -Est , 0 - coin
-	if (((wn->map[(dda->y - 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX) &&
-		((wn->map[(dda->y + 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX))
-	{
-		if (dda->pasx == -1)
-			return (3);
-		return (4);
-	}
-	if (((wn->map[dda->y * wn->y / wn->yscreen][(r->x - 1) * wn->x / wn->xscreen]) == BOX) &&
-		((wn->map[dda->y * wn->y / wn->yscreen][(r->x + 1) * wn->x / wn->xscreen]) == BOX))
-	{
-		if (dda->pasy == -1)
-			return (1);
-		return (2);
-	}
-	return (0);
+if (dda->pasx == -1)
+return (3);
+return (4);
+}
+if (((wn->map[dda->y * wn->y / wn->yscreen][(r->x - 1) * wn->x / wn->xscreen]) == BOX) &&
+((wn->map[dda->y * wn->y / wn->yscreen][(r->x + 1) * wn->x / wn->xscreen]) == BOX))
+{
+if (dda->pasy == -1)
+return (1);
+return (2);
+}
+return (0);
 }*/
 
 void	raycast(t_acz *az)
@@ -62,10 +62,10 @@ void	raycast(t_acz *az)
 	while (dda.i < XSCREEN)
 	{
 		initdda(&dda);
-		dda.x = (int)az->map->persox;
-		dda.y = (int)az->map->persoy;
-		dda.pasx = (dda.dx = (int)az->ray[dda.i]->posx - dda.x) < 0 ? -1 : 1;
-		dda.pasy = (dda.dy = (int)az->ray[dda.i]->posy - dda.y) < 0 ? -1 : 1;
+		dda.x = (int)az->map->persox * SBLOCK;
+		dda.y = (int)az->map->persoy * SBLOCK;
+		dda.pasx = (dda.dx = ((int)az->ray[dda.i]->posx * SBLOCK) - dda.x) < 0 ? -1 : 1;
+		dda.pasy = (dda.dy = ((int)az->ray[dda.i]->posy * SBLOCK) - dda.y) < 0 ? -1 : 1;
 		dda.dx = ft_abs(dda.dx);
 		dda.dy = ft_abs(dda.dy);
 		if (dda.dx > dda.dy)
@@ -99,29 +99,20 @@ void	raycast(t_acz *az)
 				if (dda.e < 0)
 				{
 					dda.distx++;
-			                dda.x+= dda.pasx;
-                    			dda.e += dda.dy;
+					dda.x+= dda.pasx;
+                    dda.e += dda.dy;
 				}
 			}
 			dda.dist = sqrt((dda.distx * dda.distx) + (dda.disty * dda.disty));
-			if ((az->map->map[dda.y][dda.x]) != 0)
+			if ((az->map->map[(int)(dda.y / SBLOCK)][(int)(dda.x / SBLOCK)]) != 0)
 			{
-				if ((az->map->map[dda.y][dda.x]) == 1)
+				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 1)
 				{
-					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * (1 / 60) * 0.00144 ));
-					dda.dist = (dda.dist != 0 ? (75 / dda.dist * 255) : 0);
-					az->ray[dda.i]->facey = dda.y * 60 / YSCREEN;
-					az->ray[dda.i]->facex = dda.x * 60 / YSCREEN;
-					az->ray[dda.i]->obs = dda.dist;
+					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
+					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
+					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
 					break ;
 				}
-				/*else if (az->ray[dda.i]->other == -1)
-				{
-					dda.convdist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * (1 / 66)));
-					dda.convdist = (dda.dist != 0 ? (75 / dda.dist * 255) : 0);
-					az->ray[dda.i]->other = az->map->map[dda.y * 60 / YSCREEN][dda.x * 60 / XSCREEN];
-					az->ray[dda.i]->obsother = dda.convdist;
-				}*/ 
 			}
 		}
 		if (dda.dist == az->info->range)

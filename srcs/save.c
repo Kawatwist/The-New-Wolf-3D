@@ -1,5 +1,19 @@
 #include "../includes/wolf3d.h"
 
+static void		findname(t_acz *az)
+{
+	int	len;
+
+	while (access(az->name_save, F_OK) == 0)
+	{
+		len = ft_strlen(az->name_save);
+		if (az->name_save[len - 1] < '9')
+			az->name_save[len - 1] += 1;
+		else
+			az->name_save = ft_strjoinfree(az->name_save, ft_strdup("0"), 2);
+	}
+}
+
 static int		check_map(t_acz *az)
 {
 	int x;
@@ -44,7 +58,7 @@ void			save_map(t_acz *az)
 		ft_putstr("Map invalid\n");
 		return ;
 	}
-	az->name_save = ft_strdup("mapsave\0");
+	findname(az);
 	savefd = creat(az->name_save, O_CREAT | S_IRWXU | S_IRWXG | S_IRWXO | O_TRUNC);
 	savefd < 0 ? stop_exec("Save failed\n") : 0;
 	y = -1;
@@ -56,5 +70,6 @@ void			save_map(t_acz *az)
 		free(str);
 	}
 	printf("Map saved\n");
+	ft_putstr(az->name_save);
 	close(savefd);
 }

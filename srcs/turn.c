@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:23:49 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/09 14:34:06 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/10 19:13:41 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	running(t_acz **az)
 	Mix_PlayMusic((*az)->main->song, -1);
 	while (TRUE)
 	{
+		(*az)->mute == 1 ? Mix_HaltMusic() : printf("WAW\n");
+		printf("Yo\n");
 		(*az)->time = SDL_GetTicks();
 		input(*az);
 		(*az)->twodactif == 1 ? map(*az) : print(*az);

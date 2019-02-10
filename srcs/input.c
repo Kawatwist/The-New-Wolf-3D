@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/09 16:39:00 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/10 19:15:36 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ static void	mouvement(t_acz *az, int move)
 	if (move == 0 || move == 2)
 	{
 		az->map->lastmovx = 0;
-		az->map->lastmovy = (move == 2 ? 0.07 : -0.07);
+		az->map->lastmovy = (move == 2 ? 0.1 : -0.1);
 	}
 	else
 	{
-		az->map->lastmovx = (move == 3 ? 0.07 : -0.07);
+		az->map->lastmovx = (move == 3 ? 0.1 : -0.1);
 		az->map->lastmovy = 0;
 	}
 	tmp = (az->map->lastmovx * cos(az->info->angle)) + (az->map->lastmovy * -sin(az->info->angle));
@@ -124,14 +124,14 @@ void		input(t_acz *az)
 
 	SDL_PollEvent(&az->ev);
 	state = (Uint8*)SDL_GetKeyboardState(NULL);
-	az->twodactif = (state[SDL_SCANCODE_M] ? 1 : 0);
-	//az->twodactif = 1;
-		if (az->interface == 0)
-			input_menu(state, az);
-		else if (az->interface == 1)
-			input_game(state, az);
-		else if (az->interface == 2)
-			input_option(state, az);
-		else
-			input_editor(state, az);
+	az->twodactif = (state[SDL_SCANCODE_TAB] ? 1 : 0);
+	state[SDL_SCANCODE_M] ? az->mute = 1 : 0;
+	if (az->interface == 0)
+		input_menu(state, az);
+	else if (az->interface == 1)
+		input_game(state, az);
+	else if (az->interface == 2)
+		input_option(state, az);
+	else
+		input_editor(state, az);
 }
