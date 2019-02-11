@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   link.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lomasse <madda.in@42.fr>                     +#+  +:+       +#+        */
+/*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/27 16:01:54 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/10 13:25:20 by lomasse          ###   ########.fr       */
+/*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
+/*   Updated: 2019/02/11 11:47:14 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	raycast(t_acz *az)
 	while (dda.i < XSCREEN)
 	{
 		initdda(&dda);
-		dda.x = (int)az->map->persox * SBLOCK;
-		dda.y = (int)az->map->persoy * SBLOCK;
-		dda.pasx = (dda.dx = ((int)az->ray[dda.i]->posx * SBLOCK) - dda.x) < 0 ? -1 : 1;
-		dda.pasy = (dda.dy = ((int)az->ray[dda.i]->posy * SBLOCK) - dda.y) < 0 ? -1 : 1;
+		dda.x = (int)(az->map->persox * SBLOCK);
+		dda.y = (int)(az->map->persoy * SBLOCK);
+		dda.pasx = (dda.dx = ((int)(az->ray[dda.i]->posx * SBLOCK)) - dda.x) < 0 ? -1 : 1;
+		dda.pasy = (dda.dy = ((int)(az->ray[dda.i]->posy * SBLOCK)) - dda.y) < 0 ? -1 : 1;
 		dda.dx = ft_abs(dda.dx);
 		dda.dy = ft_abs(dda.dy);
 		if (dda.dx > dda.dy)
@@ -108,6 +108,8 @@ void	raycast(t_acz *az)
 			{
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 1)
 				{
+					if (dda.i == 29)
+						printf("DIST %d %d\n", dda.x, (int)az->ray[dda.i]->posx);
 					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
 					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
@@ -120,3 +122,22 @@ void	raycast(t_acz *az)
 		dda.i += 1;
 	}
 }
+/*
+void    raycast(t_acz *az)
+{
+	t_dda dda;
+
+	dda.i = 0;
+	while (dda.i < XSCREEN)
+	{
+		initdda(&dda);
+		dda.x = (int)az->map->persox * SBLOCK;
+		dda.y = (int)az->map->persoy * SBLOCK;
+		dda.pasx = (dda.dx = ((int)az->ray[dda.i]->posx * SBLOCK) - dda.x) < 0 ? -1 : 1;
+		dda.pasy = (dda.dy = ((int)az->ray[dda.i]->posy * SBLOCK) - dda.y) < 0 ? -1 : 1;
+		dda.dx = ft_abs(dda.dx);
+		dda.dy = ft_abs(dda.dy);
+		dda.ratio = dda.dx / dda.dy;
+		if (dda.pasx == -1)
+			dda.nx = dda
+*/
