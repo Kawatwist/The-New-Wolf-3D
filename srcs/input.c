@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/11 11:18:37 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/11 18:03:50 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,10 @@ static void	input_editor(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_KP_3] ? az->info->editbrush = 3 : 0;
 	state[SDL_SCANCODE_KP_4] ? az->info->editbrush = 4 : 0;
 	state[SDL_SCANCODE_KP_5] ? az->info->editbrush = 5 : 0;
+	state[SDL_SCANCODE_C] ? az->info->selectx = az->info->editx / 10 : 0;
+	state[SDL_SCANCODE_C] ? az->info->selecty = az->info->edity / 10 : 0;
+	state[SDL_SCANCODE_V] ? parseselect(az) : 0;
+	state[SDL_SCANCODE_P] ? printselect(az) : 0;
 	if (state[SDL_SCANCODE_RETURN])
 		az->info->editmap[az->info->edity / 10][az->info->editx / 10] = az->info->editbrush;
 	state[SDL_SCANCODE_S] ? save_map(az) : 0;

@@ -1,6 +1,9 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		printselect(t_acz *az);
+int			ft_abs(int n);
+void		parseselect(t_acz *az);
 void		rectpos(t_acz *az);
 void		printline(t_acz *az);
 void		raycast(t_acz *az);

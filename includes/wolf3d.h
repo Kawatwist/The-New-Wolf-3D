@@ -17,7 +17,7 @@
 # define	YSCREEN	600
 # define	DEG2RAD	0.0174532778
 # define	SPAWN	2
-# define	SBLOCK 	64
+# define	SBLOCK 	75
 
 typedef struct			s_dda
 {
@@ -45,6 +45,11 @@ typedef struct			s_info
 	int					y;
 	int					editx;
 	int					edity;
+	int					selectx;
+	int					selecty;
+	int					selsizex;
+	int					selsizey;
+	int					**selmap;
 	int					editmap[60][60];
 	int					editbrush;
 }						t_info;
@@ -99,10 +104,6 @@ typedef struct			s_game
 	SDL_Texture			*ground;
 	SDL_Surface			*ssky;
 	SDL_Surface			*sground;
-	SDL_Texture			*Nwall;
-	SDL_Texture			*Swall;
-	SDL_Texture			*Wwall;
-	SDL_Texture			*Ewall;
 	SDL_Rect			rsky;
 	SDL_Rect			rsky2;
 	SDL_Rect			rground;

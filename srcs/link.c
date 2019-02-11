@@ -6,13 +6,13 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/11 15:06:00 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/11 17:31:09 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static int ft_abs(int n)
+int 		ft_abs(int n)
 {
 	if (n < 0)
 		return (-n);

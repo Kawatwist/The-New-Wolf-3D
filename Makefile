@@ -6,7 +6,7 @@
 #    By: lomasse <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 19:24:01 by lomasse           #+#    #+#              #
-#    Updated: 2019/02/10 09:17:15 by lomasse          ###   ########.fr        #
+#    Updated: 2019/02/11 17:46:46 by lomasse          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(NAME): $(OBJS)
 
 all : $(NAME)
 
-weshalors : $(NAME)
+weshalors :
 	@clear ; cat texture/portal.txt ; echo "\n\n" ; cat texture/cake.txt ;
 
 clean :

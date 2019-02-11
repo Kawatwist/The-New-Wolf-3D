@@ -1,6 +1,30 @@
 #include "../includes/wolf3d.h"
 
-void	printline(t_acz *az)
+void			printselect(t_acz *az)
+{
+	int x;
+	int y;
+
+	y = 0;
+	printf("YOOO\n");
+	if (az->info->selmap == NULL)
+		return ;
+	printf("YOOO2\n");
+	while (y < az->info->selsizey)
+	{
+		x = 0;
+		while (x < az->info->selsizex)
+		{
+			if ((y + az->info->edity / 10) > 60 || (x + az->info->editx / 10) > 60)
+				break ;
+			az->info->editmap[y + (az->info->edity / 10)][x + (az->info->editx / 10)] = az->info->selmap[y][x];
+			x++;
+		}
+		y++;
+	}
+}
+
+void			printline(t_acz *az)
 {
 	int		i;
 	double	value;
@@ -12,24 +36,35 @@ void	printline(t_acz *az)
 		value = az->info->range / az->ray[i]->obs;
 		value < 0 ? value *= -1 : 0;
 		value = value / 200;
-		if (az->side[i] / SBLOCK == 1)
-			SDL_SetRenderDrawColor(az->main->rend, 200, 150, az->side[i] % SBLOCK * 4, 0);
-		if (az->side[i] / SBLOCK == 2)
-            SDL_SetRenderDrawColor(az->main->rend, 20, 150, az->side[i] % SBLOCK * 4, 0);
-		if (az->side[i] / SBLOCK == 3)
-            SDL_SetRenderDrawColor(az->main->rend, 200, 250, az->side[i] % SBLOCK * 4, 0);
-		if (az->side[i] / SBLOCK == 4)
-            SDL_SetRenderDrawColor(az->main->rend, 0, 50, az->side[i] % SBLOCK * 4, 0);
+		az->side[i] / SBLOCK == 1 ? SDL_SetRenderDrawColor(az->main->rend, 200, 0, az->side[i] % SBLOCK, 0) : 0;
+		az->side[i] / SBLOCK == 2 ? SDL_SetRenderDrawColor(az->main->rend, az->side[i] % SBLOCK, 200, 0, 0) : 0;
+		az->side[i] / SBLOCK == 3 ? SDL_SetRenderDrawColor(az->main->rend, 0, az->side[i] % SBLOCK, 200, 0) : 0;
+		az->side[i] / SBLOCK == 4 ? SDL_SetRenderDrawColor(az->main->rend, 80, 255, 80, 0) : 0;
 		SDL_RenderDrawLine(az->main->rend, i, (YSCREEN / 2) - (value), i, (YSCREEN / 2) + (value));
-/*		SDL_SetRenderDrawColor(az->main->rend, 0, 0, 255, 0);
-		SDL_RenderDrawLine(az->main->rend, i, 0, i, (YSCREEN / 2) - (az->ray[i]->obs * (YSCREEN/2) / 300));
-		SDL_SetRenderDrawColor(az->main->rend, 0, 255, 0, 0);
-		SDL_RenderDrawLine(az->main->rend, i, (YSCREEN/2) + (az->ray[i]->obs * (YSCREEN / 2) / az->info->range), i, YSCREEN);
-	*/	i++;
+		i++;
 	}
 }
 
-void	printgrill(t_acz *az)
+static void		printgrill2(t_acz *az)
+{
+	int		x;
+	int		y;
+
+	y = -1;
+	while (++y < 60)
+	{
+		x = -1;
+		while (++x < 60)
+			if (az->info->editmap[y][x] == 0)
+			{	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
+				SDL_RenderDrawLine(az->main->rend, y * 10, 0, y * 10, 600);
+				SDL_RenderDrawLine(az->main->rend, 0, y * 10, 600, y * 10);
+			}
+	}
+
+}
+
+void			printgrill(t_acz *az)
 {
 	int		j;
 	int		i;
@@ -37,11 +72,11 @@ void	printgrill(t_acz *az)
 
 	square.w = 10;
 	square.h = 10;
-	j = 0;
-	while (j < 60)
+	j = -1;
+	while (++j < 60)
 	{
-		i = 0;
-		while (i < 60)
+		i = -1;
+		while (++i < 60)
 		{
 			if (az->info->editmap[j][i] != 0)
 			{
@@ -54,14 +89,7 @@ void	printgrill(t_acz *az)
 				az->info->editmap[j][i] == 5 ? SDL_SetRenderDrawColor(az->main->rend, 50, 100, 50, 0) : 0;
 				SDL_RenderFillRect(az->main->rend, &square);
 			}
-			if (i == 0)
-			{
-				SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
-				SDL_RenderDrawLine(az->main->rend, j * 10, 0, j * 10, 600);
-				SDL_RenderDrawLine(az->main->rend, 0, j * 10, 600, j * 10);
-			}
-			i += 1;
 		}
-		j += 1;
 	}
+	printgrill2(az);
 }

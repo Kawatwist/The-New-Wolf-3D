@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/10 19:01:58 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/11 17:28:36 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void		init_info(t_info *info)
 	info->y = 1;
 	info->editx = 5;
 	info->edity = 5;
+	info->selectx = 0;
+	info->selecty = 0;
 	info->editbrush = 1;
 	info->range = 6000;
 	info->angle = 0;
