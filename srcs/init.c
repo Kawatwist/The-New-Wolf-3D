@@ -75,7 +75,7 @@ static void		call_init(t_acz *az)
 	loadedit(az);
 	loadgame(az);
 	az->interface = 0;
-	az->mute = -1;
+	az->mute = 1;
 	az->name_save = ft_strdup("./save/map0");
 }
 
