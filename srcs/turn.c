@@ -23,8 +23,7 @@ void	running(t_acz **az)
 	Mix_PlayMusic((*az)->main->song, -1);
 	while (TRUE)
 	{
-		(*az)->mute == 1 ? Mix_HaltMusic() : printf("WAW\n");
-		printf("Yo\n");
+		(*az)->mute == 1 ? Mix_HaltMusic() : 0;
 		(*az)->time = SDL_GetTicks();
 		input(*az);
 		(*az)->twodactif == 1 ? map(*az) : print(*az);
