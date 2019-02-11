@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/11 11:47:14 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/11 15:06:00 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,23 @@ static void initdda(t_dda *dda)
 	dda->pente = 0;
 }
 
-/*
-   static int	get_side(t_dda *dda, t_win *wn)
-   {
+static int	get_side(t_dda *dda, t_acz *az)
+{
 // 1 - Nord , 2 - Sud , 3 - Ouest , 4 -Est , 0 - coin
-if (((wn->map[(dda->y - 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX) &&
-((wn->map[(dda->y + 1) * wn->y / wn->yscreen][r->x * wn->x / wn->xscreen]) == BOX))
-{
-if (dda->pasx == -1)
-return (3);
-return (4);
+	if (((az->map->map[(dda->y - 1) / SBLOCK][dda->x / SBLOCK]) == 1) && ((az->map->map[(dda->y + 1) / SBLOCK][dda->x / SBLOCK]) == 1))
+	{
+		if (dda->pasx == -1)
+			return (3 * SBLOCK + dda->y % SBLOCK);
+		return (4 * SBLOCK + dda->y % SBLOCK);
+	}
+	if (((az->map->map[dda->y / SBLOCK][(dda->x - 1) / SBLOCK]) == 1) && ((az->map->map[dda->y / SBLOCK][(dda->x + 1) / SBLOCK]) == 1))
+	{
+		if (dda->pasy == -1)
+			return (1 * SBLOCK + dda->x % SBLOCK);
+		return (2 * SBLOCK + dda->x % SBLOCK);
+	}
+	return (0);
 }
-if (((wn->map[dda->y * wn->y / wn->yscreen][(r->x - 1) * wn->x / wn->xscreen]) == BOX) &&
-((wn->map[dda->y * wn->y / wn->yscreen][(r->x + 1) * wn->x / wn->xscreen]) == BOX))
-{
-if (dda->pasy == -1)
-return (1);
-return (2);
-}
-return (0);
-}*/
 
 void	raycast(t_acz *az)
 {
@@ -104,12 +101,12 @@ void	raycast(t_acz *az)
 				}
 			}
 			dda.dist = sqrt((dda.distx * dda.distx) + (dda.disty * dda.disty));
+			az->side[dda.i] = -1;
 			if ((az->map->map[(int)(dda.y / SBLOCK)][(int)(dda.x / SBLOCK)]) != 0)
 			{
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 1)
 				{
-					if (dda.i == 29)
-						printf("DIST %d %d\n", dda.x, (int)az->ray[dda.i]->posx);
+					az->side[dda.i] = get_side(&dda, az);
 					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
 					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
