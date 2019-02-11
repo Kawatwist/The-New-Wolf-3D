@@ -99,6 +99,10 @@ typedef struct			s_game
 	SDL_Texture			*ground;
 	SDL_Surface			*ssky;
 	SDL_Surface			*sground;
+	SDL_Texture			*Nwall;
+	SDL_Texture			*Swall;
+	SDL_Texture			*Wwall;
+	SDL_Texture			*Ewall;
 	SDL_Rect			rsky;
 	SDL_Rect			rsky2;
 	SDL_Rect			rground;
