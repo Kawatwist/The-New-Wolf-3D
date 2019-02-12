@@ -76,6 +76,8 @@ typedef struct			s_inv
 typedef struct			s_map
 {
 	int					**map;
+	int				orange;
+	int				blue;
 	double				persox;
 	double				persoy;
 	double				lastmovx;
@@ -142,6 +144,8 @@ typedef struct			s_acz	// ARCZURE
 	int					textbox;
 	int					twodactif;
 	int					mute;
+	int					shoot;
+	int					shoot1;
 	char				*name_save;
 }						t_acz;
 

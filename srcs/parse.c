@@ -42,6 +42,7 @@ static void	map_stock(t_acz *az, t_map *map, int fd)
 			}
 		}
 		y++;
+		free(line);
 	}
 }
 
@@ -67,8 +68,12 @@ void		map_parse(t_acz **az, char *name)
 	i = 0;
 	while (line[++i] != '\0')
 		(line[i] == ' ') ? (*az)->info->x += 1 : 0;
+	free(line);
 	while (get_next_line(fd, &line))
+	{
 		(*az)->info->y += 1;
+		free(line);
+	}
 	close(fd);
 	if (!(fd = open(name, O_RDONLY)) || read(fd, 0, 0) < 0)
 		stop_exec("Open failed\n");

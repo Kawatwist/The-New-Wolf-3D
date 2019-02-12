@@ -107,10 +107,17 @@ void	raycast(t_acz *az)
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 1)
 				{
 					az->side[dda.i] = get_side(&dda, az);
+					printf("%d\n", dda.i);
+					az->shoot == 1 && dda.i == XSCREEN / 2 ? az->map->map[dda.y /SBLOCK][dda.x / SBLOCK] = 6 : 0;
+					az->shoot1 == 1 && dda.i == XSCREEN / 2? az->map->map[dda.y /SBLOCK][dda.x / SBLOCK] = 7 : 0;
 					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
 					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
 					break ;
+				}
+				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6 || (az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 7)
+				{
+					portalapply(&dda, diffside(az, &dda), dda.x, dda.y);
 				}
 			}
 		}

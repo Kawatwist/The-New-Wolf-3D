@@ -116,6 +116,8 @@ static void	input_game(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_D] ? mouvement(az, 1) : 0;
 	state[SDL_SCANCODE_W] ? mouvement(az, 2) : 0;
 	state[SDL_SCANCODE_S] ? mouvement(az, 0) : 0;
+	az->shoot = state[SDL_SCANCODE_L] ? 1 : 0;
+	az->shoot1 = state[SDL_SCANCODE_K] ? 1 : 0;
 	state[SDL_SCANCODE_LEFT] ? az->info->angle -= 0.07 : 0;
 	state[SDL_SCANCODE_RIGHT] ? az->info->angle += 0.07 : 0;
 	state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
