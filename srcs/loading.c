@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/11 15:33:06 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/12 17:22:49 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	loadoption(t_acz *az)
 void	loadmenu(t_acz *az)
 {
 	az->main->effect = Mix_LoadWAV("texture/Gun.wav");
+//	load_texture(az->main->rend, &az->menu->font, "texture/font.png");
 	load_texture(az->main->rend, &az->menu->bg, "texture/bg.png");
 	load_texture(az->main->rend, &az->menu->choice, "texture/arrow.png");
 }

@@ -60,9 +60,9 @@ typedef struct			s_ray
 	double				posx;
 	double				obs;
 	double				obsother;
-	int				other;
-	int				facex;
-	int				facey;
+	int					other;
+	int					facex;
+	int					facey;
 }						t_ray;
 
 typedef struct			s_inv
@@ -86,6 +86,7 @@ typedef struct			s_menu
 {
 	SDL_Surface			*background;
 	SDL_Surface			*choices;
+	SDL_Surface			*font;
 	SDL_Surface			*edit;
 	SDL_Texture			*bg;
 	SDL_Texture			*editor;
@@ -138,6 +139,7 @@ typedef struct			s_acz	// ARCZURE
 	int					interface;
 	Uint8				time;
 	Uint8				time2;
+	int					textbox;
 	int					twodactif;
 	int					mute;
 	char				*name_save;

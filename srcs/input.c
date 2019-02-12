@@ -6,11 +6,42 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/11 18:03:50 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/12 17:26:49 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+void		textbox(t_acz *az, Uint8 *state)
+{
+	(state[SDL_SCANCODE_A] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("A"), 2) : 0);
+	(state[SDL_SCANCODE_B] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("B"), 2) : 0);
+	(state[SDL_SCANCODE_C] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("C"), 2) : 0);
+	(state[SDL_SCANCODE_D] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("D"), 2) : 0);
+	(state[SDL_SCANCODE_E] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("E"), 2) : 0);
+	(state[SDL_SCANCODE_F] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("F"), 2) : 0);
+	(state[SDL_SCANCODE_G] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("G"), 2) : 0);
+	(state[SDL_SCANCODE_H] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("H"), 2) : 0);
+	(state[SDL_SCANCODE_I] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("I"), 2) : 0);
+	(state[SDL_SCANCODE_J] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("J"), 2) : 0);
+	(state[SDL_SCANCODE_K] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("K"), 2) : 0);
+	(state[SDL_SCANCODE_L] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("L"), 2) : 0);
+	(state[SDL_SCANCODE_M] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("M"), 2) : 0);
+	(state[SDL_SCANCODE_N] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("N"), 2) : 0);
+	(state[SDL_SCANCODE_O] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("O"), 2) : 0);
+	(state[SDL_SCANCODE_P] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("P"), 2) : 0);
+	(state[SDL_SCANCODE_Q] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("Q"), 2) : 0);
+	(state[SDL_SCANCODE_R] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("R"), 2) : 0);
+	(state[SDL_SCANCODE_S] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("S"), 2) : 0);
+	(state[SDL_SCANCODE_T] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("T"), 2) : 0);
+	(state[SDL_SCANCODE_U] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("U"), 2) : 0);
+	(state[SDL_SCANCODE_V] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("V"), 2) : 0);
+	(state[SDL_SCANCODE_W] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("W"), 2) : 0);
+	(state[SDL_SCANCODE_X] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("X"), 2) : 0);
+	(state[SDL_SCANCODE_Y] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("Y"), 2) : 0);
+	(state[SDL_SCANCODE_Z] ? az->name_save = ft_strjoinfree(az->name_save, ft_strdup("Z"), 2) : 0);
+	(state[SDL_SCANCODE_DELETE] ? ft_bzero(az->name_save, ft_strlen(az->name_save)) : 0);
+}
 
 void		collision(t_acz *az)
 {
@@ -101,6 +132,9 @@ static void	input_option(Uint8 *state, t_acz *az)
 
 static void	input_editor(Uint8 *state, t_acz *az)
 {
+	state[SDL_SCANCODE_F5] ? az->textbox *= -1 : 0;
+	if (az->textbox == -1)
+	{
 	state[SDL_SCANCODE_ESCAPE] ? az->interface = 0 : 0;
 	state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
 	state[SDL_SCANCODE_UP] && !state[SDL_SCANCODE_DOWN]  && az->info->editx > 9 ? az->info->editx -= 10 : 0;
@@ -120,6 +154,10 @@ static void	input_editor(Uint8 *state, t_acz *az)
 	if (state[SDL_SCANCODE_RETURN])
 		az->info->editmap[az->info->edity / 10][az->info->editx / 10] = az->info->editbrush;
 	state[SDL_SCANCODE_S] ? save_map(az) : 0;
+	}
+	else
+		textbox(az, state);
+	printf("%s\n", az->name_save);
 }
 
 void		input(t_acz *az)

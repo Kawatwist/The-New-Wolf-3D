@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/11 17:28:36 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/12 16:43:58 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void		call_init(t_acz *az)
 	loadgame(az);
 	az->interface = 0;
 	az->mute = 1;
+	az->textbox = -1;
 	az->name_save = ft_strdup("./save/map0");
 }
 

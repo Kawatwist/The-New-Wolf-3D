@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:21:03 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/11 17:40:58 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/12 14:19:59 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ static void	fillselect(t_acz *az, int sizex, int sizey)
 	{
 		x = -1;
 		while (++x < sizex && x < 60)
-		{
-			az->info->selmap[y][x] = az->info->editmap[y][x];
-			printf("%d\n", az->info->editmap[y][x]);
-		}
+			az->info->selmap[y][x] = az->info->editmap[y + az->info->selecty][x + az->info->selectx];
 	}
 }
 
@@ -103,14 +100,19 @@ void		parseselect(t_acz *az)
 	i = (ft_abs (az->info->selectx - (az->info->editx / 10)));
 	j = (ft_abs(az->info->selecty - (az->info->edity / 10)));
 	printf("%d, %d\n", i, j);
+	az->info->selsizex = i;
+	az->info->selsizey = j;
 	if (i == 0 && j == 0)
 		return ;
 	if (az->info->selmap != NULL)
-		free(az->info->selmap);
-	((az->info->selmap = (int**)malloc(sizeof(int*) * i)) == NULL ? stop_exec("Malloc select\n") : 0);
-	while (tmp < i)
 	{
-		((az->info->selmap[tmp] = (int*)malloc(sizeof(int*) * j)) == NULL ? stop_exec("Malloc select\n") : 0);
+		free(az->info->selmap);
+		az->info->selmap = NULL;
+	}
+	((az->info->selmap = (int**)malloc(sizeof(int*) * j)) == NULL ? stop_exec("Malloc select\n") : 0);
+	while (tmp < j)
+	{
+		((az->info->selmap[tmp] = (int*)malloc(sizeof(int*) * i)) == NULL ? stop_exec("Malloc select\n") : 0);
 		tmp++;
 	}
 	fillselect(az, i, j);
