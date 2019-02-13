@@ -10,7 +10,7 @@ static void		findname(t_acz *az)
 		if (az->name_save[len - 1] < '9')
 			az->name_save[len - 1] += 1;
 		else
-			az->name_save = ft_strjoinfree(az->name_save, ft_strdup("0"), 2);
+			az->name_save = ft_strjoinfree(az->name_save, ft_strdup("0"), 3);
 	}
 }
 
