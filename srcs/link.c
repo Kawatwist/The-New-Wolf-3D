@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/11 17:31:09 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/13 11:36:43 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void initdda(t_dda *dda)
 
 static int	get_side(t_dda *dda, t_acz *az)
 {
-// 1 - Nord , 2 - Sud , 3 - Ouest , 4 -Est , 0 - coin
+	// 1 - Nord , 2 - Sud , 3 - Ouest , 4 -Est , 0 - coin
 	if (((az->map->map[(dda->y - 1) / SBLOCK][dda->x / SBLOCK]) == 1) && ((az->map->map[(dda->y + 1) / SBLOCK][dda->x / SBLOCK]) == 1))
 	{
 		if (dda->pasx == -1)
@@ -97,19 +97,26 @@ void	raycast(t_acz *az)
 				{
 					dda.distx++;
 					dda.x+= dda.pasx;
-                    dda.e += dda.dy;
+					dda.e += dda.dy;
 				}
 			}
 			dda.dist = sqrt((dda.distx * dda.distx) + (dda.disty * dda.disty));
 			az->side[dda.i] = -1;
+			if (dda.y < 0 || dda.y > 60 || dda.x < 0 || dda.x > 60)
+			{
+				az->side[dda.i] = get_side(&dda, az);
+				dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
+				dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
+				az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
+				break ;
+			}
 			if ((az->map->map[(int)(dda.y / SBLOCK)][(int)(dda.x / SBLOCK)]) != 0)
 			{
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 1)
 				{
 					az->side[dda.i] = get_side(&dda, az);
-					printf("%d\n", dda.i);
-					az->shoot == 1 && dda.i == XSCREEN / 2 ? az->map->map[dda.y /SBLOCK][dda.x / SBLOCK] = 6 : 0;
-					az->shoot1 == 1 && dda.i == XSCREEN / 2? az->map->map[dda.y /SBLOCK][dda.x / SBLOCK] = 7 : 0;
+					az->shoot == 1 && dda.i == XSCREEN / 2 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 6) : 0;
+					az->shoot1 == 1 && dda.i == XSCREEN / 2 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 7) : 0;
 					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
 					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
@@ -117,7 +124,7 @@ void	raycast(t_acz *az)
 				}
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6 || (az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 7)
 				{
-					portalapply(&dda, diffside(az, &dda), dda.x, dda.y);
+					portalapply(&dda, 1/*diffside(az, &dda)*/, dda.x, dda.y);
 				}
 			}
 		}
@@ -127,21 +134,21 @@ void	raycast(t_acz *az)
 	}
 }
 /*
-void    raycast(t_acz *az)
-{
-	t_dda dda;
+   void    raycast(t_acz *az)
+   {
+   t_dda dda;
 
-	dda.i = 0;
-	while (dda.i < XSCREEN)
-	{
-		initdda(&dda);
-		dda.x = (int)az->map->persox * SBLOCK;
-		dda.y = (int)az->map->persoy * SBLOCK;
-		dda.pasx = (dda.dx = ((int)az->ray[dda.i]->posx * SBLOCK) - dda.x) < 0 ? -1 : 1;
-		dda.pasy = (dda.dy = ((int)az->ray[dda.i]->posy * SBLOCK) - dda.y) < 0 ? -1 : 1;
-		dda.dx = ft_abs(dda.dx);
-		dda.dy = ft_abs(dda.dy);
-		dda.ratio = dda.dx / dda.dy;
-		if (dda.pasx == -1)
-			dda.nx = dda
-*/
+   dda.i = 0;
+   while (dda.i < XSCREEN)
+   {
+   initdda(&dda);
+   dda.x = (int)az->map->persox * SBLOCK;
+   dda.y = (int)az->map->persoy * SBLOCK;
+   dda.pasx = (dda.dx = ((int)az->ray[dda.i]->posx * SBLOCK) - dda.x) < 0 ? -1 : 1;
+   dda.pasy = (dda.dy = ((int)az->ray[dda.i]->posy * SBLOCK) - dda.y) < 0 ? -1 : 1;
+   dda.dx = ft_abs(dda.dx);
+   dda.dy = ft_abs(dda.dy);
+   dda.ratio = dda.dx / dda.dy;
+   if (dda.pasx == -1)
+   dda.nx = dda
+   */

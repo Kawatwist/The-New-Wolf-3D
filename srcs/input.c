@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/12 17:26:49 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/13 10:35:49 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ void		collision(t_acz *az)
 	{
 		az->inv->key += 1;
 		az->map->map[(int)az->map->persoy][(int)az->map->persox] = 0;
+	}
+	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 6 || az->map->map[(int)az->map->persoy][(int)az->map->persox] == 7)
+	{
+		az->map->persoy += 1;
+		az->map->persox += 1;
 	}
 }
 
@@ -158,8 +163,10 @@ static void	input_editor(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_S] ? save_map(az) : 0;
 	}
 	else
+	{
 		textbox(az, state);
-	printf("%s\n", az->name_save);
+		ft_putstr("textbox on\n");
+	}
 }
 
 void		input(t_acz *az)

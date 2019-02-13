@@ -1,5 +1,21 @@
 #include "../includes/wolf3d.h"
 
+void	setportal(t_acz *az, int y, int x, int portal)
+{
+	int i;
+	int	j;
+
+	j = -1;
+	printf("Yo\n");
+	while (++j < 60)
+	{
+		i = -1;
+		while (++i < 60)
+			az->map->map[j][i] == portal ? az->map->map[j][i] = 1 : 0;
+	}
+	az->map->map[y][x] = portal;
+}
+
 int	diffside(t_acz *az, t_dda *dda)
 {
 	int	value1;
@@ -29,7 +45,7 @@ void	portalapply(t_dda *current, int facediff, int x, int y)
 	double	tmp;
 
 	facediff *= 90;
-	tmp = ((current->dx - x) * cos(facediff)) + ((current->dy - y) * sin(facediff));
-	current->dy = ((current->dx - x) * -sin(facediff)) + ((current->dy - y) * cos(facediff));
+	tmp = ((current->dx - x) * cos((facediff * 90) * 0.017453) + ()) + ((current->dy - y) * sin((facediff * 90) * 0.017453) + ());
+	current->dy = ((current->dx - x) * -sin((facediff * 90) * 0.017453) ()) + ((current->dy - y) * cos((facediff * 90) * 0.017453) + ());
 	current->dx = tmp;
 }

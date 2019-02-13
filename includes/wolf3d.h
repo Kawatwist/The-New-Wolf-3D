@@ -76,8 +76,8 @@ typedef struct			s_inv
 typedef struct			s_map
 {
 	int					**map;
-	int				orange;
-	int				blue;
+	int					orange[3];
+	int					blue[3];
 	double				persox;
 	double				persoy;
 	double				lastmovx;
