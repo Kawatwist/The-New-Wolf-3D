@@ -1,9 +1,10 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		changeray(t_acz *az, int portal);
 void		setportal(t_acz *az, int x, int y, int portal);
 int			diffside(t_acz *az, t_dda *dda);
-void		portalapply(t_dda *dda, int facediff, int x, int y);
+void		portalapply(t_acz *az, t_dda *dda, int facediff, int portal);
 void		printselect(t_acz *az);
 int			ft_abs(int n);
 void		parseselect(t_acz *az);

@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/13 11:59:01 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/13 14:54:12 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	raycast(t_acz *az)
 			}
 			dda.dist = sqrt((dda.distx * dda.distx) + (dda.disty * dda.disty));
 			az->side[dda.i] = -1;
-			if (dda.y < 0 || dda.y / SBLOCK > 60 || dda.x < 0 || dda.x / SBLOCK > 60)
+			if (dda.y < 0 || dda.y / SBLOCK > 59 || dda.x < 0 || dda.x / SBLOCK > 59)
 			{
 				az->side[dda.i] = 0;
 				az->ray[dda.i]->obs = 60 * SBLOCK;
@@ -120,10 +120,10 @@ void	raycast(t_acz *az)
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
 					break ;
 				}
-				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6 || (az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 7)
-				{
-					portalapply(&dda, 1/*diffside(az, &dda)*/, dda.x, dda.y);
-				}
+				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6)
+					portalapply(az, &dda, diffside(az, &dda), 6);
+				else if(az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] == 7)
+					portalapply(az, &dda, diffside(az, &dda), 7);
 			}
 		}
 		if (dda.dist == az->info->range)

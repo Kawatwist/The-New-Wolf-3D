@@ -40,7 +40,7 @@ void			printline(t_acz *az)
 		az->side[i] / SBLOCK == 1 ? SDL_SetRenderDrawColor(az->main->rend, 200, 0, az->side[i] % SBLOCK, 0) : 0;
 		az->side[i] / SBLOCK == 2 ? SDL_SetRenderDrawColor(az->main->rend, az->side[i] % SBLOCK, 200, 0, 0) : 0;
 		az->side[i] / SBLOCK == 3 ? SDL_SetRenderDrawColor(az->main->rend, 0, az->side[i] % SBLOCK, 200, 0) : 0;
-		az->side[i] / SBLOCK == 4 ? SDL_SetRenderDrawColor(az->main->rend, 80, 255, 80, 0) : 0;
+		az->side[i] / SBLOCK == 4 ? SDL_SetRenderDrawColor(az->main->rend, 180, az->side[i] % SBLOCK, 180, 0) : 0;
 		SDL_RenderDrawLine(az->main->rend, i, (YSCREEN / 2) - (value), i, (YSCREEN / 2) + (value));
 		i++;
 	}
