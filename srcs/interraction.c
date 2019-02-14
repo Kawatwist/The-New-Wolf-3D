@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/13 16:41:10 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/14 15:53:31 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,26 +75,26 @@ int	diffside(t_acz *az, t_dda *dda)
 	if ((((az->map->map[(dda->y - 1) / SBLOCK][value1]) == 6) && ((az->map->map[(dda->y + 1) / SBLOCK][value1]) == 6)))
 	{
 		if (dda->pasx == -1)
-			return ((az->map->blue[0] = 7) * SBLOCK + dda->y % SBLOCK);
-		return ((az->map->blue[0] = 8) * SBLOCK + dda->y % SBLOCK);
+			return ((az->map->blue[0] = 7));
+		return ((az->map->blue[0] = 8));
 	}
 	if ((((az->map->map[value2][(dda->x - 1) / SBLOCK]) == 6) && ((az->map->map[value2][(dda->x + 1) / SBLOCK]) == 6)))
 	{
 		if (dda->pasy == -1)
-			return ((az->map->blue[0] = 5) * SBLOCK + dda->y % SBLOCK);
-		return ((az->map->blue[0] = 6) * SBLOCK + dda->y % SBLOCK);
+			return ((az->map->blue[0] = 5));
+		return ((az->map->blue[0] = 6));
 	}
 	if ((((az->map->map[(dda->y - 1) / SBLOCK][value1]) == 7) && ((az->map->map[(dda->y + 1) / SBLOCK][value1]) == 7)))
 	{
 		if (dda->pasx == -1)
-			return ((az->map->orange[0] = 7) * SBLOCK + dda->y % SBLOCK);
-		return ((az->map->orange[0] = 8) * SBLOCK + dda->y % SBLOCK);
+			return ((az->map->orange[0] = 7));
+		return ((az->map->orange[0] = 8));
 	}
 	if ((((az->map->map[value2][(dda->x - 1) / SBLOCK]) == 7) && ((az->map->map[value2][(dda->x + 1) / SBLOCK]) == 7)))
 	{
 		if (dda->pasy == -1)
-			return ((az->map->orange[0] = 5) * SBLOCK + dda->y % SBLOCK);
-		return ((az->map->orange[0] = 6) * SBLOCK + dda->y % SBLOCK);
+			return ((az->map->orange[0] = 5));
+		return ((az->map->orange[0] = 6));
 	}
 	return (0);
 }

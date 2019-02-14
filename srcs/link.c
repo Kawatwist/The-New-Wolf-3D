@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/13 14:54:12 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/14 15:52:51 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,19 @@ void	raycast(t_acz *az)
 					az->side[dda.i] = get_side(&dda, az);
 					az->shoot == 1 && dda.i == XSCREEN / 2 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 6) : 0;
 					az->shoot1 == 1 && dda.i == XSCREEN / 2 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 7) : 0;
+					dda.i == XSCREEN / 2 ? printf("SAVED ? %d, %d\n", az->map->blue[1], az->map->blue[2]) : 0;
+					dda.i == XSCREEN / 2 ? printf("SAVED orange ? %d, %d\n", az->map->orange[1], az->map->orange[2]) : 0;
+					az->shoot == 1 && dda.i == XSCREEN / 2 ? diffside(az, &dda) : 0;
+					az->shoot1 == 1 && dda.i == XSCREEN / 2 ? diffside(az, &dda) : 0;
 					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
 					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
 					break ;
 				}
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6)
-					portalapply(az, &dda, diffside(az, &dda), 6);
+					portalapply(az, &dda, 1, 6);
 				else if(az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] == 7)
-					portalapply(az, &dda, diffside(az, &dda), 7);
+					portalapply(az, &dda, 1, 7);
 			}
 		}
 		if (dda.dist == az->info->range)

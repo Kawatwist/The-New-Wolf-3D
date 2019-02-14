@@ -32,6 +32,7 @@ void			printline(t_acz *az)
 
 	i = 0;
 	raycast(az);
+	printf("%d , %d\n", az->map->blue[1], az->map->blue[2]);
 	while (i < XSCREEN)
 	{
 		value = az->info->range / az->ray[i]->obs;
