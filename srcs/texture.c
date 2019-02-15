@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:33:20 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/12 17:23:06 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/15 15:36:13 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,19 @@ void	load_texture(SDL_Renderer *render, SDL_Texture **texture, char *path)
 	surface == NULL ? stop_exec("cant load surface\n") : 0;
 	*texture = SDL_CreateTextureFromSurface(render, surface);
 	SDL_FreeSurface(surface);
+}
+
+SDL_Texture *pick_texture(t_acz *az, int i)
+{
+    if (az->side[i] / SBLOCK == 1)
+        return az->game->Nwall;
+    if (az->side[i] / SBLOCK == 2)
+        return az->game->Swall;
+    if (az->side[i] / SBLOCK == 3)
+        return az->game->Wwall;
+    if (az->side[i] / SBLOCK == 4)
+        return az->game->Ewall;
+/** if (az->side[i] / SBLOCK == 5)
+    return az->game->Porte; **/
+    return az->game->Filler;
 }

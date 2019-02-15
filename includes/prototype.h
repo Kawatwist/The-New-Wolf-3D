@@ -1,6 +1,7 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+SDL_Texture	*pick_texture(t_acz *az, int i);
 void		changeray(t_acz *az, int portal);
 void		setportal(t_acz *az, int x, int y, int portal);
 int			diffside(t_acz *az, t_dda *dda);

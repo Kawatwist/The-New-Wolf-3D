@@ -17,7 +17,7 @@
 # define	YSCREEN	600
 # define	DEG2RAD	0.0174532778
 # define	SPAWN	2
-# define	SBLOCK 	64
+# define	SBLOCK 	75
 
 typedef struct			s_dda
 {
@@ -45,6 +45,11 @@ typedef struct			s_info
 	int					y;
 	int					editx;
 	int					edity;
+	int					selectx;
+	int					selecty;
+	int					selsizex;
+	int					selsizey;
+	int					**selmap;
 	int					editmap[60][60];
 	int					editbrush;
 }						t_info;
@@ -55,9 +60,9 @@ typedef struct			s_ray
 	double				posx;
 	double				obs;
 	double				obsother;
-	int				other;
-	int				facex;
-	int				facey;
+	int					other;
+	int					facex;
+	int					facey;
 }						t_ray;
 
 typedef struct			s_inv
@@ -71,6 +76,8 @@ typedef struct			s_inv
 typedef struct			s_map
 {
 	int					**map;
+	int					orange[3];
+	int					blue[3];
 	double				persox;
 	double				persoy;
 	double				lastmovx;
@@ -81,6 +88,7 @@ typedef struct			s_menu
 {
 	SDL_Surface			*background;
 	SDL_Surface			*choices;
+	SDL_Surface			*font;
 	SDL_Surface			*edit;
 	SDL_Texture			*bg;
 	SDL_Texture			*editor;
@@ -133,8 +141,11 @@ typedef struct			s_acz	// ARCZURE
 	int					interface;
 	Uint8				time;
 	Uint8				time2;
+	int					textbox;
 	int					twodactif;
 	int					mute;
+	int					shoot;
+	int					shoot1;
 	char				*name_save;
 }						t_acz;
 

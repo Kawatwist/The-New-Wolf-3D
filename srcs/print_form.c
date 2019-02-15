@@ -22,25 +22,33 @@ void			printselect(t_acz *az)
 	}
 }
 
-void			printline(t_acz *az)
+void            printline(t_acz *az)
 {
-	int		i;
-	double	value;
+    int     i;
+    int     j;
+    double  value;
+    SDL_Texture *tex;
 
-	i = 0;
-	raycast(az);
-	while (i < XSCREEN)
-	{
-		value = az->info->range / az->ray[i]->obs;
-		value < 0 ? value *= -1 : 0;
-		value = value / 200;
-		az->side[i] / SBLOCK == 1 ? SDL_SetRenderDrawColor(az->main->rend, 200, 0, az->side[i] % SBLOCK, 0) : 0;
-		az->side[i] / SBLOCK == 2 ? SDL_SetRenderDrawColor(az->main->rend, az->side[i] % SBLOCK, 200, 0, 0) : 0;
-		az->side[i] / SBLOCK == 3 ? SDL_SetRenderDrawColor(az->main->rend, 0, az->side[i] % SBLOCK, 200, 0) : 0;
-		az->side[i] / SBLOCK == 4 ? SDL_SetRenderDrawColor(az->main->rend, 180, az->side[i] % SBLOCK, 180, 0) : 0;
-		SDL_RenderDrawLine(az->main->rend, i, (YSCREEN / 2) - (value), i, (YSCREEN / 2) + (value));
-		i++;
-	}
+    az->dst.w = 1;
+    az->src.w = 1;
+    az->src.h = 64;
+    i = 0;
+    raycast(az);
+    while (i < XSCREEN)
+    {
+        value = az->info->range / az->ray[i]->obs;
+        value < 0 ? value *= -1 : 0;
+        value = value / 200;
+		tex = pick_texture(az, i);
+        j = (YSCREEN / 2) - value;
+        az->dst.y = j;
+        az->dst.x = i;
+        az->src.x = az->side[i] % SBLOCK;
+        az->src.y = 0;
+        az->dst.h = value * 2;
+		SDL_RenderCopy(az->main->rend, tex, &az->src, &az->dst);
+        i++;
+    }
 }
 
 static void		printgrill2(t_acz *az)

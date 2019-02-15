@@ -105,6 +105,11 @@ typedef struct			s_game
 {
 	SDL_Texture			*sky;
 	SDL_Texture			*ground;
+    SDL_Texture         *Nwall;
+    SDL_Texture         *Swall;
+    SDL_Texture         *Ewall;
+    SDL_Texture         *Wwall;
+    SDL_Texture         *Filler;
 	SDL_Surface			*ssky;
 	SDL_Surface			*sground;
 	SDL_Rect			rsky;
@@ -147,6 +152,8 @@ typedef struct			s_acz	// ARCZURE
 	int					shoot;
 	int					shoot1;
 	char				*name_save;
+    SDL_Rect            dst;
+    SDL_Rect            src;
 }						t_acz;
 
 # include "prototype.h"
