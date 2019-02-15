@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/14 15:53:31 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/15 15:08:04 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,23 @@ void	changeray(t_acz *az, int portal)
 {
 	int		i;
 	double	ang;
+	double	rotate;
 	i = -1;
 
-	printf("\nentre = %d\n", portal);
-	printf("angle = %f\n", (((az->map->orange[0] - az->map->blue[0]) / 2) * 90) * 0.017453);
-	printf("Y = %d, Y2 = %d\n",az->map->orange[1], az->map->blue[1]);
-	printf("X = %d, X2 = %d\n",az->map->orange[2], az->map->blue[2]);
+	rotate = (((az->map->orange[0]) - (az->map->blue[0]) * 90) * 0.017453);
+	az->info->angle += (portal == 6 ? -rotate : rotate);
 	while (++i < XSCREEN)
 	{
 		ang = (i * 0.00144) + az->info->angle;
 		if (portal == 6)
 		{
-			az->ray[i]->posx = (az->info->range * cos(ang + (((az->map->orange[0] - az->map->blue[0]) / 2) * 90) * 0.017453)) + (az->info->range * -sin(ang + (((az->map->orange[0] - az->map->blue[0]) / 2) * 0.017453))) + (az->map->persox);
-			az->ray[i]->posy = (az->info->range * sin(ang + (((az->map->orange[0] - az->map->blue[0]) / 2) * 90) * 0.017453)) + (az->info->range * cos(ang + (((az->map->orange[0] - az->map->blue[0]) / 2) * 0.017453))) + (az->map->persoy);
+			az->ray[i]->posx = (az->info->range * cos(ang)) + (az->info->range * -sin(ang)) + (az->map->persox);
+			az->ray[i]->posy = (az->info->range * sin(ang)) + (az->info->range * cos(ang)) + (az->map->persoy);
 		}
 		else
 		{
-			az->ray[i]->posx = (az->info->range * cos(ang + (((az->map->blue[0] - az->map->orange[0]) / 2) * 90) * 0.017453)) + (az->info->range * -sin(ang + (((az->map->blue[0] - az->map->orange[0]) / 2) * 0.017453))) + (az->map->persox);
-			az->ray[i]->posy = (az->info->range * sin(ang + (((az->map->blue[0] - az->map->orange[0]) / 2) * 90) * 0.017453)) + (az->info->range * cos(ang + (((az->map->blue[0] - az->map->orange[0]) / 2) * 0.017453))) + (az->map->persoy);
+			az->ray[i]->posx = (az->info->range * cos(ang)) + (az->info->range * -sin(ang)) + (az->map->persox);
+			az->ray[i]->posy = (az->info->range * sin(ang)) + (az->info->range * cos(ang)) + (az->map->persoy);
 		}
 	}
 }
@@ -76,24 +75,24 @@ int	diffside(t_acz *az, t_dda *dda)
 	{
 		if (dda->pasx == -1)
 			return ((az->map->blue[0] = 7));
-		return ((az->map->blue[0] = 8));
+		return ((az->map->blue[0] = 5));
 	}
 	if ((((az->map->map[value2][(dda->x - 1) / SBLOCK]) == 6) && ((az->map->map[value2][(dda->x + 1) / SBLOCK]) == 6)))
 	{
 		if (dda->pasy == -1)
-			return ((az->map->blue[0] = 5));
+			return ((az->map->blue[0] = 8));
 		return ((az->map->blue[0] = 6));
 	}
 	if ((((az->map->map[(dda->y - 1) / SBLOCK][value1]) == 7) && ((az->map->map[(dda->y + 1) / SBLOCK][value1]) == 7)))
 	{
 		if (dda->pasx == -1)
 			return ((az->map->orange[0] = 7));
-		return ((az->map->orange[0] = 8));
+		return ((az->map->orange[0] = 5));
 	}
 	if ((((az->map->map[value2][(dda->x - 1) / SBLOCK]) == 7) && ((az->map->map[value2][(dda->x + 1) / SBLOCK]) == 7)))
 	{
 		if (dda->pasy == -1)
-			return ((az->map->orange[0] = 5));
+			return ((az->map->orange[0] = 8));
 		return ((az->map->orange[0] = 6));
 	}
 	return (0);

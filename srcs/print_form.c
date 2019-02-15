@@ -14,10 +14,7 @@ void			printselect(t_acz *az)
 		while (x < az->info->selsizex)
 		{
 			if ((y + az->info->edity / 10) > 60 || (x + az->info->editx / 10) > 60)
-			{
-				printf("trop fat\n");
 				break ;
-			}
 			az->info->editmap[y + (az->info->edity / 10)][x + (az->info->editx / 10)] = az->info->selmap[y][x];
 			x++;
 		}
@@ -32,7 +29,6 @@ void			printline(t_acz *az)
 
 	i = 0;
 	raycast(az);
-	printf("%d , %d\n", az->map->blue[1], az->map->blue[2]);
 	while (i < XSCREEN)
 	{
 		value = az->info->range / az->ray[i]->obs;

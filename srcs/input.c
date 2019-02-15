@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/14 15:31:24 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/15 15:16:38 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,26 @@ void		collision(t_acz *az)
 		az->inv->key += 1;
 		az->map->map[(int)az->map->persoy][(int)az->map->persox] = 0;
 	}
-	printf("Portal == %d, orange %d\n", az->map->blue[0], az->map->orange[0]);
-	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 7 && az->map->orange[0] != 0)
-	{                                                                                                                                                                                                                                               
+	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 6 && az->map->orange[0] != 0)
+	{
 		az->map->persoy = az->map->orange[1];
 		az->map->persox = az->map->orange[2];
-		az->map->persox = (az->map->orange[0] == 5 ? -0.5 : 0);
-		az->map->persoy = (az->map->orange[0] == 6 ? -0.5 : 0);
-		az->map->persox = (az->map->orange[0] == 7 ? 0.5 : 0);
-		az->map->persoy = (az->map->orange[0] == 8 ? 0.5 : 0);
+		az->map->persoy += (az->map->orange[0] == 5 ? 0.5 : 0);
+		az->map->persoy += (az->map->orange[0] == 6 ? -0.5 : 0);
+		az->map->persox += (az->map->orange[0] == 7 ? 0.5 : 0);
+		az->map->persox += (az->map->orange[0] == 8 ? -0.5 : 0);
 		changeray(az, 6);
 	}
-	else if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 6 && az->map->blue[0] != 0)
+	else if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 7 && az->map->blue[0] != 0)
 	{
 		az->map->persoy = az->map->blue[1];
 		az->map->persox = az->map->blue[2];
-		az->map->persox += (az->map->blue[0] == 5 ? -0.5 : 0);
+		az->map->persoy += (az->map->blue[0] == 5 ? 0.5 : 0);
 		az->map->persoy += (az->map->blue[0] == 6 ? -0.5 : 0);
 		az->map->persox += (az->map->blue[0] == 7 ? 0.5 : 0);
-		az->map->persoy += (az->map->blue[0] == 8 ? 0.5 : 0);
+		az->map->persox += (az->map->blue[0] == 8 ? -0.5 : 0);
 		changeray(az, 7);
 	}
-	printf("NewPos == %f, %f\n", az->map->persoy, az->map->persox);
 }
 
 static void	input_menu(Uint8 *state, t_acz *az)
@@ -91,7 +89,6 @@ static void	input_menu(Uint8 *state, t_acz *az)
 		az->menu->mode == 2 ? az->interface = 3 : 0;
 		az->menu->mode == 3 ? stop_exec("Goodbye & see you later\n") : 0;
 	}
-	printf("Menu choice\n");
 	state[SDL_SCANCODE_ESCAPE] ? stop_exec("Escape\n") : 0;
 }
 
@@ -149,7 +146,6 @@ static void	input_game(Uint8 *state, t_acz *az)
 
 static void	input_option(Uint8 *state, t_acz *az)
 {
-	printf("Option\n");
 	state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
 	state[SDL_SCANCODE_ESCAPE] ? az->interface = 0 : 0;
 }
