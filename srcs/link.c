@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/15 15:18:38 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/15 16:37:18 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ static int	get_side(t_dda *dda, t_acz *az)
 void	raycast(t_acz *az)
 {
 	t_dda dda;
+	int		tmp;
 
 	dda.i = 0;
+	tmp = 0;
 	while (dda.i < XSCREEN)
 	{
 		initdda(&dda);
@@ -113,20 +115,25 @@ void	raycast(t_acz *az)
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 1)
 				{
 					az->side[dda.i] = get_side(&dda, az);
-					az->shoot == 1 && dda.i == XSCREEN / 2 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 6) : 0;
-					az->shoot1 == 1 && dda.i == XSCREEN / 2 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 7) : 0;
-					az->shoot == 1 && dda.i == XSCREEN / 2 ? diffside(az, &dda) : 0;
-					az->shoot1 == 1 && dda.i == XSCREEN / 2 ? diffside(az, &dda) : 0;
-					printf("face == %d\n", az->map->orange[0]);
+					az->shoot == 1 && dda.i == XSCREEN / 2 && tmp == 0 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 6) : 0;
+					az->shoot1 == 1 && dda.i == XSCREEN / 2 && tmp == 0 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 7) : 0;
+					az->shoot == 1 && dda.i == XSCREEN / 2 && tmp == 0 ? diffside(az, &dda) : 0;
+					az->shoot1 == 1 && dda.i == XSCREEN / 2 && tmp == 0? diffside(az, &dda) : 0;
 					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
 					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
 					break ;
 				}
-//				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6)
-//					portalapply(az, &dda, 1, 6);
-//				else if(az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] == 7)
-//					portalapply(az, &dda, 1, 7);
+				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6)
+				{
+					dda.i == XSCREEN / 2 ? tmp = 1 : 0;
+					//portalapply(az, &dda, 1, 6);
+				}
+				else if(az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] == 7)
+				{
+					dda.i == XSCREEN / 2 ? tmp = 1 : 0;
+				//	portalapply(az, &dda, 1, 7);
+				}
 			}
 		}
 		if (dda.dist == az->info->range)
