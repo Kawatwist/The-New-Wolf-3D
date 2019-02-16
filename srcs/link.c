@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/15 16:37:18 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/16 15:46:33 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,12 @@ void	raycast(t_acz *az)
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6)
 				{
 					dda.i == XSCREEN / 2 ? tmp = 1 : 0;
-					//portalapply(az, &dda, 1, 6);
+					portalapply(az, &dda, 1, 6);
 				}
 				else if(az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] == 7)
 				{
 					dda.i == XSCREEN / 2 ? tmp = 1 : 0;
-				//	portalapply(az, &dda, 1, 7);
+					portalapply(az, &dda, 1, 7);
 				}
 			}
 		}
