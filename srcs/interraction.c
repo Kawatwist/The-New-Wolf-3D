@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/16 17:27:26 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/16 20:40:36 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	changeray(t_acz *az, int portal)
 	else if (az->map->orange[0] - az->map->blue[0] == 2 || az->map->orange[0] - az->map->blue[0] == -2)
 		newrot = 0;
 	else
-		newrot = 270 * 0.017453;
+		newrot = -90 * 0.017453;
 	az->info->angle += newrot;
 	while (++i < XSCREEN)
 	{

@@ -6,11 +6,38 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/15 15:37:15 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/16 20:55:21 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+void	loadeditoplay(t_acz *az)
+{
+	int i;
+	int j;
+
+	j = -1;
+	while (++j < az->info->y)
+		free(az->map->map[j]);
+	(az->map->map = (int **)malloc(sizeof(int*) * 60)) == NULL ? stop_exec("MALLLOC FAILED\n") : 0;
+	j = -1;
+	while (++j < az->info->y)
+		(az->map->map[j] = (int *)malloc(sizeof(int) * 60)) == NULL ? stop_exec("MALLLOC FAILED\n") : 0;
+	j = -1;
+	while (++j < 60)
+	{
+		i = -1;
+		while (++i < 60)
+		{
+			az->map->map[j][i] = az->info->editmap[j][i];
+			az->info->editmap[j][i] == 2 ? az->map->persox = i: 0;
+			az->info->editmap[j][i] == 2 ? az->map->persoy = j: 0;
+		}
+	}
+	az->info->x = 60;
+	az->info->y = 60;
+}
 
 void	rectpos(t_acz *az)
 {
