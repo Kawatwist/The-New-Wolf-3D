@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/17 10:53:56 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/17 19:24:29 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	loadeditoplay(t_acz *az)
 	j = -1;
 	while (++j < az->info->y)
 		free(az->map->map[j]);
+	free(az->map->map);
 	(az->map->map = (int **)malloc(sizeof(int*) * 60)) == NULL ? stop_exec("MALLLOC FAILED\n") : 0;
 	j = -1;
 	while (++j < az->info->y)
@@ -53,12 +54,13 @@ void	rectpos(t_acz *az)
 
 void    loadgame(t_acz *az)
 {
-    load_texture(az->main->rend, &az->game->sky, "texture/sky.png");
+    load_texture(az->main->rend, &az->game->sky, "texture/sky2.png");
     load_texture(az->main->rend, &az->game->ground, "texture/ground.png");
     load_texture(az->main->rend, &az->game->Nwall, "texture/mur1.jpeg");
     load_texture(az->main->rend, &az->game->Swall, "texture/mur2.jpeg");
     load_texture(az->main->rend, &az->game->Ewall, "texture/mur3.jpeg");
     load_texture(az->main->rend, &az->game->Wwall, "texture/mur4.jpeg");
+    load_texture(az->main->rend, &az->game->door, "texture/door.jpeg");
     load_texture(az->main->rend, &az->game->Filler, "texture/MARBLES.bmp");
 }
 
@@ -71,7 +73,9 @@ void	loadedit(t_acz *az)
 void	loadoption(t_acz *az)
 {
 	load_texture(az->main->rend, &az->option->bg, "texture/option.png");
+	load_texture(az->main->rend, &az->option->control, "texture/control.png");
 	load_texture(az->main->rend, &az->option->select, "texture/valid.png");
+	load_texture(az->main->rend, &az->option->choice, "texture/slider.png");
 }
 
 void	loadmenu(t_acz *az)

@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/17 15:13:26 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/17 18:59:42 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ void		textbox(t_acz *az, Uint8 *state)
 
 void		collision(t_acz *az)
 {
+	if (az->map->persox > 60)
+		az->map->persox = 0;
+	if (az->map->persoy > 60)
+		az->map->persoy = 0;
+	if (az->map->persox < 0)
+		az->map->persox = 60;
+	if (az->map->persoy < 0)
+		az->map->persoy = 60;
 	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 1)
 	{
 		az->map->persox -= az->map->lastmovx;
@@ -101,7 +109,6 @@ static void	mouseoption(Uint16 mouse, t_acz *az, int x, int y)
 		(mouse & SDL_BUTTON_LMASK) == 1 ? az->hud *= -1 : 0;
 	if (y >= 342 && y <= 366 && x >= 820 && x <= 1375)
 		(mouse & SDL_BUTTON_LMASK) == 1 ? az->sensi = 0.0015 + ((x - 820) * 0.000002) : 0;
-	printf("%f\n", az->sensi);
 }
 
 static void	mouseedit(Uint16 mouse, t_acz *az, int x, int y)
@@ -149,7 +156,7 @@ static void	rotate_perso(t_acz *az)
 	current = 0;
 	while (current < XSCREEN)
 	{
-		ang = (current * 0.00144) + az->info->angle;
+		ang = (current * 0.002) + az->info->angle;
 		az->ray[current]->posx = (az->info->range * cos(ang)) + (az->info->range * -sin(ang)) + (az->map->persox);
 		az->ray[current]->posy = (az->info->range * sin(ang)) + (az->info->range * cos(ang)) + (az->map->persoy);
 		current++;
@@ -195,6 +202,7 @@ static void	input_option(Uint8 *state, t_acz *az)
 {
 	state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
 	state[SDL_SCANCODE_ESCAPE] ? az->interface = 0 : 0;
+	state[SDL_SCANCODE_H] ? az->interface = 4 : 0;
 }
 
 static void	input_editor(Uint8 *state, t_acz *az)
@@ -229,6 +237,11 @@ static void	input_editor(Uint8 *state, t_acz *az)
 	}
 }
 
+static void	input_control(Uint8 *state, t_acz *az)
+{
+	state[SDL_SCANCODE_ESCAPE] ? az->interface = 2 : 0;
+}
+
 void		input(t_acz *az)
 {
 	Uint8	*state;
@@ -246,6 +259,8 @@ void		input(t_acz *az)
 		input_game(state, az);
 	else if (az->interface == 2)
 		input_option(state, az);
-	else
+	else if (az->interface == 3)
 		input_editor(state, az);
+	else if (az->interface == 4)
+		input_control(state, az);
 }

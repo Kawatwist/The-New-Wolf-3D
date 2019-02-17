@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:57:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/17 14:59:02 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/17 17:46:43 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,22 @@ static void	printedit(t_acz *az)
 	SDL_UpdateWindowSurface(az->main->window);
 }
 
+static void	showslider(t_acz *az)
+{
+	SDL_Rect	pos;
+
+	pos.x = 800 * XSCREEN / 1600 + ((az->sensi - 0.0015) * 250000);
+	pos.y = 330 * YSCREEN / 1200;
+	pos.w = 30;
+	pos.h = 30;
+	SDL_RenderCopy(az->main->rend, az->option->choice, NULL, &pos);
+}
+
 static void	showvalide(t_acz *az)
 {
 	SDL_Rect	pos;
-	
-	pos.x = 216 * YSCREEN / 1200;
+
+	pos.x = 216 * XSCREEN / 1600;
 	pos.y = 571 * YSCREEN / 1200;
 	pos.w = 20;
 	pos.h = 20;
@@ -59,8 +70,14 @@ static void	printoption(t_acz *az)
 {
 	SDL_SetRenderDrawColor(az->main->rend, 100, 100, 100, 0);
 	SDL_RenderClear(az->main->rend);
-	SDL_RenderCopy(az->main->rend, az->option->bg, NULL, NULL);
-	showvalide(az);
+	if (az->interface == 2)
+	{
+		SDL_RenderCopy(az->main->rend, az->option->bg, NULL, NULL);
+		showvalide(az);
+		showslider(az);
+	}
+	else
+		SDL_RenderCopy(az->main->rend, az->option->control, NULL, NULL);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
 }
@@ -73,6 +90,9 @@ static void	printgame(t_acz *az)
 	SDL_RenderCopy(az->main->rend, az->game->sky, &az->game->rsky2, &az->game->rsky);
 	SDL_RenderCopy(az->main->rend, az->game->ground, NULL, &az->game->rground);
 	printline(az);
+	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
+	SDL_RenderDrawLine(az->main->rend, XSCREEN / 2, (YSCREEN / 2) - 8, XSCREEN / 2, (YSCREEN / 2) + 8);
+	SDL_RenderDrawLine(az->main->rend, (XSCREEN / 2) - 8, YSCREEN / 2, (XSCREEN / 2) + 8, YSCREEN / 2);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
 }
@@ -95,4 +115,5 @@ void		print(t_acz *az)
 	az->interface == 1 ? printgame(az) : 0;
 	az->interface == 2 ? printoption(az) : 0;
 	az->interface == 3 ? printedit(az) : 0;
+	az->interface == 4 ? printoption(az) : 0;
 }

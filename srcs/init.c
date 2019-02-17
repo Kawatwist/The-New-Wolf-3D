@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/17 15:13:28 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/17 18:51:40 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void		call_init(t_acz *az)
 	loadedit(az);
 	loadgame(az);
 	az->interface = 0;
-	az->mute = 1;
+	az->mute = -1;
 	az->fullscreen = -1;
 	az->hud = -1;
 	az->fx = -1;

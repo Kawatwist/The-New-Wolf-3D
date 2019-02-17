@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/16 15:46:33 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/17 19:31:44 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static int	get_side(t_dda *dda, t_acz *az)
 			return (1 * SBLOCK + dda->x % SBLOCK);
 		return (2 * SBLOCK + dda->x % SBLOCK);
 	}
+	if ((az->map->map[dda->y / SBLOCK][(dda->x - 1) / SBLOCK]) == 5)
+		return (5 * SBLOCK + dda->x % SBLOCK);
 	return (0);
 }
 
@@ -112,7 +114,7 @@ void	raycast(t_acz *az)
 			}
 			if ((az->map->map[(int)(dda.y / SBLOCK)][(int)(dda.x / SBLOCK)]) != 0)
 			{
-				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 1)
+				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 1 || az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] == 5)
 				{
 					az->side[dda.i] = get_side(&dda, az);
 					az->shoot == 1 && dda.i == XSCREEN / 2 && tmp == 0 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 6) : 0;

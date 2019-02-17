@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:33:20 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/15 15:36:13 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/17 19:03:13 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ SDL_Texture *pick_texture(t_acz *az, int i)
         return az->game->Wwall;
     if (az->side[i] / SBLOCK == 4)
         return az->game->Ewall;
-/** if (az->side[i] / SBLOCK == 5)
-    return az->game->Porte; **/
+	 if (az->side[i] / SBLOCK == 5)
+    	return az->game->door; 
     return az->game->Filler;
 }
