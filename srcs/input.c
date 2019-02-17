@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/16 20:45:32 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/17 15:13:26 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,55 @@ void		collision(t_acz *az)
 	}
 }
 
+static void	mousegame(Uint16 mouse, t_acz *az, int x, int y)
+{
+	SDL_ShowCursor(az->interface != 1 ? SDL_ENABLE : SDL_DISABLE);
+	SDL_CaptureMouse(az->interface == 1 ? 1 : 0);
+	az->interface == 1 ? SDL_WarpMouseInWindow(az->main->window, XSCREEN / 2, YSCREEN /2) : 0;
+	az->info->angle += (x - 400) * az->sensi;
+	az->shoot = (mouse & SDL_BUTTON_LMASK) == 1 ? 1 : 0;
+	az->shoot1 = (mouse & SDL_BUTTON_RMASK) == 4 ? 1 : 0;
+}
+
+static void	mouseoption(Uint16 mouse, t_acz *az, int x, int y)
+{
+	x = x * 1600 / XSCREEN;
+	y = y * 1200 / YSCREEN;
+	if ((x >= 216 && x <= 256) && (y >= 571 && y <= 610))
+		(mouse & SDL_BUTTON_LMASK) == 1 ? az->fullscreen *= -1 : 0;
+	else if ((x >= 216 && x <= 256) && (y >= 689 && y <= 729))
+		(mouse & SDL_BUTTON_LMASK) == 1 ? az->mute *= -1 : 0;
+	else if ((x >= 216 && x <= 256) && (y >= 807 && y <= 847))
+		(mouse & SDL_BUTTON_LMASK) == 1 ? az->fx *= -1 : 0;
+	else if ((x >= 216 && x <= 256) && (y >= 925 && y <= 965))
+		(mouse & SDL_BUTTON_LMASK) == 1 ? az->hud *= -1 : 0;
+	if (y >= 342 && y <= 366 && x >= 820 && x <= 1375)
+		(mouse & SDL_BUTTON_LMASK) == 1 ? az->sensi = 0.0015 + ((x - 820) * 0.000002) : 0;
+	printf("%f\n", az->sensi);
+}
+
+static void	mouseedit(Uint16 mouse, t_acz *az, int x, int y)
+{
+	if (az->mouse == 1)
+	{
+		az->info->editx = y;
+		az->info->edity = x;
+		(mouse & SDL_BUTTON_LMASK) == 1 ? az->info->editmap[az->info->edity / 10][az->info->editx / 10] = az->info->editbrush : 0;
+	}
+}
+
+static void	mouseinput(t_acz *az)
+{
+	Uint16			mouse;
+	int				x;
+	int				y;
+
+	mouse = SDL_GetMouseState(&x, &y);
+	az->interface == 1 ? mousegame(mouse, az, x, y) : 0;
+	az->interface == 2 ? mouseoption(mouse, az, x, y) : 0;
+	az->interface == 3 ? mouseedit(mouse, az, x, y) : 0;
+}
+
 static void	input_menu(Uint8 *state, t_acz *az)
 {
 	state[SDL_SCANCODE_DOWN] && az->menu->mode < 3 ? az->menu->mode += 1 : 0;
@@ -135,8 +184,6 @@ static void	input_game(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_D] ? mouvement(az, 1) : 0;
 	state[SDL_SCANCODE_W] ? mouvement(az, 2) : 0;
 	state[SDL_SCANCODE_S] ? mouvement(az, 0) : 0;
-	az->shoot = state[SDL_SCANCODE_L] ? 1 : 0;
-	az->shoot1 = state[SDL_SCANCODE_K] ? 1 : 0;
 	state[SDL_SCANCODE_LEFT] ? az->info->angle -= 0.07 : 0;
 	state[SDL_SCANCODE_RIGHT] ? az->info->angle += 0.07 : 0;
 	state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
@@ -191,6 +238,8 @@ void		input(t_acz *az)
 	az->twodactif = (state[SDL_SCANCODE_TAB] ? 1 : 0);
 	state[SDL_SCANCODE_M] ? az->mute = 1 : 0;
 	state[SDL_SCANCODE_L] ? loadeditoplay(az) : 0;
+	state[SDL_SCANCODE_H] ? az->mouse *= -1 : 0;
+	mouseinput(az);
 	if (az->interface == 0)
 		input_menu(state, az);
 	else if (az->interface == 1)

@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/16 20:55:21 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/17 10:53:56 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	loadedit(t_acz *az)
 void	loadoption(t_acz *az)
 {
 	load_texture(az->main->rend, &az->option->bg, "texture/option.png");
+	load_texture(az->main->rend, &az->option->select, "texture/valid.png");
 }
 
 void	loadmenu(t_acz *az)

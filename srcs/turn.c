@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:23:49 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/15 14:37:07 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/17 13:29:21 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	running(t_acz **az)
 		if ((*az)->interface == 1)
 			difftime < 1000 / 60 ? SDL_Delay((1000 / 60) - difftime) : 0;
 		else
-			difftime < 1000 / 30 ? SDL_Delay((1000 / 10) - difftime) : 0;
+			difftime < 1000 / 60 ? SDL_Delay((1000 / 10) - difftime) : 0;
 	}
 }

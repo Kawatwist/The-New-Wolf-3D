@@ -148,11 +148,19 @@ typedef struct			s_acz	// ARCZURE
 	Uint8				time2;
 	int					textbox;
 	int					twodactif;
-	int					mute;
 	int					shoot;
 	int					shoot1;
 	char				*name_save;
-    SDL_Rect            dst;
+    int					fullscreen;
+	int					mute;
+	int					hud;
+	int					fx;
+	int					pack;
+	int					mouse;
+	int					wheelup;
+	int					wheeldown;
+	double				sensi;
+	SDL_Rect            dst;
     SDL_Rect            src;
 }						t_acz;
 

@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:57:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/16 20:30:38 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/17 14:59:02 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,39 @@ static void	printedit(t_acz *az)
 	SDL_UpdateWindowSurface(az->main->window);
 }
 
+static void	showvalide(t_acz *az)
+{
+	SDL_Rect	pos;
+	
+	pos.x = 216 * YSCREEN / 1200;
+	pos.y = 571 * YSCREEN / 1200;
+	pos.w = 20;
+	pos.h = 20;
+	if (az->fullscreen == 1)
+		SDL_RenderCopy(az->main->rend, az->option->select, NULL, &pos);
+	if (az->mute == 1)
+	{
+		pos.y = 689 * YSCREEN / 1200;
+		SDL_RenderCopy(az->main->rend, az->option->select, NULL, &pos);
+	}
+	if (az->fx == 1)
+	{
+		pos.y = 807 * YSCREEN / 1200;
+		SDL_RenderCopy(az->main->rend, az->option->select, NULL, &pos);
+	}
+	if (az->hud == 1)
+	{
+		pos.y = 925 * YSCREEN / 1200;
+		SDL_RenderCopy(az->main->rend, az->option->select, NULL, &pos);
+	}
+}
+
 static void	printoption(t_acz *az)
 {
 	SDL_SetRenderDrawColor(az->main->rend, 100, 100, 100, 0);
 	SDL_RenderClear(az->main->rend);
 	SDL_RenderCopy(az->main->rend, az->option->bg, NULL, NULL);
+	showvalide(az);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
 }
