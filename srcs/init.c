@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/17 18:51:40 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/18 19:21:52 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,20 @@ static void		init_info(t_info *info)
 	info->angle = 0;
 }
 
+static void		initinv(t_acz *az)
+{
+	az->inv->key = 0;
+	az->inv->health = 100;
+	az->inv->shield = 50;
+}
+
 static void		call_init(t_acz *az)
 {
 	init_info(az->info);
 	init_sdl(az);
 	initeditmap(az->info->editmap);
 	initray(az);
+	initinv(az);
 	loadmenu(az);
 	loadoption(az);
 	loadedit(az);
@@ -79,7 +87,7 @@ static void		call_init(t_acz *az)
 	az->interface = 0;
 	az->mute = -1;
 	az->fullscreen = -1;
-	az->hud = -1;
+	az->hud = 1;
 	az->fx = -1;
 	az->mouse = 1;
 	az->textbox = -1;

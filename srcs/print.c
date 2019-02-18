@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:57:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/17 17:46:43 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/18 20:05:59 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,54 @@ static void	showvalide(t_acz *az)
 	}
 }
 
+static void	showhp(t_acz *az)
+{
+	SDL_Rect	pos;
+	SDL_Rect	high;
+	
+	high.x = 0;
+	high.y = 140 - (az->inv->health * 140 / 100);
+	high.w = 81;
+	high.h = 140 - high.y;
+
+	pos.x = 3;
+	pos.y = YSCREEN - 190 + high.y;
+	pos.w = 81;
+	pos.h = 140 - high.y;
+	SDL_RenderCopy(az->main->rend, az->game->health, &high, &pos);
+	high.y = 140 - (az->inv->shield * 140 / 100);
+	high.h = 140 - high.y;
+	pos.x = XSCREEN - 84;
+	pos.y = YSCREEN - 190 + high.y;
+	pos.h = 140 - high.y;
+	SDL_RenderCopy(az->main->rend, az->game->shield, &high, &pos);
+}
+
+static void	showhud(t_acz *az)
+{
+	SDL_Rect	pos;
+
+	pos.x = 0;
+	pos.y = YSCREEN - 200;
+	pos.w = XSCREEN;
+	pos.h = 200;
+	SDL_RenderCopy(az->main->rend, az->game->hud, NULL, &pos);
+	pos.x = 115;
+	pos.y = YSCREEN - 105;
+	pos.w = 100;
+	pos.h = 100;
+	loadcompas(az);
+	SDL_RenderCopy(az->main->rend, az->game->compas, NULL, &pos);
+	pos.x = 33;
+	pos.y = YSCREEN - 104;
+	pos.w = 101;
+	pos.h = 90;
+	if (az->map->blue[0] > 4 && az->map->blue[0] < 9)
+		SDL_RenderCopy(az->main->rend, az->game->portal1, NULL, &pos);
+	if (az->map->orange[0] > 4 && az->map->orange[0] < 9)
+		SDL_RenderCopy(az->main->rend, az->game->portal2, NULL, &pos);
+}
+
 static void	printoption(t_acz *az)
 {
 	SDL_SetRenderDrawColor(az->main->rend, 100, 100, 100, 0);
@@ -91,6 +139,8 @@ static void	printgame(t_acz *az)
 	SDL_RenderCopy(az->main->rend, az->game->ground, NULL, &az->game->rground);
 	printline(az);
 	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
+	az->hud == 1 ? showhud(az) : 0;
+	az->hud == 1 ? showhp(az) : 0;
 	SDL_RenderDrawLine(az->main->rend, XSCREEN / 2, (YSCREEN / 2) - 8, XSCREEN / 2, (YSCREEN / 2) + 8);
 	SDL_RenderDrawLine(az->main->rend, (XSCREEN / 2) - 8, YSCREEN / 2, (XSCREEN / 2) + 8, YSCREEN / 2);
 	SDL_RenderPresent(az->main->rend);

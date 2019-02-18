@@ -6,11 +6,37 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/17 19:24:29 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/18 20:10:45 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+void	loadcompas(t_acz *az)
+{
+	while (az->info->angle > 6.28318)
+		az->info->angle -= 6.28318;
+	while (az->info->angle < 0)
+		az->info->angle += 6.28318;
+	if (az->game->compas != NULL)
+		SDL_DestroyTexture(az->game->compas);
+	if (az->info->angle >= 5.89048125 || az->info->angle <= 0.39269875)
+  	  load_texture(az->main->rend, &az->game->compas, "texture/cursorN.png");
+	else if (az->info->angle > 0.39269875 && az->info->angle <= 1.17809625)
+	    load_texture(az->main->rend, &az->game->compas, "texture/cursorNE.png");
+	else if (az->info->angle > 1.1780965 && az->info->angle <= 1.96349375)
+	    load_texture(az->main->rend, &az->game->compas, "texture/cursorE.png");
+	else if (az->info->angle > 1.96349375 && az->info->angle <= 2.74889125)
+	    load_texture(az->main->rend, &az->game->compas, "texture/cursorSE.png");
+	else if (az->info->angle > 2.74889125 && az->info->angle <= 3.53428875)
+	    load_texture(az->main->rend, &az->game->compas, "texture/cursorS.png");
+	else if (az->info->angle > 3.53428875 && az->info->angle <= 4.31968625)
+	    load_texture(az->main->rend, &az->game->compas, "texture/cursorSW.png");
+	else if (az->info->angle > 4.31968625 && az->info->angle <= 5.10508375)
+	    load_texture(az->main->rend, &az->game->compas, "texture/cursorW.png");
+	else
+	    load_texture(az->main->rend, &az->game->compas, "texture/cursorNW.png");
+}
 
 void	loadeditoplay(t_acz *az)
 {
@@ -44,6 +70,8 @@ void	rectpos(t_acz *az)
 {
 	az->menu->rselect.x = 629;
 	az->menu->rselect.y = 24 + (az->info->editbrush * 41);
+	if (az->info->editbrush >= 8)
+		az->menu->rselect.y = (az->info->editbrush == 8 ? 270 : 311);
 	az->menu->rselect.w = 26;
 	az->menu->rselect.h = 26;
 	az->menu->redit.x = 600;
@@ -54,8 +82,13 @@ void	rectpos(t_acz *az)
 
 void    loadgame(t_acz *az)
 {
-    load_texture(az->main->rend, &az->game->sky, "texture/sky2.png");
+    load_texture(az->main->rend, &az->game->sky, "texture/sky.png");
     load_texture(az->main->rend, &az->game->ground, "texture/ground.png");
+    load_texture(az->main->rend, &az->game->hud, "texture/hud.png");
+	load_texture(az->main->rend, &az->game->portal1, "texture/portal1.png");
+	load_texture(az->main->rend, &az->game->portal2, "texture/portal2.png");
+    load_texture(az->main->rend, &az->game->health, "texture/health.png");
+    load_texture(az->main->rend, &az->game->shield, "texture/shield.png");
     load_texture(az->main->rend, &az->game->Nwall, "texture/mur1.jpeg");
     load_texture(az->main->rend, &az->game->Swall, "texture/mur2.jpeg");
     load_texture(az->main->rend, &az->game->Ewall, "texture/mur3.jpeg");
@@ -81,6 +114,8 @@ void	loadoption(t_acz *az)
 void	loadmenu(t_acz *az)
 {
 	az->main->effect = Mix_LoadWAV("texture/Gun.wav");
+	az->main->portal1 = Mix_LoadWAV("texture/portalshoot1.wav");
+	az->main->portal2 = Mix_LoadWAV("texture/portalshoot2.wav");
 //	load_texture(az->main->rend, &az->menu->font, "texture/font.png");
 	load_texture(az->main->rend, &az->menu->bg, "texture/bg.png");
 	load_texture(az->main->rend, &az->menu->choice, "texture/arrow.png");

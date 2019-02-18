@@ -61,11 +61,11 @@ static void		printgrill2(t_acz *az)
 	{
 		x = -1;
 		while (++x < 60)
-			if (az->info->editmap[y][x] == 0)
-			{	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
-				SDL_RenderDrawLine(az->main->rend, y * 10, 0, y * 10, 600);
-				SDL_RenderDrawLine(az->main->rend, 0, y * 10, 600, y * 10);
-			}
+		{	
+			SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
+			SDL_RenderDrawLine(az->main->rend, y * 10, 0, y * 10, 600);
+			SDL_RenderDrawLine(az->main->rend, 0, y * 10, 600, y * 10);
+		}
 	}
 
 }
@@ -93,6 +93,8 @@ void			printgrill(t_acz *az)
 				az->info->editmap[j][i] == 3 ? SDL_SetRenderDrawColor(az->main->rend, 255, 0, 0, 0) : 0;
 				az->info->editmap[j][i] == 4 ? SDL_SetRenderDrawColor(az->main->rend, 255, 150, 0, 0) : 0;
 				az->info->editmap[j][i] == 5 ? SDL_SetRenderDrawColor(az->main->rend, 50, 100, 50, 0) : 0;
+				az->info->editmap[j][i] == 8 ? SDL_SetRenderDrawColor(az->main->rend, 255, 200, 100, 0) : 0;
+				az->info->editmap[j][i] == 9 ? SDL_SetRenderDrawColor(az->main->rend, 100, 100, 255, 0) : 0;
 				SDL_RenderFillRect(az->main->rend, &square);
 			}
 		}

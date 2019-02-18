@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:59:36 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/11 12:58:02 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/18 20:04:26 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ static void	draw_obstacle(t_acz *az)
 			az->map->map[y][x] == 3 ? SDL_SetRenderDrawColor(az->main->rend, 250, 0, 0, 0) : 0;
 			az->map->map[y][x] == 4 ? SDL_SetRenderDrawColor(az->main->rend, 250, 180, 0, 0) : 0;
 			az->map->map[y][x] == 5 ? SDL_SetRenderDrawColor(az->main->rend, 0, 250, 0, 0) : 0;
+			az->map->map[y][x] == 6 ? SDL_SetRenderDrawColor(az->main->rend, 0, 0, 255, 0) : 0;
+			az->map->map[y][x] == 7 ? SDL_SetRenderDrawColor(az->main->rend, 250, 200, 0, 0) : 0;
+			az->map->map[y][x] == 8 ? SDL_SetRenderDrawColor(az->main->rend, 200, 200, 255, 0) : 0;
+			az->map->map[y][x] == 9 ? SDL_SetRenderDrawColor(az->main->rend, 200, 250, 100, 0) : 0;
 			block.x = x1 * SBLOCK;
 			block.y = y1 * SBLOCK;
 			SDL_RenderFillRect(az->main->rend, &block);

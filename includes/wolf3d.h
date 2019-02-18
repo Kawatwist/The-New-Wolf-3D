@@ -106,6 +106,12 @@ typedef struct			s_game
 {
 	SDL_Texture			*sky;
 	SDL_Texture			*ground;
+    SDL_Texture         *hud;
+    SDL_Texture         *compas;
+    SDL_Texture         *portal1;
+    SDL_Texture         *portal2;
+    SDL_Texture         *health;
+    SDL_Texture         *shield;
     SDL_Texture         *Nwall;
     SDL_Texture         *Swall;
     SDL_Texture         *Ewall;
@@ -131,6 +137,8 @@ typedef struct			s_window
 	SDL_Rect			rother;
 	Mix_Music			*song;
 	Mix_Chunk			*effect;
+	Mix_Chunk			*portal1;
+	Mix_Chunk			*portal2;
 }						t_window;
 
 typedef struct			s_acz	// ARCZURE

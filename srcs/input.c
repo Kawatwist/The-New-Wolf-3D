@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/17 18:59:42 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/18 19:59:22 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,50 @@ void		textbox(t_acz *az, Uint8 *state)
 void		collision(t_acz *az)
 {
 	if (az->map->persox > 60)
-		az->map->persox = 0;
+		az->map->persox = 0.5;
 	if (az->map->persoy > 60)
-		az->map->persoy = 0;
-	if (az->map->persox < 0)
-		az->map->persox = 60;
-	if (az->map->persoy < 0)
-		az->map->persoy = 60;
-	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 1)
+		az->map->persoy = 0.5;
+	if (az->map->persox <= 0)
+		az->map->persox = 59.5;
+	if (az->map->persoy <= 0)
+		az->map->persoy = 59.5;
+	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 3)
+	{
+		az->interface = 0;
+		ft_putstr("You win\n");
+	}
+	else if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 8)
+	{
+		az->inv->health < 100 ? az->inv->health = 100 : 0;
+		az->map->map[(int)az->map->persoy][(int)az->map->persox] = 0;
+	}
+	else if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 9)
+	{
+		az->inv->shield < 100 ? az->inv->shield = 100 : 0;
+		az->map->map[(int)az->map->persoy][(int)az->map->persox] = 0;
+	}
+	else if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 1)
 	{
 		az->map->persox -= az->map->lastmovx;
 		az->map->persoy -= az->map->lastmovy;
 	}
-	else if (az->map->map[(int)az->map->persox][(int)az->map->persoy] == 4)
+	else if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 4)
 	{
 		az->inv->key += 1;
 		az->map->map[(int)az->map->persoy][(int)az->map->persox] = 0;
+	}
+	else if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 5)
+	{
+		if (az->inv->key > 0)
+		{
+			az->inv->key -= 1;
+			az->map->map[(int)az->map->persoy][(int)az->map->persox] = 0;
+		}
+		else
+		{
+			az->map->persox -= az->map->lastmovx;
+			az->map->persoy -= az->map->lastmovy;
+		}
 	}
 	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 6 && az->map->orange[0] != 0)
 	{
@@ -92,7 +120,11 @@ static void	mousegame(Uint16 mouse, t_acz *az, int x, int y)
 	az->interface == 1 ? SDL_WarpMouseInWindow(az->main->window, XSCREEN / 2, YSCREEN /2) : 0;
 	az->info->angle += (x - 400) * az->sensi;
 	az->shoot = (mouse & SDL_BUTTON_LMASK) == 1 ? 1 : 0;
+	if (az->fx == 1)
+		az->shoot == 1 ? Mix_PlayChannel(-1, az->main->portal1, 0) : 0;
 	az->shoot1 = (mouse & SDL_BUTTON_RMASK) == 4 ? 1 : 0;
+	if (az->fx == 1)
+		az->shoot1 == 1 ? Mix_PlayChannel(-1, az->main->portal2, 0) : 0;
 }
 
 static void	mouseoption(Uint16 mouse, t_acz *az, int x, int y)
@@ -195,6 +227,7 @@ static void	input_game(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_RIGHT] ? az->info->angle += 0.07 : 0;
 	state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
 	state[SDL_SCANCODE_ESCAPE] ? az->interface = 0 : 0;
+	state[SDL_SCANCODE_ESCAPE] ? SDL_Delay(500) : 0;
 	rotate_perso(az);
 }
 
@@ -203,6 +236,7 @@ static void	input_option(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
 	state[SDL_SCANCODE_ESCAPE] ? az->interface = 0 : 0;
 	state[SDL_SCANCODE_H] ? az->interface = 4 : 0;
+	state[SDL_SCANCODE_ESCAPE] ? SDL_Delay(500) : 0;
 }
 
 static void	input_editor(Uint8 *state, t_acz *az)
@@ -211,6 +245,7 @@ static void	input_editor(Uint8 *state, t_acz *az)
 	if (az->textbox == -1)
 	{
 	state[SDL_SCANCODE_ESCAPE] ? az->interface = 0 : 0;
+	state[SDL_SCANCODE_ESCAPE] ? SDL_Delay(500) : 0;
 	state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
 	state[SDL_SCANCODE_UP] && !state[SDL_SCANCODE_DOWN]  && az->info->editx > 9 ? az->info->editx -= 10 : 0;
 	state[SDL_SCANCODE_DOWN] && !state[SDL_SCANCODE_UP]  && az->info->editx < 590 ? az->info->editx += 10 : 0;
@@ -222,6 +257,8 @@ static void	input_editor(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_KP_3] ? az->info->editbrush = 3 : 0;
 	state[SDL_SCANCODE_KP_4] ? az->info->editbrush = 4 : 0;
 	state[SDL_SCANCODE_KP_5] ? az->info->editbrush = 5 : 0;
+	state[SDL_SCANCODE_KP_6] ? az->info->editbrush = 8 : 0;
+	state[SDL_SCANCODE_KP_7] ? az->info->editbrush = 9 : 0;
 	state[SDL_SCANCODE_C] ? az->info->selectx = az->info->editx / 10 : 0;
 	state[SDL_SCANCODE_C] ? az->info->selecty = az->info->edity / 10 : 0;
 	state[SDL_SCANCODE_V] ? parseselect(az) : 0;
@@ -250,11 +287,13 @@ void		input(t_acz *az)
 	state = (Uint8*)SDL_GetKeyboardState(NULL);
 	az->twodactif = (state[SDL_SCANCODE_TAB] ? 1 : 0);
 	state[SDL_SCANCODE_M] ? az->mute = 1 : 0;
-	state[SDL_SCANCODE_L] ? loadeditoplay(az) : 0;
 	state[SDL_SCANCODE_H] ? az->mouse *= -1 : 0;
 	mouseinput(az);
 	if (az->interface == 0)
+	{
+		state[SDL_SCANCODE_L] ? loadeditoplay(az) : 0;
 		input_menu(state, az);
+	}
 	else if (az->interface == 1)
 		input_game(state, az);
 	else if (az->interface == 2)

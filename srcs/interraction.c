@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/16 20:40:36 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/18 18:52:12 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	changeray(t_acz *az, int portal)
 
 	rotate = ((((az->map->orange[0]) - (az->map->blue[0])) * 90) * 0.017453);
 	if (az->map->orange[0] - az->map->blue[0] == 0)
-		newrot = 180 * 0.017453;
-	else if (az->map->orange[0] - az->map->blue[0] == 1 || az->map->orange[0] - az->map->blue[0] == -1)
-		newrot = 90 * 0.017453;
+		newrot = 180 * 3.14159 / 180;
+	else if (az->map->orange[0] - az->map->blue[0] == 1 || az->map->orange[0] - az->map->blue[0] == -3)
+		newrot = 90 * 3.14159 / 180;
 	else if (az->map->orange[0] - az->map->blue[0] == 2 || az->map->orange[0] - az->map->blue[0] == -2)
 		newrot = 0;
-	else
-		newrot = -90 * 0.017453;
+	else if (az->map->orange[0] - az->map->blue[0] == 3 || az->map->orange[0] - az->map->blue[0] == -1)
+		newrot = 270 * 3.14159 / 180;
 	az->info->angle += newrot;
 	while (++i < XSCREEN)
 	{
