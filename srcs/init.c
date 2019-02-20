@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/18 19:21:52 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/20 17:29:45 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		initray(t_acz *az)
 {
-	int 	current;
+	int		current;
 	double	ang;
 
 	current = 0;
@@ -22,13 +22,15 @@ static void		initray(t_acz *az)
 	{
 		ang = current * 0.00144;
 		az->ray[current]->obs = -1;
-		az->ray[current]->posx = (az->info->range * cos(ang)) + (az->info->range * -sin(ang)) + (az->map->persox * SBLOCK);
-		az->ray[current]->posy = (az->info->range * sin(ang)) + (az->info->range * cos(ang)) + (az->map->persoy * SBLOCK);
+		az->ray[current]->posx = (az->info->range * cos(ang)) +
+			(az->info->range * -sin(ang)) + (az->map->persox * SBLOCK);
+		az->ray[current]->posy = (az->info->range * sin(ang)) +
+			(az->info->range * cos(ang)) + (az->map->persoy * SBLOCK);
 		current++;
 	}
 }
 
-static void		initeditmap(int	map[60][60])
+static void		initeditmap(int map[60][60])
 {
 	int i;
 	int j;
@@ -46,8 +48,10 @@ static void		init_sdl(t_acz *az)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	IMG_Init(IMG_INIT_PNG);
-	az->main->window = SDL_CreateWindow("Wolf3D", 0, SDL_WINDOWPOS_CENTERED, XSCREEN, YSCREEN, SDL_WINDOW_SHOWN);
-	az->main->rend = SDL_CreateRenderer(az->main->window, -1, SDL_RENDERER_PRESENTVSYNC);
+	az->main->window = SDL_CreateWindow("Wolf3D", 0,
+			SDL_WINDOWPOS_CENTERED, XSCREEN, YSCREEN, SDL_WINDOW_SHOWN);
+	az->main->rend = SDL_CreateRenderer(az->main->window, -1,
+			SDL_RENDERER_PRESENTVSYNC);
 	Mix_OpenAudio(17050, MIX_DEFAULT_FORMAT, 2, 4096);
 	SDL_RenderPresent(az->main->rend);
 	SDL_UpdateWindowSurface(az->main->window);
@@ -68,7 +72,10 @@ static void		init_info(t_info *info)
 
 static void		initinv(t_acz *az)
 {
+	az->inv->frame = 1;
+	az->inv->framesens = 1;
 	az->inv->key = 0;
+	az->inv->rifle = 0;
 	az->inv->health = 100;
 	az->inv->shield = 50;
 }
@@ -94,6 +101,7 @@ static void		call_init(t_acz *az)
 	az->sensi = 0.0015;
 	az->wheelup = 0;
 	az->wheeldown = 0;
+	az->map->nbenemy = 0;
 	az->map->orange[0] = 0;
 	az->map->blue[0] = 0;
 	az->name_save = ft_strdup("./save/map0");
@@ -103,16 +111,25 @@ void			initialization(t_acz **az)
 {
 	int	i;
 
-	((*az) = (t_acz *)malloc(sizeof(t_acz))) == NULL ? stop_exec("Dosnt malloc az struct\n") : 0;
-	((*az)->main = (t_window *)malloc(sizeof(t_window))) == NULL ? stop_exec("Dosnt malloc main window struct\n") : 0;
-	((*az)->map = (t_map *)malloc(sizeof(t_map))) == NULL ? stop_exec("Dosnt malloc map struct\n") : 0;
-	((*az)->inv = (t_inv *)malloc(sizeof(t_inv))) == NULL ? stop_exec("Dosnt malloc inv struct\n") : 0;
+	((*az) = (t_acz *)malloc(sizeof(t_acz))) == NULL ?
+		stop_exec("Dosnt malloc az struct\n") : 0;
+	((*az)->main = (t_window *)malloc(sizeof(t_window))) == NULL ?
+		stop_exec("Dosnt malloc main window struct\n") : 0;
+	((*az)->map = (t_map *)malloc(sizeof(t_map))) == NULL ?
+		stop_exec("Dosnt malloc map struct\n") : 0;
+	((*az)->inv = (t_inv *)malloc(sizeof(t_inv))) == NULL ?
+		stop_exec("Dosnt malloc inv struct\n") : 0;
 	i = -1;
 	while (++i < 800)
-		((*az)->ray[i] = (t_ray *)malloc(sizeof(t_ray))) == NULL ? stop_exec("Dosnt malloc ray struct\n") : 0;
-	((*az)->menu = (t_menu *)malloc(sizeof(t_menu))) == NULL ? stop_exec("Dosnt malloc menu struct\n") : 0;
-	((*az)->option = (t_menu *)malloc(sizeof(t_menu))) == NULL ? stop_exec("Dosnt malloc option struct\n") : 0;
-	((*az)->info = (t_info *)malloc(sizeof(t_info))) == NULL ? stop_exec("Dosnt malloc info struct\n") : 0;
-	((*az)->game = (t_game *)malloc(sizeof(t_game))) == NULL ? stop_exec("Dosnt malloc game struct\n") : 0;
+		((*az)->ray[i] = (t_ray *)malloc(sizeof(t_ray))) == NULL ?
+			stop_exec("Dosnt malloc ray struct\n") : 0;
+	((*az)->menu = (t_menu *)malloc(sizeof(t_menu))) == NULL ?
+		stop_exec("Dosnt malloc menu struct\n") : 0;
+	((*az)->option = (t_menu *)malloc(sizeof(t_menu))) == NULL ?
+		stop_exec("Dosnt malloc option struct\n") : 0;
+	((*az)->info = (t_info *)malloc(sizeof(t_info))) == NULL ?
+		stop_exec("Dosnt malloc info struct\n") : 0;
+	((*az)->game = (t_game *)malloc(sizeof(t_game))) == NULL ?
+		stop_exec("Dosnt malloc game struct\n") : 0;
 	call_init(*az);
 }

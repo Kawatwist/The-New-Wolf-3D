@@ -6,13 +6,13 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:33:20 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/17 19:03:13 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/20 17:56:06 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-int		letter(SDL_Rect *find, char c)
+int				letter(SDL_Rect *find, char c)
 {
 /*
 	if (c < '0'|| c > 'z' || (c > '9' && c < 'A') || (c >'Z' && c < 'a'))
@@ -24,13 +24,12 @@ int		letter(SDL_Rect *find, char c)
 	find->y = c - '0' / 13;
 	find->w = NULL;
 	find->h = NULL;
-
 	return (1);
 */
 	return (1);
 }
 
-void	showsky(t_acz *az)
+void			showsky(t_acz *az)
 {
 	double new;
 
@@ -43,19 +42,18 @@ void	showsky(t_acz *az)
 	az->game->rsky.y = 0;
 	az->game->rsky.w = 800;
 	az->game->rsky.h = 300;
-
 	az->game->rsky2.x = new;
 	az->game->rsky2.y = 0;
 	az->game->rsky2.w = 800;
 	az->game->rsky2.h = 300;
-	
 	az->game->rground.x = 0;
 	az->game->rground.y = 300;
 	az->game->rground.w = 800;
 	az->game->rground.h = 300;
 }
 
-void	load_texture(SDL_Renderer *render, SDL_Texture **texture, char *path)
+void			load_texture(SDL_Renderer *render,
+		SDL_Texture **texture, char *path)
 {
 	SDL_Surface	*surface;
 
@@ -65,17 +63,17 @@ void	load_texture(SDL_Renderer *render, SDL_Texture **texture, char *path)
 	SDL_FreeSurface(surface);
 }
 
-SDL_Texture *pick_texture(t_acz *az, int i)
+SDL_Texture		*pick_texture(t_acz *az, int i)
 {
-    if (az->side[i] / SBLOCK == 1)
-        return az->game->Nwall;
-    if (az->side[i] / SBLOCK == 2)
-        return az->game->Swall;
-    if (az->side[i] / SBLOCK == 3)
-        return az->game->Wwall;
-    if (az->side[i] / SBLOCK == 4)
-        return az->game->Ewall;
-	 if (az->side[i] / SBLOCK == 5)
-    	return az->game->door; 
-    return az->game->Filler;
+	if (az->side[i] / SBLOCK == 1)
+		return (az->game->Nwall);
+	if (az->side[i] / SBLOCK == 2)
+		return (az->game->Swall);
+	if (az->side[i] / SBLOCK == 3)
+		return (az->game->Wwall);
+	if (az->side[i] / SBLOCK == 4)
+		return (az->game->Ewall);
+	if (az->side[i] / SBLOCK == 5)
+		return (az->game->door);
+	return (az->game->Filler);
 }

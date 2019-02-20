@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/20 17:49:38 by lomasse           #+#    #+#             */
+/*   Updated: 2019/02/20 17:52:13 by lomasse          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/wolf3d.h"
 
 static void		findname(t_acz *az)
@@ -32,10 +44,11 @@ static int		check_map(t_acz *az)
 
 static char		*dupmapline(t_acz *az, int y)
 {
-	char *str;
+	char	*str;
 	int		x;
 
-	(str = (char *)malloc(sizeof(char) * 120)) == NULL ? stop_exec("str dont load\n") : 0;
+	(str = (char *)malloc(sizeof(char) * 120)) == NULL ?
+		stop_exec("str dont load\n") : 0;
 	x = 0;
 	while (x < 120)
 	{
@@ -59,7 +72,8 @@ void			save_map(t_acz *az)
 		return ;
 	}
 	findname(az);
-	savefd = creat(az->name_save, O_CREAT | S_IRWXU | S_IRWXG | S_IRWXO | O_TRUNC);
+	savefd = creat(az->name_save, O_CREAT | S_IRWXU |
+			S_IRWXG | S_IRWXO | O_TRUNC);
 	savefd < 0 ? stop_exec("Save failed\n") : 0;
 	y = -1;
 	while (++y < 60)

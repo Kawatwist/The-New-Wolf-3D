@@ -1,6 +1,7 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		getenemypos(t_acz *az);
 void		loadcompas(t_acz *az);
 void		loadeditoplay(t_acz *az);
 SDL_Texture	*pick_texture(t_acz *az, int i);

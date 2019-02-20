@@ -17,6 +17,7 @@
 # define	YSCREEN	600
 # define	DEG2RAD	0.0174532778
 # define	SPAWN	2
+# define	ENEMY	666
 # define	SBLOCK 	64
 
 typedef struct			s_dda
@@ -67,7 +68,9 @@ typedef struct			s_ray
 
 typedef struct			s_inv
 {
-	int					**rifle;
+	int					frame;
+	int					framesens;
+	int					rifle;
 	int					key;
 	int					health;
 	int					shield;
@@ -76,6 +79,8 @@ typedef struct			s_inv
 typedef struct			s_map
 {
 	int					**map;
+	double				*enemy;
+	int					nbenemy;
 	int					orange[3];
 	int					blue[3];
 	double				persox;
@@ -108,6 +113,8 @@ typedef struct			s_game
 	SDL_Texture			*ground;
     SDL_Texture         *hud;
     SDL_Texture         *compas;
+    SDL_Texture         *gun;
+    SDL_Texture         *sword;
     SDL_Texture         *portal1;
     SDL_Texture         *portal2;
     SDL_Texture         *health;
