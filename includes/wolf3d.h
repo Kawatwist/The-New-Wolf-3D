@@ -176,6 +176,9 @@ typedef struct			s_acz	// ARCZURE
 	int					mouse;
 	int					wheelup;
 	int					wheeldown;
+	float				speed;
+	double				mode;
+	double				jump;
 	double				sensi;
 	SDL_Rect            dst;
     SDL_Rect            src;

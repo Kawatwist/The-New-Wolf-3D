@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:33:20 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/20 17:56:06 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/21 16:56:57 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			showsky(t_acz *az)
 {
 	double new;
 
-	new = (az->info->angle * 100) * 3200 / 600;
+	new = (az->info->angle * 100) * 3050 / 600;
 	while (new < 0)
 		new += 3200;
 	while (new > 3200)

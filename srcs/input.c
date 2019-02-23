@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/20 19:47:56 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/23 19:46:33 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,13 @@ static void	mousegame(Uint16 mouse, t_acz *az, int x, int y)
 		else
 			load_texture(az->main->rend, &az->game->gun, "texture/P1.png");
 	}
+	else if (az->inv->rifle == 3)
+	{
+		if (mouse & SDL_BUTTON_LMASK || mouse & SDL_BUTTON_RMASK)
+			load_texture(az->main->rend, &az->game->gun, "texture/box2.png");
+		else
+			load_texture(az->main->rend, &az->game->gun, "texture/box.png");
+	}
 }
 
 static void	mouseoption(Uint16 mouse, t_acz *az, int x, int y)
@@ -256,11 +263,11 @@ static void	mouvement(t_acz *az, int move)
 	if (move == 0 || move == 2)
 	{
 		az->map->lastmovx = 0;
-		az->map->lastmovy = (move == 2 ? 0.1 : -0.1);
+		az->map->lastmovy = (move == 2 ? 0.1 : -0.1) * az->speed;
 	}
 	else
 	{
-		az->map->lastmovx = (move == 3 ? 0.1 : -0.1);
+		az->map->lastmovx = (move == 3 ? 0.1 : -0.1) * az->speed;
 		az->map->lastmovy = 0;
 	}
 	tmp = (az->map->lastmovx * cos(az->info->angle)) + (az->map->lastmovy * -sin(az->info->angle));
@@ -285,6 +292,19 @@ static void	input_game(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_1] ? az->inv->rifle = 0 : 0;
 	state[SDL_SCANCODE_2] ? az->inv->rifle = 1 : 0;
 	state[SDL_SCANCODE_3] ? az->inv->rifle = 2 : 0;
+	state[SDL_SCANCODE_4] ? az->inv->rifle = 3 : 0;
+	state[SDL_SCANCODE_7] ? az->mode += 1 : 0;
+	state[SDL_SCANCODE_9] ? az->mode -= 1 : 0;
+	state[SDL_SCANCODE_O] ? az->speed *= 1.01 : 0;
+	state[SDL_SCANCODE_P] ? az->speed *= 0.99 : 0;
+	az->mode = state[SDL_SCANCODE_LSHIFT] ? (SBLOCK * 7) : 0;
+	state[SDL_SCANCODE_LSHIFT] ? az->speed = 0.5 : 0;
+	!state[SDL_SCANCODE_LSHIFT] ? az->speed = 2 : 0;
+	state[SDL_SCANCODE_LSHIFT] ? az->inv->rifle = 3 : 1;
+	if (az->jump == 0)
+		state[SDL_SCANCODE_SPACE] ? az->jump += 1 : 0;
+	az->jump != 0 ? az->jump += 1 : 0;
+	az->jump == 60 ? az->jump = 0 : 0;
 	if (state[SDL_SCANCODE_1] || state[SDL_SCANCODE_2])
 		az->inv->frame = 0;
 	rotate_perso(az);

@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:21:03 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/20 19:39:22 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/21 14:15:26 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void		getenemypos(t_acz *az)
 {
-}
-
-/*	int 	x;
+	int 	x;
 	int		y;
 	int		count;
+
 	az->map->enemy != NULL ? free(az->map->enemy) : 0;
-	(az->map->enemy = (double*)malloc(sizeof(double) *
-	az->map->nbenemy)) == NULL ? stop_exec("Enemy not malloc\n") : 0;
+	(az->map->enemy = (double*)malloc(sizeof(double) * az->map->nbenemy)) == NULL ?
+		stop_exec("Enemy not malloc\n") : 0;
 	count = 0;
 	y = -1;
 	while (++y < 60 && count < az->map->nbenemy * 2)
@@ -34,7 +33,8 @@ void		getenemypos(t_acz *az)
 				az->map->enemy[count + 1] = x;
 				count += 2;
 			}
-	}*/
+	}
+}
 
 static void	map_stock(t_acz *az, t_map *map, int fd)
 {

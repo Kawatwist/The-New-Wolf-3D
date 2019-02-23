@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 19:39:42 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/20 19:43:58 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/23 19:46:31 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,19 @@ void			printline(t_acz *az)
 	az->src.h = 64;
 	i = 0;
 	raycast(az);
+	if (az->jump != 0)
+	{
+		az->mode = -(((az->jump * 640 / 60)));
+		if (az->jump > 30)
+			az->mode -= (az->mode + 320) * 2;
+	}
 	while (i < XSCREEN)
 	{
 		value = az->info->range / az->ray[i]->obs;
 		value < 0 ? value *= -1 : 0;
 		value = value / 200;
 		tex = pick_texture(az, i);
-		j = (YSCREEN / 2) - value;
+		j = (YSCREEN / 2) - value - (az->mode * (value / 680));
 		az->dst.y = j;
 		az->dst.x = i;
 		az->src.x = az->side[i] % SBLOCK;

@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:57:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/20 17:49:33 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/23 19:14:54 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,10 @@ static void	showgun(t_acz *az)
 	az->inv->frame >= 15 ? pos.y = 285 + ((az->inv->frame - 15) % 16 * 2) : 0;
 	az->inv->rifle == 2 ? pos.x -= 130 : 0;
 	az->inv->rifle == 2 ? pos.y -= 80 : 0;
+	az->inv->rifle == 3 ? pos.x = 0 : 0;
+	az->inv->rifle == 3 ? pos.y = 0 : 0;
+	az->inv->rifle == 3 ? pos.w = 800 : 0;
+	az->inv->rifle == 3 ? pos.h = 600 : 0;
 	SDL_RenderCopy(az->main->rend, az->game->gun, NULL, &pos);
 	az->inv->frame == 30 ? az->inv->framesens *= -1 : 0;
 	az->inv->frame == 0 ? az->inv->framesens *= -1 : 0;

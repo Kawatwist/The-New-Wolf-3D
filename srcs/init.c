@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/20 17:29:45 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/23 18:01:21 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,16 @@ static void		call_init(t_acz *az)
 	az->hud = 1;
 	az->fx = -1;
 	az->mouse = 1;
+	az->mode = 1;
+	az->jump = 0;
+	az->speed = 1;
 	az->textbox = -1;
 	az->sensi = 0.0015;
 	az->wheelup = 0;
 	az->wheeldown = 0;
 	az->map->nbenemy = 0;
+	az->map->enemy = NULL;
+	az->map->map = NULL;
 	az->map->orange[0] = 0;
 	az->map->blue[0] = 0;
 	az->name_save = ft_strdup("./save/map0");
