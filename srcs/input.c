@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/23 19:46:33 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/24 15:35:03 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ static void	mousegame(Uint16 mouse, t_acz *az, int x, int y)
 	SDL_CaptureMouse(az->interface == 1 ? 1 : 0);
 	az->interface == 1 ? SDL_WarpMouseInWindow(az->main->window, XSCREEN / 2, YSCREEN /2) : 0;
 	az->info->angle += (x - 400) * az->sensi;
+	az->vue -= ((y - 300) * az->sensi) * 20;
 	az->game->gun != NULL ? SDL_DestroyTexture(az->game->gun) : 0;
 	if (az->inv->rifle == 0)
 	{
@@ -295,16 +296,27 @@ static void	input_game(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_4] ? az->inv->rifle = 3 : 0;
 	state[SDL_SCANCODE_7] ? az->mode += 1 : 0;
 	state[SDL_SCANCODE_9] ? az->mode -= 1 : 0;
-	state[SDL_SCANCODE_O] ? az->speed *= 1.01 : 0;
-	state[SDL_SCANCODE_P] ? az->speed *= 0.99 : 0;
-	az->mode = state[SDL_SCANCODE_LSHIFT] ? (SBLOCK * 7) : 0;
-	state[SDL_SCANCODE_LSHIFT] ? az->speed = 0.5 : 0;
-	!state[SDL_SCANCODE_LSHIFT] ? az->speed = 2 : 0;
-	state[SDL_SCANCODE_LSHIFT] ? az->inv->rifle = 3 : 1;
-	if (az->jump == 0)
+	state[SDL_SCANCODE_O] ? az->vue += 1 : 0;
+	state[SDL_SCANCODE_P] ? az->vue -= 1 : 0;
+	if (az->jump == 0 && !state[SDL_SCANCODE_LSHIFT])
+	{
 		state[SDL_SCANCODE_SPACE] ? az->jump += 1 : 0;
-	az->jump != 0 ? az->jump += 1 : 0;
-	az->jump == 60 ? az->jump = 0 : 0;
+		state[SDL_SCANCODE_SPACE] ? az->acl = 35 : 0;
+	}
+	else if (az->jump != 0)
+	{
+		az->jump != 0 ? az->jump += 1 : 0;
+		az->jump != 0 && az->mode > 0 ? az->jump = 0 : 0;
+		az->mode > 0 ? az->acl = 0 : 0;
+		az->mode > 0 ? az->mode = 0 : 0;
+	}
+	else
+	{
+		state[SDL_SCANCODE_LSHIFT] ? az->speed = 0.5 : 0;
+		state[SDL_SCANCODE_LSHIFT] ? az->inv->rifle = 3 : 1;
+	az->mode = state[SDL_SCANCODE_LSHIFT] ? (SBLOCK * 7) : 0;
+	!state[SDL_SCANCODE_LSHIFT] ? az->speed = 2 : 0;
+	}
 	if (state[SDL_SCANCODE_1] || state[SDL_SCANCODE_2])
 		az->inv->frame = 0;
 	rotate_perso(az);

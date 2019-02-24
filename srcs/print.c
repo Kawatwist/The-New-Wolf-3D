@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:57:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/23 19:14:54 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/24 13:58:41 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,10 +160,10 @@ static void	printgame(t_acz *az)
 	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
 	SDL_RenderClear(az->main->rend);
 	showsky(az);
-	SDL_RenderCopy(az->main->rend, az->game->sky,
-			&az->game->rsky2, &az->game->rsky);
 	SDL_RenderCopy(az->main->rend, az->game->ground,
 			NULL, &az->game->rground);
+	SDL_RenderCopy(az->main->rend, az->game->sky,
+			&az->game->rsky2, &az->game->rsky);
 	printline(az);
 	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
 	az->hud == 1 ? showgun(az) : 0;

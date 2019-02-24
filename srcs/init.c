@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/23 18:01:21 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/24 14:00:38 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ static void		call_init(t_acz *az)
 	az->hud = 1;
 	az->fx = -1;
 	az->mouse = 1;
+	az->acl = 1;
 	az->mode = 1;
+	az->vue = 0;
 	az->jump = 0;
 	az->speed = 1;
 	az->textbox = -1;

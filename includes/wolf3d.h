@@ -178,6 +178,8 @@ typedef struct			s_acz	// ARCZURE
 	int					wheeldown;
 	float				speed;
 	double				mode;
+	double				acl;
+	double				vue;
 	double				jump;
 	double				sensi;
 	SDL_Rect            dst;
