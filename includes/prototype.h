@@ -33,5 +33,6 @@ void		map_parse(t_acz **az, char *name);
 void		initialization(t_acz **az);
 void		stop_exec(void	*msg);
 int			main(int argc, char **argv);
+int			get_side(t_dda *dda, t_acz *az);
 
 #endif

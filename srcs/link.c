@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/17 19:31:44 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/25 17:19:33 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void initdda(t_dda *dda)
 	dda->pente = 0;
 }
 
-static int	get_side(t_dda *dda, t_acz *az)
+int	get_side(t_dda *dda, t_acz *az)
 {
 	// 1 - Nord , 2 - Sud , 3 - Ouest , 4 -Est , 0 - coin
 	if (((az->map->map[(dda->y - 1) / SBLOCK][dda->x / SBLOCK]) == 1) && ((az->map->map[(dda->y + 1) / SBLOCK][dda->x / SBLOCK]) == 1))
