@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_straddlline.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/25 10:33:25 by lomasse           #+#    #+#             */
+/*   Updated: 2019/02/25 10:33:43 by lomasse          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static char	*ft_strnrchr(char *str, int c)
@@ -30,9 +42,9 @@ char		*ft_straddlline(char *str, char c)
 	if (!(pos = ft_strnrchr(str, c)))
 		return (NULL);
 	len = pos - str;
-	if (len < 1 ||
-		 !(tmp = ft_strndup(pos + 1, ft_strlen(pos + 1))) ||
-		 !(newhead = ft_strndup(str, len + 1)))
+	if (len < 1
+			|| !(tmp = ft_strndup(pos + 1, ft_strlen(pos + 1)))
+			|| !(newhead = ft_strndup(str, len + 1)))
 		return (NULL);
 	free(str);
 	str = ft_strjoinfree(tmp, newhead, 3);

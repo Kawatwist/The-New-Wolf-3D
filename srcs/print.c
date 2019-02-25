@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:57:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/24 13:58:41 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/25 16:08:33 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,10 @@ static void	showgun(t_acz *az)
 	az->inv->rifle == 3 ? pos.y = 0 : 0;
 	az->inv->rifle == 3 ? pos.w = 800 : 0;
 	az->inv->rifle == 3 ? pos.h = 600 : 0;
-	SDL_RenderCopy(az->main->rend, az->game->gun, NULL, &pos);
+	if (az->inv->rifle == 4)
+		akframe(az);
+	else 
+		SDL_RenderCopy(az->main->rend, az->game->gun, NULL, &pos);
 	az->inv->frame == 30 ? az->inv->framesens *= -1 : 0;
 	az->inv->frame == 0 ? az->inv->framesens *= -1 : 0;
 	if (az->inv->frame < 30 && az->inv->framesens == 1)
@@ -174,7 +177,6 @@ static void	printgame(t_acz *az)
 	SDL_RenderDrawLine(az->main->rend, (XSCREEN / 2) - 8, YSCREEN / 2,
 			(XSCREEN / 2) + 8, YSCREEN / 2);
 	SDL_RenderPresent(az->main->rend);
-	SDL_UpdateWindowSurface(az->main->window);
 }
 
 static void	printmenu(t_acz *az)

@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   frames.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 07:26:29 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/25 10:31:06 by lomasse          ###   ########.fr       */
+/*   Created: 2019/02/25 13:40:18 by lomasse           #+#    #+#             */
+/*   Updated: 2019/02/25 16:11:50 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/wolf3d.h"
 
-int	ft_isalnum(int c)
+void	akframe(t_acz *az)
 {
-	if ((c >= 'A' && c <= 'Z') 
-			|| (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
-		return (1);
-	return (0);
+	SDL_Rect	org;
+	SDL_Rect	pos;
+
+	org.x = ((az->inv->akframe % 8) * 800);
+	org.y = ((az->inv->akframe / 8) * 600);
+	org.w = 800;
+	org.h = 600;
+	pos.x = 0;
+	pos.y = 0;
+	pos.w = 800;
+	pos.h = 600;
+	SDL_RenderCopy(az->main->rend, az->game->ak, &org, &pos);
 }

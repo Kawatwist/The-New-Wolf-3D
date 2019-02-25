@@ -68,6 +68,7 @@ typedef struct			s_ray
 
 typedef struct			s_inv
 {
+	int					akframe;
 	int					frame;
 	int					framesens;
 	int					rifle;
@@ -114,6 +115,7 @@ typedef struct			s_game
     SDL_Texture         *hud;
     SDL_Texture         *compas;
     SDL_Texture         *gun;
+    SDL_Texture         *ak;
     SDL_Texture         *sword;
     SDL_Texture         *portal1;
     SDL_Texture         *portal2;

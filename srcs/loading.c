@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/24 13:55:43 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/25 14:01:41 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	loadgame(t_acz *az)
 	load_texture(az->main->rend, &az->game->ground, "texture/ground.png");
 	load_texture(az->main->rend, &az->game->hud, "texture/hud.png");
 	load_texture(az->main->rend, &az->game->gun, "texture/portalgun.png");
+	load_texture(az->main->rend, &az->game->ak, "texture/ak47_png.png");
 	load_texture(az->main->rend, &az->game->portal1, "texture/portal1.png");
 	load_texture(az->main->rend, &az->game->portal2, "texture/portal2.png");
 	load_texture(az->main->rend, &az->game->health, "texture/health.png");

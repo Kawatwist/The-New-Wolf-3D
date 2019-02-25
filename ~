@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/25 17:01:27 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/25 16:49:47 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,16 +148,11 @@ static void	mousegame(Uint16 mouse, t_acz *az, int x, int y)
 	SDL_CaptureMouse(az->interface == 1 ? 1 : 0);
 	az->interface == 1 ? SDL_WarpMouseInWindow(az->main->window, XSCREEN / 2, YSCREEN /2) : 0;
 	az->info->angle += (x - 400) * az->sensi;
-	if (az->vue < 50 && y < 300)
-	{
+	printf("=>%f\n", az->vue);
+	if (az->vue < 30 && y < 300)
 		az->vue -= ((y - 300) * az->sensi) * 30;
-		az->vue > 50 ? az->vue = 50 : 0;
-	}
-	else if (az->vue > -50 && y > 300)
-	{
+	else if (az->vue > -30 && y > 300)
 		az->vue -= ((y - 300) * az->sensi) * 30;
-		az->vue > 50 ? az->vue = 50 : 0;
-	}
 	az->game->gun != NULL ? SDL_DestroyTexture(az->game->gun) : 0;
 	if (az->inv->rifle == 0)
 	{

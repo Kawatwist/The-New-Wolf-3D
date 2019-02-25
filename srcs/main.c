@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:36:05 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/20 17:26:43 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/25 10:38:41 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		main(int argc, char **argv)
 {
 	t_acz	*az;
 
+	az = NULL;
 	if (argc < 3 && argc > 3)
 		stop_exec("Erreur du nombre d'argument\n");
 	initialization(&az);
