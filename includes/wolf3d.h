@@ -59,6 +59,8 @@ typedef struct			s_dda
 	int					dy;
 	int					e;
 	int					pente;
+	double				dstx;
+	double				dsty;
 }						t_dda;
 
 typedef struct			s_info

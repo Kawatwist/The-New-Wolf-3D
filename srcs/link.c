@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/27 11:44:53 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/27 18:32:12 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,12 @@ void	raycast(t_acz *az)
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6)
 				{
 					dda.i == XSCREEN / 2 ? tmp = 1 : 0;
-					portalapply(az, &dda, 1, 6);
+					portalapply(az, &dda, 6);
 				}
 				else if(az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] == 7)
 				{
 					dda.i == XSCREEN / 2 ? tmp = 1 : 0;
-					portalapply(az, &dda, 1, 7);
+					portalapply(az, &dda, 7);
 				}
 			}
 		}
@@ -144,22 +144,3 @@ void	raycast(t_acz *az)
 		dda.i += 1;
 	}
 }
-/*
-   void    raycast(t_acz *az)
-   {
-   t_dda dda;
-
-   dda.i = 0;
-   while (dda.i < XSCREEN)
-   {
-   initdda(&dda);
-   dda.x = (int)az->map->persox * SBLOCK;
-   dda.y = (int)az->map->persoy * SBLOCK;
-   dda.pasx = (dda.dx = ((int)az->ray[dda.i]->posx * SBLOCK) - dda.x) < 0 ? -1 : 1;
-   dda.pasy = (dda.dy = ((int)az->ray[dda.i]->posy * SBLOCK) - dda.y) < 0 ? -1 : 1;
-   dda.dx = ft_abs(dda.dx);
-   dda.dy = ft_abs(dda.dy);
-   dda.ratio = dda.dx / dda.dy;
-   if (dda.pasx == -1)
-   dda.nx = dda
-   */

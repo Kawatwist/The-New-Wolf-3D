@@ -1,6 +1,7 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		dds(t_acz *az, t_dda *dda, int portal);
 void		sprite_dist(t_acz *az);
 void		load_sprites(t_acz *az);
 void        draw_sprites(t_acz *az, int i);
@@ -12,7 +13,7 @@ SDL_Texture	*pick_texture(t_acz *az, int i);
 void		changeray(t_acz *az, int portal);
 void		setportal(t_acz *az, int x, int y, int portal);
 int			diffside(t_acz *az, t_dda *dda);
-void		portalapply(t_acz *az, t_dda *dda, int facediff, int portal);
+void		portalapply(t_acz *az, t_dda *dda, int portal);
 void		printselect(t_acz *az);
 int			ft_abs(int n);
 void		parseselect(t_acz *az);
