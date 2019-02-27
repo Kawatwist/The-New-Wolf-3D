@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:23:49 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/25 15:36:42 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/26 13:48:12 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	running(t_acz **az)
 	(*az)->twodactif = 0;
 	(*az)->main->song = Mix_LoadMUS("texture/Dee.wav");
 	Mix_PlayMusic((*az)->main->song, -1);
-	getenemypos(*az);
+	//getenemypos(*az);
+	load_sprites(*az);
 	while (TRUE)
 	{
 		(*az)->mute == 1 ? Mix_HaltMusic() : 0;

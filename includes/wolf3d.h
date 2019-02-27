@@ -20,6 +20,29 @@
 # define	ENEMY	666
 # define	SBLOCK 	64
 
+typedef struct			s_sdetect
+{
+	double  dxl;
+    double  dyl;
+    double  dxf;
+    double  dyf;
+	double	dx;
+	double  dy;
+    double  sx;
+    double  sy;
+}						t_sdetect;
+
+typedef struct			s_sprite
+{
+	struct	s_sprite	*next;
+	double				posx;
+	double				posy;
+	double				dist;
+	int					sizex;
+	int					sizey;
+	SDL_Texture			*tex;
+}						t_sprite;
+
 typedef struct			s_dda
 {
 	int					i;
@@ -155,8 +178,11 @@ typedef struct			s_acz	// ARCZURE
 	t_window			*main;
 	t_map				*map;
 	t_inv				*inv;
+	t_sprite			*sprite;
 	t_ray				*ray[XSCREEN];
 	int					side[XSCREEN];
+	double				zbuffer[XSCREEN];
+	t_sdetect			sdetect;
 	t_info				*info;
 	t_menu				*menu;
 	t_menu				*option;

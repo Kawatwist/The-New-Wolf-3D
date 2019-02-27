@@ -17,7 +17,19 @@
 # define	YSCREEN	600
 # define	DEG2RAD	0.0174532778
 # define	SPAWN	2
-# define	SBLOCK 	75
+# define	ENEMY	666
+# define	SBLOCK 	64
+
+typedef struct			s_sprite
+{
+	struct	s_sprite	*next;
+	double				posx;
+	double				posy;
+	double				dist;
+	int					sizex;
+	int					sizey;
+	SDL_Texture			*tex;
+}						t_sprite;
 
 typedef struct			s_dda
 {
@@ -67,7 +79,10 @@ typedef struct			s_ray
 
 typedef struct			s_inv
 {
-	int					**rifle;
+	int					akframe;
+	int					frame;
+	int					framesens;
+	int					rifle;
 	int					key;
 	int					health;
 	int					shield;
@@ -76,6 +91,8 @@ typedef struct			s_inv
 typedef struct			s_map
 {
 	int					**map;
+	double				*enemy;
+	int					nbenemy;
 	int					orange[3];
 	int					blue[3];
 	double				persox;
@@ -91,6 +108,7 @@ typedef struct			s_menu
 	SDL_Surface			*font;
 	SDL_Surface			*edit;
 	SDL_Texture			*bg;
+	SDL_Texture			*control;
 	SDL_Texture			*editor;
 	SDL_Texture			*select;
 	SDL_Texture			*choice;
@@ -105,6 +123,21 @@ typedef struct			s_game
 {
 	SDL_Texture			*sky;
 	SDL_Texture			*ground;
+    SDL_Texture         *hud;
+    SDL_Texture         *compas;
+    SDL_Texture         *gun;
+    SDL_Texture         *ak;
+    SDL_Texture         *sword;
+    SDL_Texture         *portal1;
+    SDL_Texture         *portal2;
+    SDL_Texture         *health;
+    SDL_Texture         *shield;
+    SDL_Texture         *Nwall;
+    SDL_Texture         *Swall;
+    SDL_Texture         *Ewall;
+    SDL_Texture         *Wwall;
+    SDL_Texture         *door;
+    SDL_Texture         *Filler;
 	SDL_Surface			*ssky;
 	SDL_Surface			*sground;
 	SDL_Rect			rsky;
@@ -124,6 +157,8 @@ typedef struct			s_window
 	SDL_Rect			rother;
 	Mix_Music			*song;
 	Mix_Chunk			*effect;
+	Mix_Chunk			*portal1;
+	Mix_Chunk			*portal2;
 }						t_window;
 
 typedef struct			s_acz	// ARCZURE
@@ -131,8 +166,10 @@ typedef struct			s_acz	// ARCZURE
 	t_window			*main;
 	t_map				*map;
 	t_inv				*inv;
+	t_sprite			*sprite;
 	t_ray				*ray[XSCREEN];
 	int					side[XSCREEN];
+	double				zbuffer[XSCREEN];
 	t_info				*info;
 	t_menu				*menu;
 	t_menu				*option;
@@ -143,10 +180,25 @@ typedef struct			s_acz	// ARCZURE
 	Uint8				time2;
 	int					textbox;
 	int					twodactif;
-	int					mute;
 	int					shoot;
 	int					shoot1;
 	char				*name_save;
+    int					fullscreen;
+	int					mute;
+	int					hud;
+	int					fx;
+	int					pack;
+	int					mouse;
+	int					wheelup;
+	int					wheeldown;
+	float				speed;
+	double				mode;
+	double				acl;
+	double				vue;
+	double				jump;
+	double				sensi;
+	SDL_Rect            dst;
+    SDL_Rect            src;
 }						t_acz;
 
 # include "prototype.h"

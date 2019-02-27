@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/25 17:19:33 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/27 11:44:53 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void	raycast(t_acz *az)
 					az->shoot1 == 1 && dda.i == XSCREEN / 2 && tmp == 0? diffside(az, &dda) : 0;
 					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
 					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
+					az->zbuffer[dda.i] = dda.dist / SBLOCK;
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
 					break ;
 				}

@@ -1,6 +1,9 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		sprite_dist(t_acz *az);
+void		load_sprites(t_acz *az);
+void        draw_sprites(t_acz *az, int i);
 void		akframe(t_acz *az);
 void		getenemypos(t_acz *az);
 void		loadcompas(t_acz *az);
