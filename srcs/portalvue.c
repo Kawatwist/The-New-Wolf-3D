@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 11:04:33 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/27 18:57:31 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/28 22:41:10 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,11 @@ void		portalapply(t_acz *az, t_dda *dda, int portal) // portal == contact
 	double	offx;
 	double	offy;
 
+	if (portal == 7)
+		SDL_SetRenderDrawColor(az->main->rend, 230, 30, 30, 0);
+	else
+		SDL_SetRenderDrawColor(az->main->rend, 30, 30, 230, 0);
+	SDL_RenderDrawLine(az->main->rend, (int)az->map->persox * 64 -150, (int)az->map->persoy * 64 -150, dda->x -150, dda->y -150);
 	rot = rotpos(az, portal) * (cos((dda->i - (XSCREEN / 2)) * 0.00144));
 	offx = offblock(az, dda, portal, 2);
 	offy = offblock(az, dda, portal, 1);
@@ -197,7 +202,13 @@ void		portalapply(t_acz *az, t_dda *dda, int portal) // portal == contact
 	dda->dstx += offy;
 	dda->dstx += portaloff1(az, dda, portal);
 	dda->dsty += portaloff2(az, dda, portal);
-	dds(az, dda, portal);
+	dda->dist = az->info->range;
+	if (portal == 7)
+	{
+		SDL_SetRenderDrawColor(az->main->rend, 200, 100, 100, 0);
+		SDL_RenderDrawLine(az->main->rend, dda->x, dda->y, dda->dstx, dda->dsty);
+	}
+	//	dds(az, dda, portal);
 	//	x = offset(az, dda, portal, 2);
 	//	y = offset(az, dda, portal, 1);
 	//	wallpos(az, dda, portal);

@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 19:39:42 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/28 12:18:39 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/02/27 11:44:31 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void			printline(t_acz *az)
 		az->dst.h = value * 2;
 		SDL_RenderCopy(az->main->rend, tex, &az->src, &az->dst);
 		//printf("Drawsprites\n");
+		draw_sprites(az, i);
 		i++;
 	}
-	draw_sprites(az);
 }
 
 static void		printgrill2(t_acz *az)

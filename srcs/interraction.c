@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/27 18:32:50 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:36:24 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ void    dds(t_acz *az, t_dda *dda, int portal)
 		}
 		dda->dist = sqrt((dda->distx * dda->distx) + (dda->disty * dda->disty));
 		az->side[dda->i] = -1;
+		SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
+		SDL_RenderDrawPoint(az->main->rend, dda->x/SBLOCK, dda->y/SBLOCK);
 		if (dda->y < 0 || dda->y / SBLOCK > 59 || dda->x < 0 || dda->x / SBLOCK > 59)
 		{
 			az->side[dda->i] = 0;

@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/27 18:32:12 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/02/28 22:36:47 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void	raycast(t_acz *az)
 					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
 					az->zbuffer[dda.i] = dda.dist / SBLOCK;
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
+					SDL_SetRenderDrawColor(az->main->rend, 30, 30, 230, 0);
+					SDL_RenderDrawLine(az->main->rend, (int)az->map->persox * 64 -150, (int)az->map->persoy * 64 -150, dda.x -150, dda.y -150);
 					break ;
 				}
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6)
