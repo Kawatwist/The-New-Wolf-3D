@@ -107,8 +107,8 @@ typedef struct			s_map
 	int					**map;
 	double				*enemy;
 	int					nbenemy;
-	int					orange[3];
-	int					blue[3];
+	float				orange[6];
+	float				blue[6];
 	double				persox;
 	double				persoy;
 	double				lastmovx;

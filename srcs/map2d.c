@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:59:36 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/20 17:46:22 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/01 17:10:42 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static void	draw_obstacle(t_acz *az)
 
 	block.w = SBLOCK;
 	block.h = SBLOCK;
-	y = (int)az->map->persoy - 3;
+	y = (int)az->map->persoy - 4;
 	y1 = 0;
-	while (y < (int)az->map->persoy + 6)
+	while (y < (int)az->map->persoy + 8)
 	{
-		x = (int)az->map->persox - 5;
+		x = (int)az->map->persox - 4;
 		x1 = 0;
-		while (x < (int)az->map->persox + 6)
+		while (x < (int)az->map->persox + 8)
 		{
 			while (x < 0)
 			{
@@ -91,10 +91,10 @@ void		map(t_acz *az)
 {
 	SDL_Rect	perso;
 
-	perso.x = XSCREEN / 2 - 17.5;
-	perso.y = YSCREEN / 2 - 17.5;
-	perso.w = 35;
-	perso.h = 35;
+	perso.x = XSCREEN / 2 - SBLOCK / 4;
+	perso.y = YSCREEN / 2 - SBLOCK / 4;
+	perso.w = SBLOCK / 2;
+	perso.h = SBLOCK / 2;
 	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
 	SDL_RenderClear(az->main->rend);
 	SDL_SetRenderDrawColor(az->main->rend, 150, 150, 150, 0);

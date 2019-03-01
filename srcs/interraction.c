@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/28 21:36:24 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/01 19:58:31 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,36 @@ void		changeray(t_acz *az, int portal)
 {
 	int		i;
 	double	rotate;
-	double	newrot;
 
 	i = -1;
-	rotate = ((((az->map->orange[0]) - (az->map->blue[0])) * 90) * 0.017453);
-	if (az->map->orange[0] - az->map->blue[0] == 0)
-		newrot = 180 * 3.14159 / 180;
-	else if (az->map->orange[0] - az->map->blue[0] == 1 ||
-			az->map->orange[0] - az->map->blue[0] == -3)
-		newrot = 90 * 3.14159 / 180;
-	else if (az->map->orange[0] - az->map->blue[0] == 2 ||
-			az->map->orange[0] - az->map->blue[0] == -2)
-		newrot = 0;
-	else if (az->map->orange[0] - az->map->blue[0] == 3 ||
-			az->map->orange[0] - az->map->blue[0] == -1)
-		newrot = 270 * 3.14159 / 180;
-	az->info->angle += newrot;
+	az->info->angle += -rotpos(az, portal);
 	while (++i < XSCREEN)
 		changeray2(az, portal, i);
 }
 
-void		setportal(t_acz *az, int y, int x, int portal)
+int		frontblock(t_acz *az, int type, int portal)
+{
+	int value;
+
+	value = 0;
+	if (portal == 6)
+	{
+		value += (az->map->blue[0] == 5  && type == 2 ? SBLOCK + 10 : 0);
+		value += (az->map->blue[0] == 6  && type == 1 ? SBLOCK + 10 : 0);
+		value += (az->map->blue[0] == 7  && type == 2 ? -10 : 0);
+		value += (az->map->blue[0] == 8  && type == 1 ? -10 : 0);
+	}
+	else
+	{
+		value += (az->map->blue[0] == 5  && type == 2 ? SBLOCK + 10 : 0);
+		value += (az->map->blue[0] == 6  && type == 1 ? SBLOCK + 10 : 0);
+		value += (az->map->blue[0] == 7  && type == 2 ? -10 : 0);
+		value += (az->map->blue[0] == 8  && type == 1 ? -10 : 0);
+	}
+	return (value);
+}
+
+void		setportal(t_acz *az, t_dda dda, int portal)
 {
 	int i;
 	int	j;
@@ -67,18 +76,36 @@ void		setportal(t_acz *az, int y, int x, int portal)
 	{
 		i = -1;
 		while (++i < 60)
-			az->map->map[j][i] == portal ? az->map->map[j][i] = 1 : 0;
+			az->map->map[j][i] == portal ? az->map->map[j][i] = 1 : 0; // reset block
 	}
-	az->map->map[y][x] = portal;
+	az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] = portal;
 	if (portal == 6)
 	{
-		az->map->blue[1] = y;
-		az->map->blue[2] = x;
+		az->map->blue[1] = dda.y - (dda.y % SBLOCK);
+		az->map->blue[2] = dda.x - (dda.x % SBLOCK);
+		if (az->map->orange[0] != 0)
+		{
+			az->map->blue[3] = -rotpos(az, 6);
+			az->map->orange[3] = az->map->blue[3] * -1;
+			az->map->blue[4] = az->map->blue[1] - az->map->orange[1];
+			az->map->blue[5] = az->map->blue[2] - az->map->orange[2];
+		}
+		az->map->blue[4] += frontblock(az, 1, 6);
+		az->map->blue[5] += frontblock(az, 2, 6);
 	}
 	else
 	{
-		az->map->orange[1] = y;
-		az->map->orange[2] = x;
+		az->map->orange[1] = dda.y - (dda.y % SBLOCK);
+		az->map->orange[2] = dda.x - (dda.x % SBLOCK);
+		if (az->map->orange[0] != 0)
+		{
+			az->map->orange[3] = -rotpos(az, 7);
+			az->map->blue[3] = az->map->orange[3] * -1;
+			az->map->orange[4] = az->map->orange[1] - az->map->blue[1];
+			az->map->orange[5] = az->map->orange[2] - az->map->blue[2];
+		}
+		az->map->orange[4] += frontblock(az, 1, 6);
+		az->map->orange[5] += frontblock(az, 2, 6);
 	}
 }
 
@@ -164,8 +191,8 @@ void    dds(t_acz *az, t_dda *dda, int portal)
 		}
 		dda->dist = sqrt((dda->distx * dda->distx) + (dda->disty * dda->disty));
 		az->side[dda->i] = -1;
-		SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
-		SDL_RenderDrawPoint(az->main->rend, dda->x/SBLOCK, dda->y/SBLOCK);
+//		SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
+//		SDL_RenderDrawPoint(az->main->rend, dda->x/SBLOCK, dda->y/SBLOCK);
 		if (dda->y < 0 || dda->y / SBLOCK > 59 || dda->x < 0 || dda->x / SBLOCK > 59)
 		{
 			az->side[dda->i] = 0;

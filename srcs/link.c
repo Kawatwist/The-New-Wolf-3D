@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/28 22:36:47 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/01 17:39:40 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,27 +117,29 @@ void	raycast(t_acz *az)
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 1 || az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] == 5)
 				{
 					az->side[dda.i] = get_side(&dda, az);
-					az->shoot == 1 && dda.i == XSCREEN / 2 && tmp == 0 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 6) : 0;
-					az->shoot1 == 1 && dda.i == XSCREEN / 2 && tmp == 0 ? setportal(az, dda.y / SBLOCK, dda.x / SBLOCK, 7) : 0;
+					az->shoot == 1 && dda.i == XSCREEN / 2 && tmp == 0 ? setportal(az, dda, 6) : 0;
+					az->shoot1 == 1 && dda.i == XSCREEN / 2 && tmp == 0 ? setportal(az, dda, 7) : 0;
 					az->shoot == 1 && dda.i == XSCREEN / 2 && tmp == 0 ? diffside(az, &dda) : 0;
 					az->shoot1 == 1 && dda.i == XSCREEN / 2 && tmp == 0? diffside(az, &dda) : 0;
-					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00144));
+					dda.dist = (dda.dist * cos((dda.i - (XSCREEN / 2)) * 0.00195));
 					dda.dist = (dda.dist != 0 ? (dda.dist) : 0);
 					az->zbuffer[dda.i] = dda.dist / SBLOCK;
 					az->ray[dda.i]->obs = (dda.dist / (YSCREEN / 2));
-					SDL_SetRenderDrawColor(az->main->rend, 30, 30, 230, 0);
-					SDL_RenderDrawLine(az->main->rend, (int)az->map->persox * 64 -150, (int)az->map->persoy * 64 -150, dda.x -150, dda.y -150);
 					break ;
 				}
 				if ((az->map->map[dda.y / SBLOCK][dda.x / SBLOCK]) == 6)
 				{
 					dda.i == XSCREEN / 2 ? tmp = 1 : 0;
-					portalapply(az, &dda, 6);
+					newportail(az, &dda, 6);
+					SDL_SetRenderDrawColor(az->main->rend, 30, 30, 230, 0);
+					SDL_RenderDrawLine(az->main->rend, (dda.x / SBLOCK) * 10, (dda.y / SBLOCK) * 10, (dda.dstx / SBLOCK) * 10, (dda.dsty / SBLOCK) * 10);
 				}
 				else if(az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] == 7)
 				{
 					dda.i == XSCREEN / 2 ? tmp = 1 : 0;
-					portalapply(az, &dda, 7);
+					newportail(az, &dda, 7);
+					SDL_SetRenderDrawColor(az->main->rend, 230, 30, 30, 0);
+					SDL_RenderDrawLine(az->main->rend, (dda.x / SBLOCK) * 10, (dda.y / SBLOCK) * 10, (dda.dstx / SBLOCK) * 10, (dda.dsty / SBLOCK) * 10);
 				}
 			}
 		}
@@ -145,4 +147,5 @@ void	raycast(t_acz *az)
 			az->ray[dda.i]->obs = dda.dist;
 		dda.i += 1;
 	}
+	printgrill(az);
 }

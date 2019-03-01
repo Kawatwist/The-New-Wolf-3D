@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 11:04:33 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/28 22:41:10 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/01 19:52:53 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ float		offset(t_acz *az, t_dda *dda, int  portal, int coor)
 			value += (az->map->orange[0] == 7 ? 0.5 : 0);
 		}
 	}
-	if (dda->i == 400)
-		coor == 1 ? printf("Y == >%f\t", value) : printf("X == %f\n", value);
+//	if (dda->i == 400)
+//		coor == 1 ? printf("Y == >%f\t", value) : printf("X == %f\n", value);
 	value = (value * SBLOCK) + (value2 * SBLOCK);
 	return (value);
 }

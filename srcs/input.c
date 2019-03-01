@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/25 17:01:27 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/01 19:41:10 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,23 +121,15 @@ void		collision(t_acz *az)
 	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 6 &&
 			az->map->orange[0] != 0)
 	{
-		az->map->persoy = az->map->orange[1];
-		az->map->persox = az->map->orange[2];
-		az->map->persoy += (az->map->orange[0] == 8 ? 1 : 0);
-		az->map->persoy += (az->map->orange[0] == 6 ? -1 : 0);
-		az->map->persox += (az->map->orange[0] == 7 ? 1 : 0);
-		az->map->persox += (az->map->orange[0] == 5 ? -1 : 0);
+		az->map->persoy = az->map->orange[1] / SBLOCK;
+		az->map->persox = az->map->orange[2] / SBLOCK;
 		changeray(az, 6);
 	}
 	else if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 7 &&
 			az->map->blue[0] != 0)
 	{
-		az->map->persoy = az->map->blue[1];
-		az->map->persox = az->map->blue[2];
-		az->map->persoy += (az->map->blue[0] == 8 ? 1 : 0);
-		az->map->persoy += (az->map->blue[0] == 6 ? -1 : 0);
-		az->map->persox += (az->map->blue[0] == 7 ? 1 : 0);
-		az->map->persox += (az->map->blue[0] == 5 ? -1 : 0);
+		az->map->persoy = az->map->blue[1] / SBLOCK;
+		az->map->persox = az->map->blue[2] / SBLOCK;
 		changeray(az, 7);
 	}
 }

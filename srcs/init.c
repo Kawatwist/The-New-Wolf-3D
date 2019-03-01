@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/26 13:46:08 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/01 17:05:21 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		initray(t_acz *az)
 	current = 0;
 	while (current < XSCREEN)
 	{
-		ang = current * 0.00144;
+		ang = (current - (XSCREEN / 2)) * 0.00144;
 		az->ray[current]->obs = -1;
 		az->ray[current]->posx = (az->info->range * cos(ang)) +
 			(az->info->range * -sin(ang)) + (az->map->persox * SBLOCK);
