@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 19:39:42 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/01 17:31:07 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/02 18:31:48 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void		printgrill2(t_acz *az)
 {
 	int		x;
 	int		y;
-/*
+
 	y = -1;
 	while (++y < 60)
 	{
@@ -90,7 +90,7 @@ static void		printgrill2(t_acz *az)
 			SDL_RenderDrawLine(az->main->rend, 0, y * 10, 600, y * 10);
 		}
 	}
-*/}
+}
 
 void			printgrill(t_acz *az)
 {
@@ -106,29 +106,29 @@ void			printgrill(t_acz *az)
 		i = -1;
 		while (++i < 60)
 		{
-			if (az->map->map[j][i] != 0)
+			if (az->info->editmap[j][i] != 0)
 			{
 				square.x = i * 10;
 				square.y = j * 10;
-				az->map->map[j][i] == 1 ?
+				az->info->editmap[j][i] == 1 ?
 					SDL_SetRenderDrawColor(az->main->rend, 255, 255, 255, 100) : 0;
-				az->map->map[j][i] == 2 ?
+				az->info->editmap[j][i] == 2 ?
 					SDL_SetRenderDrawColor(az->main->rend, 255, 0, 255, 0) : 0;
-				az->map->map[j][i] == 3 ?
+				az->info->editmap[j][i] == 3 ?
 					SDL_SetRenderDrawColor(az->main->rend, 255, 0, 0, 0) : 0;
-				az->map->map[j][i] == 4 ?
+				az->info->editmap[j][i] == 4 ?
 					SDL_SetRenderDrawColor(az->main->rend, 255, 150, 0, 0) : 0;
-				az->map->map[j][i] == 5 ?
+				az->info->editmap[j][i] == 5 ?
 					SDL_SetRenderDrawColor(az->main->rend, 50, 100, 50, 0) : 0;
-				az->map->map[j][i] == 6 ?
+				az->info->editmap[j][i] == 6 ?
 					SDL_SetRenderDrawColor(az->main->rend, 100, 100, 250, 0) : 0;
-				az->map->map[j][i] == 7 ?
+				az->info->editmap[j][i] == 7 ?
 					SDL_SetRenderDrawColor(az->main->rend, 250, 100, 100, 0) : 0;
-				az->map->map[j][i] == 8 ?
+				az->info->editmap[j][i] == 8 ?
 					SDL_SetRenderDrawColor(az->main->rend, 255, 200, 100, 0) : 0;
-				az->map->map[j][i] == 9 ?
+				az->info->editmap[j][i] == 9 ?
 					SDL_SetRenderDrawColor(az->main->rend, 100, 100, 255, 0) : 0;
-				az->map->map[j][i] == ENEMY ?
+				az->info->editmap[j][i] == ENEMY ?
 					SDL_SetRenderDrawColor(az->main->rend, 100, 0, 0, 0) : 0;
 				SDL_RenderFillRect(az->main->rend, &square);
 			}

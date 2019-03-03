@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/01 19:41:10 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/03 16:45:16 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,8 +219,8 @@ static void	mouseedit(Uint16 mouse, t_acz *az, int x, int y)
 {
 	if (az->mouse == 1)
 	{
-		az->info->editx = y;
-		az->info->edity = x;
+		az->info->editx = x;
+		az->info->edity = y;
 		(mouse & SDL_BUTTON_LMASK) == 1 ? az->info->editmap[az->info->edity / 10][az->info->editx / 10] = az->info->editbrush : 0;
 	}
 }
@@ -349,10 +349,10 @@ static void	input_editor(Uint8 *state, t_acz *az)
 		state[SDL_SCANCODE_ESCAPE] ? az->interface = 0 : 0;
 		state[SDL_SCANCODE_ESCAPE] ? SDL_Delay(500) : 0;
 		state[SDL_SCANCODE_F1] ? az->interface = 0 : 0;
-		state[SDL_SCANCODE_UP] && !state[SDL_SCANCODE_DOWN]  && az->info->editx > 9 ? az->info->editx -= 10 : 0;
-		state[SDL_SCANCODE_DOWN] && !state[SDL_SCANCODE_UP]  && az->info->editx < 590 ? az->info->editx += 10 : 0;
-		state[SDL_SCANCODE_LEFT] && !state[SDL_SCANCODE_RIGHT]  && az->info->edity > 9 ? az->info->edity -= 10 : 0;
-		state[SDL_SCANCODE_RIGHT] && !state[SDL_SCANCODE_LEFT]  && az->info->edity < 590 ? az->info->edity += 10 : 0;
+		state[SDL_SCANCODE_UP] && !state[SDL_SCANCODE_DOWN]  && az->info->edity > 9 ? az->info->edity -= 10 : 0;
+		state[SDL_SCANCODE_DOWN] && !state[SDL_SCANCODE_UP]  && az->info->edity < 590 ? az->info->edity += 10 : 0;
+		state[SDL_SCANCODE_LEFT] && !state[SDL_SCANCODE_RIGHT]  && az->info->editx > 9 ? az->info->editx -= 10 : 0;
+		state[SDL_SCANCODE_RIGHT] && !state[SDL_SCANCODE_LEFT]  && az->info->editx < 590 ? az->info->editx += 10 : 0;
 		state[SDL_SCANCODE_KP_0] ? az->info->editbrush = 0 : 0;
 		state[SDL_SCANCODE_KP_1] ? az->info->editbrush = 1 : 0;
 		state[SDL_SCANCODE_KP_2] ? az->info->editbrush = 2 : 0;
@@ -365,6 +365,7 @@ static void	input_editor(Uint8 *state, t_acz *az)
 		state[SDL_SCANCODE_C] ? az->info->selectx = az->info->editx / 10 : 0;
 		state[SDL_SCANCODE_C] ? az->info->selecty = az->info->edity / 10 : 0;
 		state[SDL_SCANCODE_V] ? parseselect(az) : 0;
+		state[SDL_SCANCODE_L] ? loadplaytoedit(az) : 0;
 		state[SDL_SCANCODE_P] ? printselect(az) : 0;
 		if (state[SDL_SCANCODE_RETURN])
 			az->info->editmap[az->info->edity / 10][az->info->editx / 10] = az->info->editbrush;

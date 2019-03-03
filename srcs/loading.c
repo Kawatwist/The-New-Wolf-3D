@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/26 11:03:15 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/03 16:53:35 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,23 @@ void	loadeditoplay(t_acz *az)
 	az->info->y = 60;
 }
 
+void	loadplaytoedit(t_acz *az)
+{
+	int i;
+	int j;
+
+	az->map->enemy = 0;
+	j = -1;
+	while (++j < 60)
+	{
+		i = -1;
+		while (++i < 60)
+			az->info->editmap[j][i] = az->map->map[j][i];
+	}
+	az->info->x = 60;
+	az->info->y = 60;
+}
+
 void	rectpos(t_acz *az)
 {
 	az->menu->rselect.x = 629;
@@ -89,7 +106,7 @@ void	rectpos(t_acz *az)
 
 void	loadgame(t_acz *az)
 {
-	load_texture(az->main->rend, &az->game->sky, "texture/sky.png");
+	load_texture(az->main->rend, &az->game->sky, "texture/sky3.png");
 	load_texture(az->main->rend, &az->game->ground, "texture/ground.png");
 	load_texture(az->main->rend, &az->game->hud, "texture/hud.png");
 	load_texture(az->main->rend, &az->game->gun, "texture/portalgun.png");
@@ -98,10 +115,10 @@ void	loadgame(t_acz *az)
 	load_texture(az->main->rend, &az->game->portal2, "texture/portal2.png");
 	load_texture(az->main->rend, &az->game->health, "texture/health.png");
 	load_texture(az->main->rend, &az->game->shield, "texture/shield.png");
-	load_texture(az->main->rend, &az->game->Nwall, "texture/mur1.jpeg");
-	load_texture(az->main->rend, &az->game->Swall, "texture/mur2.jpeg");
-	load_texture(az->main->rend, &az->game->Ewall, "texture/mur3.jpeg");
-	load_texture(az->main->rend, &az->game->Wwall, "texture/mur4.jpeg");
+	load_texture(az->main->rend, &az->game->Nwall, "texture/wall1.jpeg");
+	load_texture(az->main->rend, &az->game->Swall, "texture/wall2.jpeg");
+	load_texture(az->main->rend, &az->game->Ewall, "texture/wall3.jpeg");
+	load_texture(az->main->rend, &az->game->Wwall, "texture/wall4.jpeg");
 	load_texture(az->main->rend, &az->game->door, "texture/door.jpeg");
 	load_texture(az->main->rend, &az->game->Filler, "texture/MARBLES.bmp");
 }

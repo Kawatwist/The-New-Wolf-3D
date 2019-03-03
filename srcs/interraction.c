@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/01 19:58:31 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/02 11:44:09 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void		setportal(t_acz *az, t_dda dda, int portal)
 		{
 			az->map->blue[3] = -rotpos(az, 6);
 			az->map->orange[3] = az->map->blue[3] * -1;
-			az->map->blue[4] = az->map->blue[1] - az->map->orange[1];
-			az->map->blue[5] = az->map->blue[2] - az->map->orange[2];
+			az->map->blue[4] = az->map->orange[1];
+			az->map->blue[5] = az->map->orange[2];
 		}
 		az->map->blue[4] += frontblock(az, 1, 6);
 		az->map->blue[5] += frontblock(az, 2, 6);
@@ -101,8 +101,8 @@ void		setportal(t_acz *az, t_dda dda, int portal)
 		{
 			az->map->orange[3] = -rotpos(az, 7);
 			az->map->blue[3] = az->map->orange[3] * -1;
-			az->map->orange[4] = az->map->orange[1] - az->map->blue[1];
-			az->map->orange[5] = az->map->orange[2] - az->map->blue[2];
+			az->map->orange[4] = az->map->blue[1];
+			az->map->orange[5] = az->map->blue[2];
 		}
 		az->map->orange[4] += frontblock(az, 1, 6);
 		az->map->orange[5] += frontblock(az, 2, 6);
@@ -191,8 +191,6 @@ void    dds(t_acz *az, t_dda *dda, int portal)
 		}
 		dda->dist = sqrt((dda->distx * dda->distx) + (dda->disty * dda->disty));
 		az->side[dda->i] = -1;
-//		SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
-//		SDL_RenderDrawPoint(az->main->rend, dda->x/SBLOCK, dda->y/SBLOCK);
 		if (dda->y < 0 || dda->y / SBLOCK > 59 || dda->x < 0 || dda->x / SBLOCK > 59)
 		{
 			az->side[dda->i] = 0;

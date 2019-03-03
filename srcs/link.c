@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:47:12 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/01 17:39:40 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/03 15:46:22 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,12 @@ void	raycast(t_acz *az)
 			}
 			dda.dist = sqrt((dda.distx * dda.distx) + (dda.disty * dda.disty));
 			az->side[dda.i] = -1;
-			if (dda.y < 0 || dda.y / SBLOCK > 59 || dda.x < 0 || dda.x / SBLOCK > 59)
+			if (dda.y < 0 || dda.y > 3775 || dda.x < 0 || dda.x > 3775)
 			{
-				az->side[dda.i] = 0;
-				az->ray[dda.i]->obs = 60 * SBLOCK;
-				break ;
+				unlimitedmap(az, &dda);
+		//		az->side[dda.i] = 0;
+		//		az->ray[dda.i]->obs = 60 * SBLOCK;
+		//		break ;
 			}
 			if ((az->map->map[(int)(dda.y / SBLOCK)][(int)(dda.x / SBLOCK)]) != 0)
 			{
@@ -147,5 +148,4 @@ void	raycast(t_acz *az)
 			az->ray[dda.i]->obs = dda.dist;
 		dda.i += 1;
 	}
-	printgrill(az);
 }

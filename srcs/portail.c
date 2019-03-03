@@ -8,6 +8,18 @@
 */
 #include "../includes/wolf3d.h"
 
+void		unlimitedmap(t_acz *az, t_dda *dda)
+{
+	if (dda->y <= 0)
+		dda->y = 3775;
+	else if (dda->y > 3775)
+		dda->y = 1;
+	else if (dda->x <= 0)
+		dda->x = 3775;
+	else if (dda->x > 3775)
+		dda->x = 1;
+}
+
 void		newportail(t_acz *az, t_dda *dda, int portal)
 {
 	float	xdiff;
@@ -16,6 +28,15 @@ void		newportail(t_acz *az, t_dda *dda, int portal)
 	float	tmp;
 
 	padding = (dda->x % SBLOCK == 0 ? dda->y % SBLOCK : dda->x % SBLOCK);
+	if (dda->i == XSCREEN / 2)
+	{
+		printf("portail = %f\t", az->map->orange[0]);
+		printf("y1 = %f\t", az->map->orange[1]);
+		printf("x1 = %f\t", az->map->orange[2]);
+		printf("rot = %f\t", az->map->orange[3]);
+		printf("x2 = %f\t", az->map->orange[4]);
+		printf("y2 = %f\n", az->map->orange[5]);
+	}
 	if (portal == 6)
 	{
 		tmp = ((dda->dstx - dda->x) * cos(az->map->blue[3])) + ((dda->dsty - dda->y) * -sin(az->map->blue[3])) + dda->x;
@@ -32,16 +53,16 @@ void		newportail(t_acz *az, t_dda *dda, int portal)
 	ydiff = dda->y - dda->dsty;
 	if (portal == 6)
 	{
-		dda->x = az->map->orange[2] + ((int)az->map->orange[2] % 64 == 1 ? padding : 0);
-		dda->y = az->map->orange[1] + ((int)az->map->orange[1] % 64 == 1 ? padding : 0);
-		dda->dstx += xdiff + ((int)az->map->orange[2] % 64 == 1 ? padding : 0);
-		dda->dsty += ydiff + ((int)az->map->orange[1] % 64 == 1 ? padding : 0);
+		dda->x = az->map->orange[2] + ((int)az->map->orange[2] % 64 != 0 ? padding : 0);
+		dda->y = az->map->orange[1] + ((int)az->map->orange[1] % 64 != 0 ? padding : 0);
+		dda->dstx += xdiff + ((int)az->map->orange[2] % 64 != 0 ? padding : 0);
+		dda->dsty += ydiff + ((int)az->map->orange[1] % 64 != 0 ? padding : 0);
 	}
 	else
 	{
-		dda->x = az->map->blue[2] + ((int)az->map->blue[2] % 64 == 1 ? padding : 0);
-		dda->y = az->map->blue[1] + ((int)az->map->blue[1] % 64 == 1 ? padding : 0);
-		dda->dstx += xdiff + ((int)az->map->blue[2] % 64 == 1 ? padding : 0);
-		dda->dsty += ydiff + ((int)az->map->blue[1] % 64 == 1 ? padding : 0);
+		dda->x = az->map->blue[2] + ((int)az->map->blue[2] % 64 != 0 ? padding : 0);
+		dda->y = az->map->blue[1] + ((int)az->map->blue[1] % 64 != 0 ? padding : 0);
+		dda->dstx += xdiff + ((int)az->map->blue[2] % 64 != 0 ? padding : 0);
+		dda->dsty += ydiff + ((int)az->map->blue[1] % 64 != 0 ? padding : 0);
 	}
 }

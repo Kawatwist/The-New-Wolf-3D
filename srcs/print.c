@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:57:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/02/28 22:08:38 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/02 16:41:01 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	printedit(t_acz *az)
 	SDL_SetRenderDrawColor(az->main->rend, 0, 0, 0, 0);
 	printgrill(az);
 	SDL_SetRenderDrawColor(az->main->rend, 250, 120, 0, 0);
-	SDL_RenderDrawLine(az->main->rend, 0, az->info->editx,
-			YSCREEN, az->info->editx);
-	SDL_RenderDrawLine(az->main->rend, az->info->edity,
-			0, az->info->edity, 600);
+	SDL_RenderDrawLine(az->main->rend, az->info->editx,
+			YSCREEN, az->info->editx, 0);
+	SDL_RenderDrawLine(az->main->rend, 0, az->info->edity,
+			600, az->info->edity);
 	rectpos(az);
 	SDL_RenderCopy(az->main->rend, az->menu->editor, NULL, &az->menu->redit);
 	SDL_RenderCopy(az->main->rend, az->menu->select, NULL, &az->menu->rselect);
@@ -165,6 +165,7 @@ static void	printgame(t_acz *az)
 	showsky(az);
 	SDL_RenderCopy(az->main->rend, az->game->ground,
 			NULL, &az->game->rground);
+	showsky(az);
 	SDL_RenderCopy(az->main->rend, az->game->sky,
 			&az->game->rsky2, &az->game->rsky);
 	printline(az);
