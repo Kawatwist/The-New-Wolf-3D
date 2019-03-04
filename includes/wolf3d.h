@@ -152,6 +152,7 @@ typedef struct			s_game
     SDL_Texture         *Wwall;
     SDL_Texture         *door;
     SDL_Texture         *Filler;
+	SDL_Texture			*enemy;
 	SDL_Surface			*ssky;
 	SDL_Surface			*sground;
 	SDL_Rect			rsky;
@@ -162,7 +163,7 @@ typedef struct			s_game
 typedef struct			s_window
 {
 	SDL_Window			*window;
-	SDL_Renderer			*rend;
+	SDL_Renderer		*rend;
 	SDL_Texture			*tbg;
 	SDL_Texture			*tother;
 	SDL_Surface			*sbg;

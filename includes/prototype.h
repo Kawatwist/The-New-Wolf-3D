@@ -1,13 +1,14 @@
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		sort_sprite(t_sprite **sprite);
 void		unlimitedmap(t_acz *az, t_dda *dda);
 double		rotpos(t_acz *az, int portal);
 void		newportail(t_acz *az, t_dda *dda, int portal);
 void		dds(t_acz *az, t_dda *dda, int portal);
 void		sprite_dist(t_acz *az);
 void		load_sprites(t_acz *az);
-void        draw_sprites(t_acz *az, int i);
+void        draw_sprites(t_acz *az);
 void		akframe(t_acz *az);
 void		getenemypos(t_acz *az);
 void		loadcompas(t_acz *az);

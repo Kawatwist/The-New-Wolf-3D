@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/04 11:57:51 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/04 16:23:51 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	loadgame(t_acz *az)
 	load_texture(az->main->rend, &az->game->Wwall, "texture/wall4.jpeg");
 	load_texture(az->main->rend, &az->game->door, "texture/door.jpeg");
 	load_texture(az->main->rend, &az->game->Filler, "texture/MARBLES.bmp");
+	load_texture(az->main->rend, &az->game->enemy, "texture/enemy.png");
 }
 
 void	loadedit(t_acz *az)
