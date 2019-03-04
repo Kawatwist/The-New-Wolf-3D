@@ -6,104 +6,98 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 17:32:30 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/04 16:28:59 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/04 18:49:21 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-/*
-void	sort_sprite(t_sprite **sprite)
-{
-	t_sprite *new;
-	t_sprite *curr;
-	t_sprite *currn;
-	t_sprite *prevn;
-	t_sprite *tmp;
 
-	if (*sprite == NULL)
-		return ;
-	new = *sprite;
-	curr = new->next;
-	new->next = NULL;
-	while (curr != NULL)
-	{
-		currn = new;
-		prevn = NULL;
-		while (currn != NULL && curr->dist < currn->dist)
-		{
-			prevn = currn;
-			currn = currn->next;
-		}
-		tmp = curr;
-		curr = curr->next;
-		if (prevn != NULL)
-			prevn->next = tmp;
-		else
-			new = tmp;
-		tmp->next = currn;
-	}
-	*sprite = new;
-}
-*/			
-int     isvisible(t_acz *az, t_sprite *tmp, int i)
+int		isvisible3(t_acz *az, t_sprite *tmp, int i)
 {
-    az->sdetect.sx = (az->map->persox * SBLOCK) - (tmp->posx * SBLOCK);
+	if ((((az->sdetect.sx < az->sdetect.dxf)
+		&& (az->sdetect.sx >= az->sdetect.dxl))
+		|| ((az->sdetect.sx >= az->sdetect.dxf)
+		&& (az->sdetect.sx < az->sdetect.dxl)))
+		&& (((az->sdetect.sy < az->sdetect.dyf)
+		&& (az->sdetect.sy >= az->sdetect.dyl))
+		|| ((az->sdetect.sy >= az->sdetect.dyf)
+		&& (az->sdetect.sy < az->sdetect.dyl))))
+	{
+		if ((az->sdetect.sx / az->sdetect.sy - az->ray[i]->posx
+			/ az->ray[i]->posy) > 0.01 || (az->sdetect.sx / az->sdetect.sy
+			- az->ray[i]->posx / az->ray[i]->posy) < -0.01)
+			return (0);
+		return (1);
+	}
+	return (0);
+}
+
+int		isvisible2(t_acz *az, t_sprite *tmp, int i)
+{
+	if (az->sdetect.dyf < 0 && az->sdetect.dyl < 0)
+	{
+		if (az->sdetect.sy >= 0)
+			return (0);
+		if ((az->sdetect.sx / az->sdetect.sy - az->ray[i]->posx
+			/ az->ray[i]->posy) > 0.01 || (az->sdetect.sx 
+			/ az->sdetect.sy - az->ray[i]->posx / az->ray[i]->posy) < -0.01)
+			return (0);
+		if (az->sdetect.sx / az->sdetect.sy >= az->sdetect.dxl
+			/ az->sdetect.dyl && az->sdetect.sx / az->sdetect.sy
+			< az->sdetect.dxf / az->sdetect.dyf)
+			return (1);
+	}
+	if (az->sdetect.dyf >= 0 && az->sdetect.dyl >= 0)
+	{
+		if (az->sdetect.sy < 0)
+			return (0);
+		if ((az->sdetect.sx / az->sdetect.sy - az->ray[i]->posx
+			/ az->ray[i]->posy) > 0.01 || (az->sdetect.sx
+			/ az->sdetect.sy - az->ray[i]->posx / az->ray[i]->posy) < -0.01)
+			return (0);
+		if (az->sdetect.sx / az->sdetect.sy >= az->sdetect.dxl
+			/ az->sdetect.dyl && az->sdetect.sx / az->sdetect.sy
+			< az->sdetect.dxf / az->sdetect.dyf)
+			return (1);
+	}
+	return (isvisible3(az, tmp, i));
+}
+
+int		isvisible(t_acz *az, t_sprite *tmp, int i)
+{
+	az->sdetect.sx = (az->map->persox * SBLOCK) - (tmp->posx * SBLOCK);
     az->sdetect.sy = (az->map->persoy * SBLOCK) - (tmp->posy * SBLOCK);
-    if (i == 400)
-    {
-        printf("sx %f sy %f \ndxf %f dyf %f\ndxl %f dyl %f \n\n",az->sdetect.sx,az->sdetect.sy, az->sdetect.dxf, az->sdetect.dyf, az->sdetect.dxl, az->sdetect.dyl);
-    }
-    if (az->sdetect.dxf >= 0 && az->sdetect.dxl >= 0)
-    {
-        if (az->sdetect.sx < 0)
-            return (0);
-        if ((az->sdetect.sy / az->sdetect.sx - az->ray[i]->posy / az->ray[i]->posx) > 0.01 || (az->sdetect.sy / az->sdetect.sx - az->ray[i]->posy / az->ray[i]->posx) < -0.01)
-            return (0);
-        if (az->sdetect.sy / az->sdetect.sx < az->sdetect.dyl / az->sdetect.dxl && az->sdetect.sy / az->sdetect.sx >= az->sdetect.dyf / az->sdetect.dxf)
-            return (1);
-    }
-    if (az->sdetect.dxf < 0 && az->sdetect.dxl < 0)
-    {
-        if (az->sdetect.sx >= 0)
-            return (0);
-        if ((az->sdetect.sy / az->sdetect.sx - az->ray[i]->posy / az->ray[i]->posx) > 0.01 || (az->sdetect.sy / az->sdetect.sx - az->ray[i]->posy / az->ray[i]->posx) < -0.01)
-            return (0);
-        //if (az->sdetect.sy > az->sdetect.dyf && az->sdetect.sy < az->sdetect.dyl)
-        if (az->sdetect.sy / az->sdetect.sx < az->sdetect.dyl / az->sdetect.dxl && az->sdetect.sy / az->sdetect.sx >= az->sdetect.dyf / az->sdetect.dxf)
-            return (1);
-    }
-    if (az->sdetect.dyf < 0 && az->sdetect.dyl < 0)
-    {
-        if (az->sdetect.sy >= 0)
-            return (0);
-        if ((az->sdetect.sx / az->sdetect.sy - az->ray[i]->posx / az->ray[i]->posy) > 0.01 || (az->sdetect.sx / az->sdetect.sy - az->ray[i]->posx / az->ray[i]->posy) < -0.01)
-            return (0);
-        // if (az->sdetect.sx > az->sdetect.dxf && az->sdetect.sx < az->sdetect.dxl)
-        if (az->sdetect.sx / az->sdetect.sy >= az->sdetect.dxl / az->sdetect.dyl && az->sdetect.sx / az->sdetect.sy < az->sdetect.dxf / az->sdetect.dyf)
-            return (1);
-    }
-    if (az->sdetect.dyf >= 0 && az->sdetect.dyl >= 0)
-    {
-        if (az->sdetect.sy < 0)
-            return (0);
-        if ((az->sdetect.sx / az->sdetect.sy - az->ray[i]->posx / az->ray[i]->posy) > 0.01 || (az->sdetect.sx / az->sdetect.sy - az->ray[i]->posx / az->ray[i]->posy) < -0.01)
-            return (0);
-        //    if (az->sdetect.sx > az->sdetect.dxf && az->sdetect.sx < az->sdetect.dxl)
-        if (az->sdetect.sx / az->sdetect.sy >= az->sdetect.dxl / az->sdetect.dyl && az->sdetect.sx / az->sdetect.sy < az->sdetect.dxf / az->sdetect.dyf)
-            return (1);
-    }
-    if ((((az->sdetect.sx < az->sdetect.dxf) && (az->sdetect.sx >= az->sdetect.dxl)) || ((az->sdetect.sx >= az->sdetect.dxf) && (az->sdetect.sx < az->sdetect.dxl)))
-        && (((az->sdetect.sy < az->sdetect.dyf) && (az->sdetect.sy >= az->sdetect.dyl)) || ((az->sdetect.sy >= az->sdetect.dyf) && (az->sdetect.sy < az->sdetect.dyl))))
-    {
-        if ((az->sdetect.sx / az->sdetect.sy - az->ray[i]->posx / az->ray[i]->posy) > 0.01 || (az->sdetect.sx / az->sdetect.sy - az->ray[i]->posx / az->ray[i]->posy) < -0.01)
-            return (0);
-        return (1);
-    }
-    return (0);
+	if (az->sdetect.dxf >= 0 && az->sdetect.dxl >= 0)
+	{
+		if (az->sdetect.sx < 0)
+			return (0);
+		if ((az->sdetect.sy / az->sdetect.sx - az->ray[i]->posy
+			 / az->ray[i]->posx) > 0.01 || (az->sdetect.sy
+			/ az->sdetect.sx - az->ray[i]->posy / az->ray[i]->posx) < -0.01)
+			return (0);
+		if (az->sdetect.sy / az->sdetect.sx < az->sdetect.dyl
+			/ az->sdetect.dxl && az->sdetect.sy / az->sdetect.sx
+			>= az->sdetect.dyf / az->sdetect.dxf)
+			return (1);
+	}
+	if (az->sdetect.dxf < 0 && az->sdetect.dxl < 0)
+	{
+		if (az->sdetect.sx >= 0)
+			return (0);
+		if ((az->sdetect.sy / az->sdetect.sx - az->ray[i]->posy / az->ray[i]->posx) > 0.01
+			|| (az->sdetect.sy / az->sdetect.sx - az->ray[i]->posy / az->ray[i]->posx) < -0.01)
+			return (0);
+		if (az->sdetect.sy / az->sdetect.sx < az->sdetect.dyl / az->sdetect.dxl
+			&& az->sdetect.sy / az->sdetect.sx >= az->sdetect.dyf / az->sdetect.dxf)
+			return (1);
+	}
+	return (isvisible2(az, tmp, i));
 }
 
 void initsurf(SDL_Rect *rect1, SDL_Rect *rect2, t_sprite *tmp, t_acz *az)
 {
+	//az->sdetect.sx = (az->map->persox * SBLOCK) - (tmp->posx * SBLOCK);
+    //az->sdetect.sy = (az->map->persoy * SBLOCK) - (tmp->posy * SBLOCK);
 	rect1->x = 0;
 	rect1->y = 0;
 	rect1->h = tmp->sizey;
@@ -130,8 +124,6 @@ void        draw_sprites(t_acz *az)
 		i = 0;
 		while (i < XSCREEN)
 		{
-            /*if (i == 400)
-              printf("DRAW SPRITE %f %f\n", az->zbuffer[i], tmp->dist); */
             initsurf(&rect1, &rect2, tmp, az);
             rect1.x = 0;
             rect2.x = i;
@@ -140,7 +132,6 @@ void        draw_sprites(t_acz *az)
                 rect2.h = YSCREEN / tmp->dist;
                 rect2.w = XSCREEN / (tmp->dist * 2);
                 rect2.x -= tmp->sizex / 2;
-				//rect2.w = tmp->dist * tmp->sizex / 1000;
                 rect2.y = ((YSCREEN - rect2.h) / 2) + (az->vue * 5/* * 680 / 90*/);
                 if (isvisible(az, tmp, i))
                 {
