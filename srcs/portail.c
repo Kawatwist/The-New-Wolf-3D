@@ -11,12 +11,12 @@
 void		unlimitedmap(t_acz *az, t_dda *dda)
 {
 	if (dda->y <= 0)
-		dda->y = 3775;
-	else if (dda->y > 3775)
+		dda->y = 59 * SBLOCK;
+	else if (dda->y > 59 * SBLOCK)
 		dda->y = 1;
 	else if (dda->x <= 0)
-		dda->x = 3775;
-	else if (dda->x > 3775)
+		dda->x = 59 * SBLOCK;
+	else if (dda->x > 59 * SBLOCK)
 		dda->x = 1;
 }
 

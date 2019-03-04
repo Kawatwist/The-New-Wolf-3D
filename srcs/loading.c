@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/03 16:53:35 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/04 11:57:51 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,20 @@ void	loadeditoplay(t_acz *az)
 			az->info->editmap[j][i] == ENEMY ? az->map->enemy += 1 : 0;
 		}
 	}
-	az->info->x = 60;
-	az->info->y = 60;
+}
+
+void	loadedittoreset(t_acz *az)
+{
+	int i;
+	int j;
+
+	j = -1;
+	while (++j < 60)
+	{
+		i = -1;
+		while (++i < 60)
+			az->info->editmap[j][i] = 0;
+	}
 }
 
 void	loadplaytoedit(t_acz *az)
@@ -86,8 +98,6 @@ void	loadplaytoedit(t_acz *az)
 		while (++i < 60)
 			az->info->editmap[j][i] = az->map->map[j][i];
 	}
-	az->info->x = 60;
-	az->info->y = 60;
 }
 
 void	rectpos(t_acz *az)

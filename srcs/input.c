@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/03 16:45:16 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/04 13:53:19 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,29 @@ void		textbox(t_acz *az, Uint8 *state)
 void		collision(t_acz *az)
 {
 	if (az->map->persox > 60)
+	{
 		az->map->persox = 0.5;
+		if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 1)
+			az->map->persox = 59.5;
+	}
 	if (az->map->persoy > 60)
+	{
 		az->map->persoy = 0.5;
+		if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 1)
+			az->map->persoy = 59.5;
+	}
 	if (az->map->persox <= 0)
+	{
 		az->map->persox = 59.5;
+		if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 1)
+			az->map->persox = 0.5;
+	}
 	if (az->map->persoy <= 0)
+	{
 		az->map->persoy = 59.5;
+		if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 1)
+			az->map->persoy = 0.5;
+	}
 	if (az->map->map[(int)az->map->persoy][(int)az->map->persox] == 3)
 	{
 		az->interface = 0;
@@ -366,6 +382,7 @@ static void	input_editor(Uint8 *state, t_acz *az)
 		state[SDL_SCANCODE_C] ? az->info->selecty = az->info->edity / 10 : 0;
 		state[SDL_SCANCODE_V] ? parseselect(az) : 0;
 		state[SDL_SCANCODE_L] ? loadplaytoedit(az) : 0;
+		state[SDL_SCANCODE_R] ? loadedittoreset(az) : 0;
 		state[SDL_SCANCODE_P] ? printselect(az) : 0;
 		if (state[SDL_SCANCODE_RETURN])
 			az->info->editmap[az->info->edity / 10][az->info->editx / 10] = az->info->editbrush;
@@ -396,7 +413,7 @@ void		input(t_acz *az)
 	if (az->interface == 0)
 	{
 		state[SDL_SCANCODE_L] ? loadeditoplay(az) : 0;
-		state[SDL_SCANCODE_L] ? getenemypos(az) : 0;
+	//	state[SDL_SCANCODE_L] ? getenemypos(az) : 0;
 		input_menu(state, az);
 	}
 	else if (az->interface == 1)

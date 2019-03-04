@@ -11,6 +11,7 @@ void        draw_sprites(t_acz *az, int i);
 void		akframe(t_acz *az);
 void		getenemypos(t_acz *az);
 void		loadcompas(t_acz *az);
+void		loadedittoreset(t_acz *az);
 void		loadplaytoedit(t_acz *az);
 void		loadeditoplay(t_acz *az);
 SDL_Texture	*pick_texture(t_acz *az, int i);

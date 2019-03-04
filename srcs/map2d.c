@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:59:36 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/03 15:20:44 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/04 13:23:24 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,30 @@ static void	draw_obstacle(t_acz *az)
 
 	block.w = SBLOCK;
 	block.h = SBLOCK;
-	y = (int)az->map->persoy - 4;
+	y = (int)az->map->persoy - 5;
 	y1 = 0;
-	while (y < (int)az->map->persoy + 8)
+	while (y < (int)az->map->persoy + 10 || y <= 60)
 	{
-		x = (int)az->map->persox - 4;
-		x1 = 0;
-		while (x < (int)az->map->persox + 8)
+		printf("%d\n", y);
+		while (y < 0)
 		{
+			y++;
+			y1++;
+		}
+		printf("y2 = %d!\n", y);
+		if (y >= 60)
+			break;
+		x = (int)az->map->persox - 6;
+		x1 = 0;
+		while (x < (int)az->map->persox + 10 || x <= 60)
+		{
+			printf("%d | %d\n", x, y);
 			while (x < 0)
 			{
 				x++;
 				x1++;
 			}
-			if (x > 60 || y > 60 || y < 0)
+			if (x >= 60 || y >= 60 || y < 0)
 				break ;
 			az->map->map[y][x] == 0 ? SDL_SetRenderDrawColor(az->main->rend,
 					150, 150, 150, 0) : 0;

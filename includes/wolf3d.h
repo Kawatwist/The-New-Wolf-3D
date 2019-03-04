@@ -17,7 +17,7 @@
 # define	YSCREEN	600
 # define	DEG2RAD	0.0174532778
 # define	SPAWN	2
-# define	ENEMY	666
+# define	ENEMY	9
 # define	SBLOCK 	64
 
 typedef struct			s_sdetect
