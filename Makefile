@@ -6,7 +6,7 @@
 #    By: lomasse <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 19:24:01 by lomasse           #+#    #+#              #
-#    Updated: 2019/03/05 13:04:05 by lomasse          ###   ########.fr        #
+#    Updated: 2019/03/05 21:07:53 by lomasse          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,10 @@ FRAME			= -framework OpenGL -framework AppKit
 RANDOM			= $$
 
 %.o: %.c ./includes/wolf3d.h
-	@$(GCC) $(INC) -o $@ -c $<
+	@$(GCC) $(INC) -o $@ -c $< $(FLAGS)
 
 $(NAME): $(OBJS)
-	@$(GCC) -o $@ `sdl2-config --cflags --libs` $(OBJS) $(LIB) $(LIBFT) $(LIBMLX) $(FRAME)
+	@$(GCC) -o $@ `sdl2-config --cflags --libs` $(OBJS) $(LIB) $(LIBFT) $(LIBMLX) $(FRAME) $(FLAGS)
 
 all : $(NAME)
 

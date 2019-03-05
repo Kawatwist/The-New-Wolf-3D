@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:36:05 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 18:42:13 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 21:07:05 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void	stop_exec(void *msg, t_acz *az)
 		if (az->inv != NULL)
 			free(az->inv);
 		if (az->sprite != NULL)
-			freesprite(az);
-		if (az->ray != NULL)
-			free(az->ray);
+			freesprite(az->sprite);
 		if (az->info != NULL)
 			freeinfo(az);
 		if (az->menu != NULL)
@@ -35,6 +33,7 @@ void	stop_exec(void *msg, t_acz *az)
 			freeoption(az);
 		if (az->game != NULL)
 			freegame(az);
+		freeaz(az);
 		free(az);
 	}
 	exit(0);

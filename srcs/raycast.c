@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 11:38:10 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 19:21:04 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 21:11:36 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void	raycast2(t_acz *az, t_dda *dda)
 		az->side[dda->i] = -1;
 		if (dda->y < 0 || dda->y > 3775 || dda->x < 0 || dda->x > 3775)
 		{
-			unlimitedmap(az, dda);
+			unlimitedmap(dda);
 		}
 		if (raycast4(az, dda))
 			break ;

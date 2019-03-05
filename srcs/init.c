@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 18:36:29 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 20:16:38 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,19 @@ static void		call_init2(t_acz *az)
 	az->name_save = ft_strdup("./save/map0");
 }
 
+static void		setinit(t_acz *az)
+{
+	initmain(az);
+	az->map->map = NULL;
+	az->info->selmap = NULL;
+	initmenu(az);
+	initoption(az);
+	initgame(az);
+}
+
 static void		call_init(t_acz *az)
 {
+	setinit(az);
 	init_info(az->info);
 	init_sdl(az);
 	initeditmap(az->info->editmap);
@@ -56,11 +67,11 @@ void			initialization(t_acz **az)
 
 	((*az) = (t_acz *)malloc(sizeof(t_acz))) == NULL ?
 		stop_exec("Dosnt malloc az struct\n", (*az)) : 0;
-	((*az)->main = (t_window *)malloc(sizeof(t_window))) == NULL ?
+	((*az)->main = ft_memalloc(sizeof(t_window))) == NULL ?
 		stop_exec("Dosnt malloc main window struct\n", (*az)) : 0;
-	((*az)->map = (t_map *)malloc(sizeof(t_map))) == NULL ?
+	((*az)->map = ft_memalloc(sizeof(t_map))) == NULL ?
 		stop_exec("Dosnt malloc map struct\n", (*az)) : 0;
-	((*az)->inv = (t_inv *)malloc(sizeof(t_inv))) == NULL ?
+	((*az)->inv = ft_memalloc(sizeof(t_inv))) == NULL ?
 		stop_exec("Dosnt malloc inv struct\n", (*az)) : 0;
 	i = -1;
 	while (++i < 800)

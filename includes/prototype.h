@@ -6,13 +6,21 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:14:48 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 18:23:21 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 21:09:37 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		freeaz(t_acz *az);
+void		freemain(t_acz *az);
+void		freemap(t_acz *az);
+void		freesprite(t_sprite *sprite);
+void		freeinfo(t_acz *az);
+void		freemenu(t_acz *az);
+void		freeoption(t_acz *az);
+void		freegame(t_acz *az);
 void		printedit(t_acz *az);
 void		showslider(t_acz *az);
 void		showvalide(t_acz *az);
@@ -22,7 +30,7 @@ void        initdda(t_dda *dda, t_acz *az);
 int         isvisible(t_acz *az, t_sprite *tmp, int i);
 int         frontblock(t_acz *az, int type, int portal);
 void		sort_sprite(t_sprite **sprite);
-void		unlimitedmap(t_acz *az, t_dda *dda);
+void		unlimitedmap(t_dda *dda);
 double		rotpos(t_acz *az, int portal);
 void		map_stock(t_acz *az, t_map *map, int fd);
 void		newportail(t_acz *az, t_dda *dda, int portal);
@@ -72,6 +80,10 @@ void		mouseinput(t_acz *az);
 void		input(t_acz *az);
 void		running(t_acz **az);
 void		map_parse(t_acz **az, char *name);
+void		initmain(t_acz *az);
+void		initmenu(t_acz *az);
+void		initoption(t_acz *az);
+void		initgame(t_acz *az);
 void		init_info(t_info *info);
 void		init_sdl(t_acz *az);
 void		initray(t_acz *az);

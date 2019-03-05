@@ -119,7 +119,6 @@ typedef struct			s_menu
 {
 	SDL_Surface			*background;
 	SDL_Surface			*choices;
-	SDL_Surface			*font;
 	SDL_Surface			*edit;
 	SDL_Texture			*bg;
 	SDL_Texture			*control;

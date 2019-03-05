@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:05:27 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 18:42:00 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 20:56:35 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,59 @@ void	freemain(t_acz *az)
 void	freemap(t_acz *az)
 {
 	int i;
-	int j;
 
 	i = -1;
 	if (az->map->map != NULL)
 	{
-		while (++i < 60)
-		{
-			j = -1;
-			while (++j < 60)
-				az->map->map[i][j] ? free(&(az->map->map[i][j])) : 0;
-			az->map->map[i] ? free(az->map->map[i]) : 0;
-		}
+		while (++i < 60 && az->map->map[i] != NULL)
+			az->map->map[i] != NULL ? free(az->map->map[i]) : 0;
+		free(az->map->map);
 	}
 	free(az->map);
 }
 
 void	freeinfo(t_acz *az)
 {
+	int i;
+	int j;
+
+	i = -1;
+	if (az->info->selmap != NULL)
+	{
+		while (++i < 60)
+		{
+			j = -1;
+			while (++j < 60)
+				az->info->selmap[i][j] ? free(&(az->info->selmap[i][j])) : 0;
+			az->info->selmap[i] ? free(az->info->selmap[i]) : 0;
+		}
+	}
+	free(az->info);
+}
+
+void	freemenu(t_acz *az)
+{
+	az->menu->bg != NULL ? SDL_DestroyTexture(az->menu->bg) : 0;
+	az->menu->control != NULL ? SDL_DestroyTexture(az->menu->control) : 0;
+	az->menu->editor != NULL ? SDL_DestroyTexture(az->menu->editor) : 0;
+	az->menu->select != NULL ? SDL_DestroyTexture(az->menu->select) : 0;
+	az->menu->choice != NULL ? SDL_DestroyTexture(az->menu->choice) : 0;
+	az->menu->background != NULL ? SDL_FreeSurface(az->menu->background) : 0;
+	az->menu->choices != NULL ? SDL_FreeSurface(az->menu->choices) : 0;
+	az->menu->edit != NULL ? SDL_FreeSurface(az->menu->edit) : 0;
+	free(az->menu);
+}
+
+void	freeoption(t_acz *az)
+{
+	az->option->bg != NULL ? SDL_DestroyTexture(az->option->bg) : 0;
+	az->option->control != NULL ? SDL_DestroyTexture(az->option->control) : 0;
+	az->option->editor != NULL ? SDL_DestroyTexture(az->option->editor) : 0;
+	az->option->select != NULL ? SDL_DestroyTexture(az->option->select) : 0;
+	az->option->choice != NULL ? SDL_DestroyTexture(az->option->choice) : 0;
+	az->option->background != NULL ?
+		SDL_FreeSurface(az->option->background) : 0;
+	az->option->choices != NULL ? SDL_FreeSurface(az->option->choices) : 0;
+	az->option->edit != NULL ? SDL_FreeSurface(az->option->edit) : 0;
+	free(az->option);
 }

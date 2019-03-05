@@ -6,13 +6,13 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 13:05:16 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 17:37:56 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 21:09:24 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void		unlimitedmap(t_acz *az, t_dda *dda)
+void		unlimitedmap(t_dda *dda)
 {
 	if (dda->y <= 0)
 		dda->y = 59 * SBLOCK;
