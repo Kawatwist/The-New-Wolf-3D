@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:14:48 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 17:01:18 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 17:58:05 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ void		mouseinput(t_acz *az);
 void		input(t_acz *az);
 void		running(t_acz **az);
 void		map_parse(t_acz **az, char *name);
+void		init_info(t_info *info);
+void		init_sdl(t_acz *az);
+void		initray(t_acz *az);
+void		initinv(t_acz *az);
+void		initeditmap(int map[60][60]);
 void		initialization(t_acz **az);
 void		stop_exec(void	*msg);
 int			main(int argc, char **argv);
