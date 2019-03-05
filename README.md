@@ -5,7 +5,7 @@
 <b>Need to do:</b>
 <ul>
   <li><s>init</s>
-  <li>loading
+  <li><s>loading</s>
   <li>main
   <li>map2d
   <li>portail
