@@ -4,13 +4,16 @@
 <hr>
 <b>Need to do:</b>
 <ul>
-  <li><s>Find motivation</s>
-  <li>Menu
-  <li>Option
-  <li>Editor
-  <li>Input
-  <li>Create 2D space (MAP)
-  <li>Create 3D space
+  <li>init
+  <li>loading
+  <li>main
+  <li>map2d
+  <li>portail
+  <li>portalvue
+  <li>print
+  <li>print\_form
+  <li>texture
+  <li>turn
 </ul>
 <hr>
 <b> What is Wolf3D/DOOM ?
