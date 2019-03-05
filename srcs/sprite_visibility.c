@@ -6,13 +6,13 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 10:17:03 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 10:37:18 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:26:33 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static int	isvisible5(t_acz *az, t_sprite *tmp, int i)
+static int	isvisible5(t_acz *az, int i)
 {
 	if ((((az->sdetect.sx < az->sdetect.dxf)
 		&& (az->sdetect.sx >= az->sdetect.dxl))
@@ -32,7 +32,7 @@ static int	isvisible5(t_acz *az, t_sprite *tmp, int i)
 	return (0);
 }
 
-static int	isvisible4(t_acz *az, t_sprite *tmp, int i)
+static int	isvisible4(t_acz *az, int i)
 {
 	if (az->sdetect.dyf >= 0 && az->sdetect.dyl >= 0)
 	{
@@ -47,10 +47,10 @@ static int	isvisible4(t_acz *az, t_sprite *tmp, int i)
 			< az->sdetect.dxf / az->sdetect.dyf)
 			return (1);
 	}
-	return (isvisible5(az, tmp, i));
+	return (isvisible5(az, i));
 }
 
-static int	isvisible3(t_acz *az, t_sprite *tmp, int i)
+static int	isvisible3(t_acz *az, int i)
 {
 	if (az->sdetect.dyf < 0 && az->sdetect.dyl < 0)
 	{
@@ -65,10 +65,10 @@ static int	isvisible3(t_acz *az, t_sprite *tmp, int i)
 			< az->sdetect.dxf / az->sdetect.dyf)
 			return (1);
 	}
-	return (isvisible4(az, tmp, i));
+	return (isvisible4(az, i));
 }
 
-static int	isvisible2(t_acz *az, t_sprite *tmp, int i)
+static int	isvisible2(t_acz *az, int i)
 {
 	if (az->sdetect.dxf < 0 && az->sdetect.dxl < 0)
 	{
@@ -83,7 +83,7 @@ static int	isvisible2(t_acz *az, t_sprite *tmp, int i)
 			/ az->sdetect.sx >= az->sdetect.dyf / az->sdetect.dxf)
 			return (1);
 	}
-	return (isvisible3(az, tmp, i));
+	return (isvisible3(az, i));
 }
 
 int			isvisible(t_acz *az, t_sprite *tmp, int i)
@@ -103,5 +103,5 @@ int			isvisible(t_acz *az, t_sprite *tmp, int i)
 			>= az->sdetect.dyf / az->sdetect.dxf)
 			return (1);
 	}
-	return (isvisible2(az, tmp, i));
+	return (isvisible2(az, i));
 }

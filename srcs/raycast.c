@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 11:38:10 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 13:20:32 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:21:04 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	raycast4(t_acz *az, t_dda *dda)
 	return (0);
 }
 
-static void	raycast3(t_acz *az, t_dda *dda)
+static void	raycast3(t_dda *dda)
 {
 	if (dda->pente == 1)
 	{
@@ -93,7 +93,7 @@ static void	raycast2(t_acz *az, t_dda *dda)
 {
 	while (dda->dist < az->info->range)
 	{
-		raycast3(az, dda);
+		raycast3(dda);
 		dda->dist = sqrt((dda->distx * dda->distx) + (dda->disty * dda->disty));
 		az->side[dda->i] = -1;
 		if (dda->y < 0 || dda->y > 3775 || dda->x < 0 || dda->x > 3775)

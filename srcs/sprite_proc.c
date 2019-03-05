@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 16:28:11 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 10:53:48 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:22:34 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ void		sort_sprite(t_sprite **sprite)
 {
 	t_sprite *new;
 	t_sprite *curr;
-	t_sprite *currn;
-	t_sprite *prevn;
-	t_sprite *tmp;
 
 	if (*sprite == NULL)
 		return ;

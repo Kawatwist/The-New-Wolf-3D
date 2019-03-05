@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 16:24:58 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:14:55 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	changeray2(t_acz *az, int portal, int i)
 void		changeray(t_acz *az, int portal)
 {
 	int		i;
-	double	rotate;
 
 	i = -1;
 	az->info->angle += -rotpos(az, portal);

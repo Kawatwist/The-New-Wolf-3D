@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 18:38:11 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 19:16:11 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	parseloadedit(t_acz *az)
 
 void	loadeditoplay(t_acz *az)
 {
-	int i;
 	int j;
 
 	j = -1;

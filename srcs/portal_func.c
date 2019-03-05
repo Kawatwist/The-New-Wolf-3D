@@ -6,13 +6,13 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 13:39:08 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 13:58:55 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:18:05 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static void	setportal3(t_acz *az, t_dda dda, int portal)
+static void	setportal3(t_acz *az, t_dda dda)
 {
 	az->map->blue[1] = dda.y - (dda.y % SBLOCK);
 	az->map->blue[2] = dda.x - (dda.x % SBLOCK);
@@ -27,7 +27,7 @@ static void	setportal3(t_acz *az, t_dda dda, int portal)
 	az->map->blue[5] += frontblock(az, 2, 6);
 }
 
-static void	setportal2(t_acz *az, t_dda dda, int portal)
+static void	setportal2(t_acz *az, t_dda dda)
 {
 	az->map->orange[1] = dda.y - (dda.y % SBLOCK);
 	az->map->orange[2] = dda.x - (dda.x % SBLOCK);
@@ -56,7 +56,7 @@ void		setportal(t_acz *az, t_dda dda, int portal)
 	}
 	az->map->map[dda.y / SBLOCK][dda.x / SBLOCK] = portal;
 	if (portal == 6)
-		setportal3(az, dda, portal);
+		setportal3(az, dda);
 	else
-		setportal2(az, dda, portal);
+		setportal2(az, dda);
 }
