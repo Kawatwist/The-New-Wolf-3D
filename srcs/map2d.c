@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 10:59:36 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/04 13:23:24 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 13:11:17 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,17 @@ static void	draw_obstacle(t_acz *az)
 	y1 = 0;
 	while (y < (int)az->map->persoy + 10 || y <= 60)
 	{
-		printf("%d\n", y);
 		while (y < 0)
 		{
 			y++;
 			y1++;
 		}
-		printf("y2 = %d!\n", y);
 		if (y >= 60)
 			break;
 		x = (int)az->map->persox - 6;
 		x1 = 0;
 		while (x < (int)az->map->persox + 10 || x <= 60)
 		{
-			printf("%d | %d\n", x, y);
 			while (x < 0)
 			{
 				x++;

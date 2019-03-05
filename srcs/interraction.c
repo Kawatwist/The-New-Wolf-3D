@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/02 11:44:09 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 13:03:15 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	changeray2(t_acz *az, int portal, int i)
 void		changeray(t_acz *az, int portal)
 {
 	int		i;
-	double	rotate;
 
 	i = -1;
 	az->info->angle += -rotpos(az, portal);
@@ -151,6 +150,7 @@ int			diffside(t_acz *az, t_dda *dda)
 
 void    dds(t_acz *az, t_dda *dda, int portal)
 {
+	(void)portal;
 	dda->pasx = (dda->dx = ((int)(dda->dstx)) - dda->x) < 0 ? -1 : 1;
 	dda->pasy = (dda->dy = ((int)(dda->dsty)) - dda->y) < 0 ? -1 : 1;
 	dda->dx = ft_abs(dda->dx);

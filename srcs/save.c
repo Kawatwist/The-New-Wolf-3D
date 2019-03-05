@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:49:38 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/21 14:27:10 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 13:11:01 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			save_map(t_acz *az)
 		write(savefd, "\n", 1);
 		free(str);
 	}
-	printf("Map saved\n");
+	ft_putstr("Map saved\n");
 	ft_putstr(az->name_save);
 	close(savefd);
 }

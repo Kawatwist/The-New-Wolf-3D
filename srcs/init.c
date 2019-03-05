@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/01 17:05:21 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 12:57:35 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ static void		call_init(t_acz *az)
 	az->vue = 0;
 	az->jump = 0;
 	az->speed = 1;
-	az->textbox = -1;
 	az->sensi = 0.0015;
 	az->wheelup = 0;
 	az->wheeldown = 0;

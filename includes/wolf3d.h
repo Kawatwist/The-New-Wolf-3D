@@ -194,7 +194,6 @@ typedef struct			s_acz	// ARCZURE
 	int					interface;
 	Uint8				time;
 	Uint8				time2;
-	int					textbox;
 	int					twodactif;
 	int					shoot;
 	int					shoot1;

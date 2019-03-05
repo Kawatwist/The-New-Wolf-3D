@@ -1,11 +1,15 @@
-/*
- stock ang beetween 2 portail orange<>blue  [3]
- distance xy + 1 pour front block			[4/5]
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   portail.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/05 13:05:16 by lomasse           #+#    #+#             */
+/*   Updated: 2019/03/05 13:38:53 by lomasse          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
- x1 = dda->x
- x2 = dda->dstx
- x3 = new dda->dstx
-*/
 #include "../includes/wolf3d.h"
 
 void		unlimitedmap(t_acz *az, t_dda *dda)
@@ -28,15 +32,6 @@ void		newportail(t_acz *az, t_dda *dda, int portal)
 	float	tmp;
 
 	padding = (dda->x % SBLOCK == 0 ? dda->y % SBLOCK : dda->x % SBLOCK);
-	if (dda->i == XSCREEN / 2)
-	{
-		printf("portail = %f\t", az->map->orange[0]);
-		printf("y1 = %f\t", az->map->orange[1]);
-		printf("x1 = %f\t", az->map->orange[2]);
-		printf("rot = %f\t", az->map->orange[3]);
-		printf("x2 = %f\t", az->map->orange[4]);
-		printf("y2 = %f\n", az->map->orange[5]);
-	}
 	if (portal == 6)
 	{
 		tmp = ((dda->dstx - dda->x) * cos(az->map->blue[3])) + ((dda->dsty - dda->y) * -sin(az->map->blue[3])) + dda->x;

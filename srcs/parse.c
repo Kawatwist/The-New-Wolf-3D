@@ -6,71 +6,11 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:21:03 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/21 14:15:26 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 13:33:15 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-
-void		getenemypos(t_acz *az)
-{
-	int 	x;
-	int		y;
-	int		count;
-
-	az->map->enemy != NULL ? free(az->map->enemy) : 0;
-	(az->map->enemy = (double*)malloc(sizeof(double) * az->map->nbenemy)) == NULL ?
-		stop_exec("Enemy not malloc\n") : 0;
-	count = 0;
-	y = -1;
-	while (++y < 60 && count < az->map->nbenemy * 2)
-	{
-		x = -1;
-		while (++x < 60)
-			if (az->map->map[y][x] == ENEMY)
-			{
-				az->map->enemy[count] = y;
-				az->map->enemy[count + 1] = x;
-				count += 2;
-			}
-	}
-}
-
-static void	map_stock(t_acz *az, t_map *map, int fd)
-{
-	int		x;
-	int		y;
-	int		index;
-	char	*line;
-
-	y = 0;
-	while (get_next_line(fd, &line))
-	{
-		x = 0;
-		index = 0;
-		while (x < az->info->x)
-		{
-			if (line[index] == ' ' || line[index] == '\0')
-				index++;
-			else
-			{
-				map->map[y][x] = ft_atoi(&line[index]);
-				if (map->map[y][x] == SPAWN)
-				{
-					map->persox = x;
-					map->persoy = y;
-				}
-				else if (map->map[y][x] == ENEMY)
-					az->map->nbenemy += 1;
-				while (line[index] != ' ' && line[index] != '\0')
-					index++;
-				x++;
-			}
-		}
-		y++;
-		free(line);
-	}
-}
 
 static void	map_malloc(t_acz *az, t_map *map)
 {
