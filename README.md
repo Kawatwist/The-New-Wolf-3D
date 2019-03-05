@@ -8,7 +8,7 @@
   <li><s>loading</s>
   <li>main
   <li>map2d
-  <li>portail
+  <li><s>portail</s>
   <li><s>portalvue</s>
   <li><s>print</s>
   <li><s>print\_form</s>
