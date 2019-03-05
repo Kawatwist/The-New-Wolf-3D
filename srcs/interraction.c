@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:43:08 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 13:54:02 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 16:24:58 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		changeray(t_acz *az, int portal)
 		changeray2(az, portal, i);
 }
 
-int		frontblock(t_acz *az, int type, int portal)
+int			frontblock(t_acz *az, int type, int portal)
 {
 	int value;
 
@@ -64,6 +64,32 @@ int		frontblock(t_acz *az, int type, int portal)
 		value += (az->map->blue[0] == 8 && type == 1 ? -10 : 0);
 	}
 	return (value);
+}
+
+static int	diffside2(t_acz *az, t_dda *dda)
+{
+	int value1;
+	int value2;
+	int portal;
+
+	value1 = dda->x / SBLOCK;
+	value2 = dda->y / SBLOCK;
+	portal = az->map->map[value2][value1];
+	if ((((az->map->map[(dda->y - 1) / SBLOCK][value1]) == 7) &&
+		((az->map->map[(dda->y + 1) / SBLOCK][value1]) == 7)))
+	{
+		if (dda->pasx == -1)
+			return ((az->map->orange[0] = 7));
+		return ((az->map->orange[0] = 5));
+	}
+	if ((((az->map->map[value2][(dda->x - 1) / SBLOCK]) == 7) &&
+		((az->map->map[value2][(dda->x + 1) / SBLOCK]) == 7)))
+	{
+		if (dda->pasy == -1)
+			return ((az->map->orange[0] = 8));
+		return ((az->map->orange[0] = 6));
+	}
+	return (0);
 }
 
 int			diffside(t_acz *az, t_dda *dda)
@@ -89,19 +115,5 @@ int			diffside(t_acz *az, t_dda *dda)
 			return ((az->map->blue[0] = 8));
 		return ((az->map->blue[0] = 6));
 	}
-	if ((((az->map->map[(dda->y - 1) / SBLOCK][value1]) == 7) &&
-				((az->map->map[(dda->y + 1) / SBLOCK][value1]) == 7)))
-	{
-		if (dda->pasx == -1)
-			return ((az->map->orange[0] = 7));
-		return ((az->map->orange[0] = 5));
-	}
-	if ((((az->map->map[value2][(dda->x - 1) / SBLOCK]) == 7) &&
-				((az->map->map[value2][(dda->x + 1) / SBLOCK]) == 7)))
-	{
-		if (dda->pasy == -1)
-			return ((az->map->orange[0] = 8));
-		return ((az->map->orange[0] = 6));
-	}
-	return (0);
+	return (diffside2(az, dda));
 }
