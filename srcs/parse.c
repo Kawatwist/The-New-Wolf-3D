@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:21:03 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 13:33:15 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 18:26:50 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	map_malloc(t_acz *az, t_map *map)
 	int		i;
 
 	(map->map = (int **)malloc(sizeof(int *) * az->info->y)) == NULL ?
-		stop_exec("Erreur parse\n") : 0;
+		stop_exec("Erreur parse\n", az) : 0;
 	i = -1;
 	while (++i < az->info->y)
 		(map->map[i] = (int *)malloc(sizeof(int) * az->info->x)) == NULL ?
-			stop_exec("Erreur parse\n") : 0;
+			stop_exec("Erreur parse\n", az) : 0;
 }
 
 void		map_parse(t_acz **az, char *name)
@@ -31,7 +31,7 @@ void		map_parse(t_acz **az, char *name)
 	char	*line;
 
 	if (!(fd = open(name, O_RDONLY)) || read(fd, 0, 0) < 0)
-		stop_exec("Open failed\n");
+		stop_exec("Open failed\n", *az);
 	get_next_line(fd, &line);
 	i = 0;
 	while (line[++i] != '\0')
@@ -43,10 +43,10 @@ void		map_parse(t_acz **az, char *name)
 		free(line);
 	}
 	if ((*az)->info->y != 60 || (*az)->info->x < 60 || (*az)->info->x > 61)
-		stop_exec("Map invalid\n");
+		stop_exec("Map invalid\n", *az);
 	close(fd);
 	if (!(fd = open(name, O_RDONLY)) || read(fd, 0, 0) < 0)
-		stop_exec("Open failed\n");
+		stop_exec("Open failed\n", *az);
 	map_malloc((*az), (*az)->map);
 	map_stock((*az), (*az)->map, fd);
 }
@@ -85,11 +85,11 @@ void		parseselect(t_acz *az)
 		az->info->selmap = NULL;
 	}
 	((az->info->selmap = (int**)malloc(sizeof(int*) * j)) == NULL ?
-	stop_exec("Malloc select\n") : 0);
+	stop_exec("Malloc select\n", az) : 0);
 	while (tmp < j)
 	{
 		((az->info->selmap[tmp] = (int*)malloc(sizeof(int*) * i)) == NULL ?
-		stop_exec("Malloc select\n") : 0);
+		stop_exec("Malloc select\n", az) : 0);
 		tmp++;
 	}
 	fillselect(az, i, j);

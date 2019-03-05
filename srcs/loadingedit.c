@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 17:55:00 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 18:38:11 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	parseloadedit(t_acz *az)
 			az->map->map[j][i] = az->info->editmap[j][i];
 			az->info->editmap[j][i] == 2 ? az->map->persox = i : 0;
 			az->info->editmap[j][i] == 2 ? az->map->persoy = j : 0;
-			az->info->editmap[j][i] == ENEMY ? az->map->enemy += 1 : 0;
 		}
 	}
 }
@@ -43,13 +42,12 @@ void	loadeditoplay(t_acz *az)
 			az->map->map[j] != NULL ? free(az->map->map[j]) : 0;
 		free(az->map->map);
 	}
-	az->map->enemy = 0;
 	(az->map->map = (int **)malloc(sizeof(int*) * 60)) == NULL ?
-		stop_exec("MALLLOC FAILED\n") : 0;
+		stop_exec("MALLLOC FAILED\n", az) : 0;
 	j = -1;
 	while (++j < az->info->y)
 		(az->map->map[j] = (int *)malloc(sizeof(int) * 60)) == NULL ?
-			stop_exec("MALLLOC FAILED\n") : 0;
+			stop_exec("MALLLOC FAILED\n", az) : 0;
 	parseloadedit(az);
 }
 
@@ -72,7 +70,6 @@ void	loadplaytoedit(t_acz *az)
 	int i;
 	int j;
 
-	az->map->enemy = 0;
 	j = -1;
 	while (++j < 60)
 	{

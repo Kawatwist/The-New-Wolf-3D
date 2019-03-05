@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 17:40:21 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 18:36:29 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void		call_init2(t_acz *az)
 	az->wheelup = 0;
 	az->wheeldown = 0;
 	az->map->nbenemy = 0;
-	az->map->enemy = NULL;
 	az->map->map = NULL;
 	az->map->orange[0] = 0;
 	az->map->blue[0] = 0;
@@ -56,24 +55,24 @@ void			initialization(t_acz **az)
 	int	i;
 
 	((*az) = (t_acz *)malloc(sizeof(t_acz))) == NULL ?
-		stop_exec("Dosnt malloc az struct\n") : 0;
+		stop_exec("Dosnt malloc az struct\n", (*az)) : 0;
 	((*az)->main = (t_window *)malloc(sizeof(t_window))) == NULL ?
-		stop_exec("Dosnt malloc main window struct\n") : 0;
+		stop_exec("Dosnt malloc main window struct\n", (*az)) : 0;
 	((*az)->map = (t_map *)malloc(sizeof(t_map))) == NULL ?
-		stop_exec("Dosnt malloc map struct\n") : 0;
+		stop_exec("Dosnt malloc map struct\n", (*az)) : 0;
 	((*az)->inv = (t_inv *)malloc(sizeof(t_inv))) == NULL ?
-		stop_exec("Dosnt malloc inv struct\n") : 0;
+		stop_exec("Dosnt malloc inv struct\n", (*az)) : 0;
 	i = -1;
 	while (++i < 800)
 		((*az)->ray[i] = (t_ray *)malloc(sizeof(t_ray))) == NULL ?
-			stop_exec("Dosnt malloc ray struct\n") : 0;
+			stop_exec("Dosnt malloc ray struct\n", (*az)) : 0;
 	((*az)->menu = (t_menu *)malloc(sizeof(t_menu))) == NULL ?
-		stop_exec("Dosnt malloc menu struct\n") : 0;
+		stop_exec("Dosnt malloc menu struct\n", (*az)) : 0;
 	((*az)->option = (t_menu *)malloc(sizeof(t_menu))) == NULL ?
-		stop_exec("Dosnt malloc option struct\n") : 0;
+		stop_exec("Dosnt malloc option struct\n", (*az)) : 0;
 	((*az)->info = (t_info *)malloc(sizeof(t_info))) == NULL ?
-		stop_exec("Dosnt malloc info struct\n") : 0;
+		stop_exec("Dosnt malloc info struct\n", (*az)) : 0;
 	((*az)->game = (t_game *)malloc(sizeof(t_game))) == NULL ?
-		stop_exec("Dosnt malloc game struct\n") : 0;
+		stop_exec("Dosnt malloc game struct\n", (*az)) : 0;
 	call_init(*az);
 }

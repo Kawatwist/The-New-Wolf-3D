@@ -106,7 +106,6 @@ typedef struct			s_inv
 typedef struct			s_map
 {
 	int					**map;
-	double				*enemy;
 	int					nbenemy;
 	float				orange[6];
 	float				blue[6];

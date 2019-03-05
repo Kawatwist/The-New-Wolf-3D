@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:49:38 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 13:11:01 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 18:27:20 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char		*dupmapline(t_acz *az, int y)
 	int		x;
 
 	(str = (char *)malloc(sizeof(char) * 120)) == NULL ?
-		stop_exec("str dont load\n") : 0;
+		stop_exec("str dont load\n", az) : 0;
 	x = 0;
 	while (x < 120)
 	{
@@ -74,7 +74,7 @@ void			save_map(t_acz *az)
 	findname(az);
 	savefd = creat(az->name_save, O_CREAT | S_IRWXU |
 			S_IRWXG | S_IRWXO | O_TRUNC);
-	savefd < 0 ? stop_exec("Save failed\n") : 0;
+	savefd < 0 ? stop_exec("Save failed\n", az) : 0;
 	y = -1;
 	while (++y < 60)
 	{

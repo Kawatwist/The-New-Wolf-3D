@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 11:25:21 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 18:37:13 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	input_menu(Uint8 *state, t_acz *az)
 		az->menu->mode == 0 ? az->interface = 1 : 0;
 		az->menu->mode == 1 ? az->interface = 2 : 0;
 		az->menu->mode == 2 ? az->interface = 3 : 0;
-		az->menu->mode == 3 ? stop_exec("Goodbye & see you later\n") : 0;
+		az->menu->mode == 3 ? stop_exec("Goodbye & see you later\n", az) : 0;
 	}
-	state[SDL_SCANCODE_ESCAPE] ? stop_exec("Escape\n") : 0;
+	state[SDL_SCANCODE_ESCAPE] ? stop_exec("Escape\n", az) : 0;
 }
 
 static void	input_option(Uint8 *state, t_acz *az)

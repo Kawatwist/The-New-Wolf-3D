@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:33:20 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 16:31:31 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 18:35:13 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			load_texture(SDL_Renderer *render,
 	SDL_Surface	*surface;
 
 	surface = IMG_Load(path);
-	surface == NULL ? stop_exec("cant load surface\n") : 0;
+//	surface == NULL ? stop_exec("cant load surface\n") : 0;
 	*texture = SDL_CreateTextureFromSurface(render, surface);
 	SDL_FreeSurface(surface);
 }

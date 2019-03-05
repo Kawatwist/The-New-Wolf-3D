@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:14:48 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 17:58:05 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 18:23:21 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		initray(t_acz *az);
 void		initinv(t_acz *az);
 void		initeditmap(int map[60][60]);
 void		initialization(t_acz **az);
-void		stop_exec(void	*msg);
+void		stop_exec(void	*msg, t_acz *az);
 int			main(int argc, char **argv);
 int			get_side(t_dda *dda, t_acz *az);
 
