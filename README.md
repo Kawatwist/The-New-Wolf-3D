@@ -4,7 +4,7 @@
 <hr>
 <b>Need to do:</b>
 <ul>
-  <li>init
+  <li><s>init</s>
   <li>loading
   <li>main
   <li>map2d
