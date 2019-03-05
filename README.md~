@@ -10,8 +10,8 @@
   <li>map2d
   <li>portail
   <li>portalvue
-  <li>print
-  <li>print\_form
+  <li><s>print</s>
+  <li><s>print\_form</s>
   <li><s>texture</s>
   <li><s>turn</s>
 </ul>

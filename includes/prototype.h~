@@ -1,6 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prototype.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/05 14:14:48 by cbilga            #+#    #+#             */
+/*   Updated: 2019/03/05 14:14:53 by cbilga           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void        initdda(t_dda *dda, t_acz *az);
+int         isvisible(t_acz *az, t_sprite *tmp, int i);
+int         frontblock(t_acz *az, int type, int portal);
 void		sort_sprite(t_sprite **sprite);
 void		unlimitedmap(t_acz *az, t_dda *dda);
 double		rotpos(t_acz *az, int portal);

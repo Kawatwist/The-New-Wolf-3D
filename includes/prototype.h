@@ -6,13 +6,18 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:14:48 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 14:14:53 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 17:01:18 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _PROTOTYPE_H
 # define _PROTOTYPE_H
 
+void		printedit(t_acz *az);
+void		showslider(t_acz *az);
+void		showvalide(t_acz *az);
+void		showhp(t_acz *az);
+void		showhud(t_acz *az);
 void        initdda(t_dda *dda, t_acz *az);
 int         isvisible(t_acz *az, t_sprite *tmp, int i);
 int         frontblock(t_acz *az, int type, int portal);

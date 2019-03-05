@@ -9,7 +9,7 @@
   <li>main
   <li>map2d
   <li>portail
-  <li>portalvue
+  <li><s>portalvue</s>
   <li><s>print</s>
   <li><s>print\_form</s>
   <li><s>texture</s>
