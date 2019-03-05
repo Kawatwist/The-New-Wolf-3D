@@ -6,28 +6,11 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:33:20 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/02 14:43:44 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/05 16:31:31 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-
-int				letter(SDL_Rect *find, char c)
-{
-/*
-	if (c < '0'|| c > 'z' || (c > '9' && c < 'A') || (c >'Z' && c < 'a'))
-	{
-		ft_putstr("char invalid\n");
-		return (0);
-	}
-	find->x = c - '0' * 20 % 13;
-	find->y = c - '0' / 13;
-	find->w = NULL;
-	find->h = NULL;
-	return (1);
-*/
-	return (1);
-}
 
 void			showsky(t_acz *az)
 {
