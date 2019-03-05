@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 19:39:42 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/04 16:14:05 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/05 16:54:55 by cbilga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,42 +36,31 @@ void			printselect(t_acz *az)
 	}
 }
 
-void			printline(t_acz *az)
+static void		printgrill3(t_acz *az, int i, int j, SDL_Rect square)
 {
-	int			i;
-	int			j;
-	double		value;
-	SDL_Texture *tex;
-
-	az->dst.w = 1;
-	az->src.w = 1;
-	az->src.h = 64;
-	i = 0;
-	raycast(az);
-	if (az->jump != 0)
-	{
-		az->acl = az->acl - (0.098 * az->jump);
-		az->mode -= az->acl;
-	}
-	//spritedist
-	sprite_dist(az);
-	sort_sprite(&az->sprite);
-	while (i < XSCREEN)
-	{
-		value = az->info->range / az->ray[i]->obs;
-		value < 0 ? value *= -1 : 0;
-		value = value / 200;
-		tex = pick_texture(az, i);
-		j = (YSCREEN / 2) - value - (az->mode * (value / 680)) + ( az->vue * 5/* * 680 / 90*/);
-		az->dst.y = j;
-		az->dst.x = i;
-		az->src.x = az->side[i] % SBLOCK;
-		az->src.y = 0;
-		az->dst.h = value * 2;
-		SDL_RenderCopy(az->main->rend, tex, &az->src, &az->dst);
-		i++;
-	}
-	draw_sprites(az);
+	square.x = i * 10;
+	square.y = j * 10;
+	az->info->editmap[j][i] == 1 ?
+		SDL_SetRenderDrawColor(az->main->rend, 255, 255, 255, 100) : 0;
+	az->info->editmap[j][i] == 2 ?
+		SDL_SetRenderDrawColor(az->main->rend, 255, 0, 255, 0) : 0;
+	az->info->editmap[j][i] == 3 ?
+		SDL_SetRenderDrawColor(az->main->rend, 255, 0, 0, 0) : 0;
+	az->info->editmap[j][i] == 4 ?
+		SDL_SetRenderDrawColor(az->main->rend, 255, 150, 0, 0) : 0;
+	az->info->editmap[j][i] == 5 ?
+		SDL_SetRenderDrawColor(az->main->rend, 50, 100, 50, 0) : 0;
+	az->info->editmap[j][i] == 6 ?
+		SDL_SetRenderDrawColor(az->main->rend, 100, 100, 250, 0) : 0;
+	az->info->editmap[j][i] == 7 ?
+		SDL_SetRenderDrawColor(az->main->rend, 250, 100, 100, 0) : 0;
+	az->info->editmap[j][i] == 8 ?
+		SDL_SetRenderDrawColor(az->main->rend, 255, 200, 100, 0) : 0;
+	az->info->editmap[j][i] == 9 ?
+		SDL_SetRenderDrawColor(az->main->rend, 100, 100, 255, 0) : 0;
+	az->info->editmap[j][i] == ENEMY ?
+		SDL_SetRenderDrawColor(az->main->rend, 100, 0, 0, 0) : 0;
+	SDL_RenderFillRect(az->main->rend, &square);
 }
 
 static void		printgrill2(t_acz *az)
@@ -107,31 +96,7 @@ void			printgrill(t_acz *az)
 		while (++i < 60)
 		{
 			if (az->info->editmap[j][i] != 0)
-			{
-				square.x = i * 10;
-				square.y = j * 10;
-				az->info->editmap[j][i] == 1 ?
-					SDL_SetRenderDrawColor(az->main->rend, 255, 255, 255, 100) : 0;
-				az->info->editmap[j][i] == 2 ?
-					SDL_SetRenderDrawColor(az->main->rend, 255, 0, 255, 0) : 0;
-				az->info->editmap[j][i] == 3 ?
-					SDL_SetRenderDrawColor(az->main->rend, 255, 0, 0, 0) : 0;
-				az->info->editmap[j][i] == 4 ?
-					SDL_SetRenderDrawColor(az->main->rend, 255, 150, 0, 0) : 0;
-				az->info->editmap[j][i] == 5 ?
-					SDL_SetRenderDrawColor(az->main->rend, 50, 100, 50, 0) : 0;
-				az->info->editmap[j][i] == 6 ?
-					SDL_SetRenderDrawColor(az->main->rend, 100, 100, 250, 0) : 0;
-				az->info->editmap[j][i] == 7 ?
-					SDL_SetRenderDrawColor(az->main->rend, 250, 100, 100, 0) : 0;
-				az->info->editmap[j][i] == 8 ?
-					SDL_SetRenderDrawColor(az->main->rend, 255, 200, 100, 0) : 0;
-				az->info->editmap[j][i] == 9 ?
-					SDL_SetRenderDrawColor(az->main->rend, 100, 100, 255, 0) : 0;
-				az->info->editmap[j][i] == ENEMY ?
-					SDL_SetRenderDrawColor(az->main->rend, 100, 0, 0, 0) : 0;
-				SDL_RenderFillRect(az->main->rend, &square);
-			}
+				printgrill3(az, i, j, square);
 		}
 	}
 	square.x = az->map->persox * 10;

@@ -12,7 +12,7 @@
   <li>portalvue
   <li>print
   <li>print\_form
-  <li>texture
+  <li><s>texture</s>
   <li><s>turn</s>
 </ul>
 <hr>
