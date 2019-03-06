@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 11:38:10 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/06 10:01:54 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 11:03:16 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	raycast4(t_acz *az, t_dda *dda)
 				== 0 ? diffside(az, dda) : 0;
 			az->shoot1 == 1 && dda->i == XSCREEN / 2 && dda->tmp
 				== 0 ? diffside(az, dda) : 0;
-			dda->dist = (dda->dist * cos((dda->i - (XSCREEN / 2)) * 0.00195));
+			dda->dist = (dda->dist * cos((dda->i - (XSCREEN / 2)) * az->fov));
 			dda->dist = (dda->dist != 0 ? (dda->dist) : 0);
 			az->zbuffer[dda->i] = dda->dist / SBLOCK;
 			az->ray[dda->i]->obs = (dda->dist / (YSCREEN / 2));

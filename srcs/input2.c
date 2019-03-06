@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 12:59:40 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 11:08:38 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void		game_touche(Uint8 *state, t_acz *az)
 	state[SDL_SCANCODE_9] ? az->mode -= 1 : 0;
 	state[SDL_SCANCODE_O] ? az->vue += 1 : 0;
 	state[SDL_SCANCODE_P] ? az->vue -= 1 : 0;
+	state[SDL_SCANCODE_KP_PLUS] && az->fov < 0.003 ?
+		az->fov += 0.0001 : 0;
+	state[SDL_SCANCODE_KP_MINUS] && az->fov > 0.0005 ?
+		az->fov -= 0.0001 : 0;
 }
 
 void		input_game(Uint8 *state, t_acz *az)

@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 09:45:54 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/06 10:17:24 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 10:58:33 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ typedef struct			s_acz
 	double				sensi;
 	SDL_Rect			dst;
 	SDL_Rect			src;
+	double				fov;
 }						t_acz;
 
 void					freeaz(t_acz *az);
