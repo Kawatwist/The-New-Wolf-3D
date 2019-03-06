@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:25:07 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 11:19:39 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 10:21:30 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,40 @@ void		rifle0(Uint16 mouse, t_acz *az)
 	az->game->gun != NULL ? SDL_DestroyTexture(az->game->gun) : 0;
 	if (mouse & SDL_BUTTON_LMASK)
 		load_texture(az->main->rend, &az->game->gun
-				, "texture/portalshoot1.png");
+				, "texture/portalshoot1.png", az);
 	else if (mouse & SDL_BUTTON_RMASK)
 		load_texture(az->main->rend, &az->game->gun
-				, "texture/portalshoot2.png");
+				, "texture/portalshoot2.png", az);
 	else
 		load_texture(az->main->rend, &az->game->gun
-				, "texture/portalgun.png");
+				, "texture/portalgun.png", az);
 }
 
 void		rifle1(Uint16 mouse, t_acz *az)
 {
 	az->game->gun != NULL ? SDL_DestroyTexture(az->game->gun) : 0;
 	if (mouse & SDL_BUTTON_LMASK || mouse & SDL_BUTTON_RMASK)
-		load_texture(az->main->rend, &az->game->gun, "texture/sword2.png");
+		load_texture(az->main->rend, &az->game->gun, "texture/sword2.png", az);
 	else
-		load_texture(az->main->rend, &az->game->gun, "texture/sword.png");
+		load_texture(az->main->rend, &az->game->gun, "texture/sword.png", az);
 }
 
 void		rifle2(Uint16 mouse, t_acz *az)
 {
 	az->game->gun != NULL ? SDL_DestroyTexture(az->game->gun) : 0;
 	if (mouse & SDL_BUTTON_LMASK || mouse & SDL_BUTTON_RMASK)
-		load_texture(az->main->rend, &az->game->gun, "texture/P2.png");
+		load_texture(az->main->rend, &az->game->gun, "texture/P2.png", az);
 	else
-		load_texture(az->main->rend, &az->game->gun, "texture/P1.png");
+		load_texture(az->main->rend, &az->game->gun, "texture/P1.png", az);
 }
 
 void		rifle3(Uint16 mouse, t_acz *az)
 {
 	az->game->gun != NULL ? SDL_DestroyTexture(az->game->gun) : 0;
 	if (mouse & SDL_BUTTON_LMASK || mouse & SDL_BUTTON_RMASK)
-		load_texture(az->main->rend, &az->game->gun, "texture/box2.png");
+		load_texture(az->main->rend, &az->game->gun, "texture/box2.png", az);
 	else
-		load_texture(az->main->rend, &az->game->gun, "texture/box.png");
+		load_texture(az->main->rend, &az->game->gun, "texture/box.png", az);
 }
 
 void		rifle4(Uint16 mouse, t_acz *az)

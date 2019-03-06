@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 19:51:54 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 20:18:16 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 09:59:32 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ void	initgame(t_acz *az)
 	az->game->portal2 = NULL;
 	az->game->health = NULL;
 	az->game->shield = NULL;
-	az->game->Nwall = NULL;
-	az->game->Swall = NULL;
-	az->game->Ewall = NULL;
-	az->game->Wwall = NULL;
+	az->game->nwall = NULL;
+	az->game->swall = NULL;
+	az->game->ewall = NULL;
+	az->game->wwall = NULL;
 	az->game->door = NULL;
-	az->game->Filler = NULL;
+	az->game->filler = NULL;
 	az->game->enemy = NULL;
 	az->game->ssky = NULL;
 	az->game->sground = NULL;

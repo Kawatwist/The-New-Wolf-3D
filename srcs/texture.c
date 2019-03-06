@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:33:20 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 18:35:13 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 10:17:51 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void			showground(t_acz *az)
 }
 
 void			load_texture(SDL_Renderer *render,
-		SDL_Texture **texture, char *path)
+		SDL_Texture **texture, char *path, t_acz *az)
 {
 	SDL_Surface	*surface;
 
 	surface = IMG_Load(path);
-//	surface == NULL ? stop_exec("cant load surface\n") : 0;
+	surface == NULL ? stop_exec("cant load surface\n", az) : 0;
 	*texture = SDL_CreateTextureFromSurface(render, surface);
 	SDL_FreeSurface(surface);
 }
@@ -72,14 +72,14 @@ void			load_texture(SDL_Renderer *render,
 SDL_Texture		*pick_texture(t_acz *az, int i)
 {
 	if (az->side[i] / SBLOCK == 1)
-		return (az->game->Nwall);
+		return (az->game->nwall);
 	if (az->side[i] / SBLOCK == 2)
-		return (az->game->Swall);
+		return (az->game->swall);
 	if (az->side[i] / SBLOCK == 3)
-		return (az->game->Wwall);
+		return (az->game->wwall);
 	if (az->side[i] / SBLOCK == 4)
-		return (az->game->Ewall);
+		return (az->game->ewall);
 	if (az->side[i] / SBLOCK == 5)
 		return (az->game->door);
-	return (az->game->Filler);
+	return (az->game->filler);
 }

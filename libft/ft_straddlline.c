@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:33:25 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/25 10:33:43 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 10:14:27 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static char	*ft_strnrchr(char *str, int c)
 {
-	int i;
+	int	i;
 	int oc;
 
-	i =  ft_strlen(str);
+	i = ft_strlen(str);
 	oc = 0;
 	while (i)
 	{
@@ -34,7 +34,7 @@ static char	*ft_strnrchr(char *str, int c)
 
 char		*ft_straddlline(char *str, char c)
 {
-	int 	len;
+	int		len;
 	char	*pos;
 	char	*tmp;
 	char	*newhead;

@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:54:06 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 21:03:36 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 09:57:51 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	freegame(t_acz *az)
 	az->game->portal2 != NULL ? SDL_DestroyTexture(az->game->portal2) : 0;
 	az->game->health != NULL ? SDL_DestroyTexture(az->game->health) : 0;
 	az->game->shield != NULL ? SDL_DestroyTexture(az->game->shield) : 0;
-	az->game->Nwall != NULL ? SDL_DestroyTexture(az->game->Nwall) : 0;
-	az->game->Swall != NULL ? SDL_DestroyTexture(az->game->Swall) : 0;
-	az->game->Ewall != NULL ? SDL_DestroyTexture(az->game->Ewall) : 0;
-	az->game->Wwall != NULL ? SDL_DestroyTexture(az->game->Wwall) : 0;
+	az->game->nwall != NULL ? SDL_DestroyTexture(az->game->nwall) : 0;
+	az->game->swall != NULL ? SDL_DestroyTexture(az->game->swall) : 0;
+	az->game->ewall != NULL ? SDL_DestroyTexture(az->game->ewall) : 0;
+	az->game->wwall != NULL ? SDL_DestroyTexture(az->game->wwall) : 0;
 	az->game->door != NULL ? SDL_DestroyTexture(az->game->door) : 0;
-	az->game->Filler != NULL ? SDL_DestroyTexture(az->game->Filler) : 0;
+	az->game->filler != NULL ? SDL_DestroyTexture(az->game->filler) : 0;
 	az->game->enemy != NULL ? SDL_DestroyTexture(az->game->enemy) : 0;
 	az->game->ssky != NULL ? SDL_FreeSurface(az->game->ssky) : 0;
 	az->game->sground != NULL ? SDL_FreeSurface(az->game->sground) : 0;

@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 14:40:44 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 17:10:54 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 10:03:25 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		init_info(t_info *info)
 	info->selectx = 0;
 	info->selecty = 0;
 	info->editbrush = 1;
-	info->range = 6000;
+	info->range = 3000;
 	info->angle = 0;
 }
 

@@ -6,7 +6,7 @@
 /*   By: cbilga <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 15:31:38 by cbilga            #+#    #+#             */
-/*   Updated: 2019/03/05 19:16:11 by cbilga           ###   ########.fr       */
+/*   Updated: 2019/03/06 10:19:56 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void	loadplaytoedit(t_acz *az)
 
 void	loadedit(t_acz *az)
 {
-	load_texture(az->main->rend, &az->menu->editor, "texture/editor.png");
-	load_texture(az->main->rend, &az->menu->select, "texture/select.png");
+	load_texture(az->main->rend, &az->menu->editor, "texture/editor.png", az);
+	load_texture(az->main->rend, &az->menu->select, "texture/select.png", az);
 }

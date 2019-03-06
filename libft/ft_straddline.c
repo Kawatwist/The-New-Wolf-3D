@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:32:53 by lomasse           #+#    #+#             */
-/*   Updated: 2019/02/25 10:33:04 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 10:14:37 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_straddline(char *str, char c)
 {
-	int 	len;
+	int		len;
 	char	*pos;
 	char	*tmp;
 	char	*newhead;
