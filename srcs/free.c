@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:05:27 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 20:56:35 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 11:52:18 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,13 @@ void	freemap(t_acz *az)
 void	freeinfo(t_acz *az)
 {
 	int i;
-	int j;
 
 	i = -1;
 	if (az->info->selmap != NULL)
 	{
-		while (++i < 60)
-		{
-			j = -1;
-			while (++j < 60)
-				az->info->selmap[i][j] ? free(&(az->info->selmap[i][j])) : 0;
-			az->info->selmap[i] ? free(az->info->selmap[i]) : 0;
-		}
+		while (++i < az->info->selsizey && az->info->selmap[i] != NULL)
+			az->info->selmap[i] != NULL ? free(az->info->selmap[i]) : 0;
+		free(az->info->selmap);
 	}
 	free(az->info);
 }

@@ -6,7 +6,7 @@
 /*   By: lomasse <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 15:21:03 by lomasse           #+#    #+#             */
-/*   Updated: 2019/03/05 18:26:50 by lomasse          ###   ########.fr       */
+/*   Updated: 2019/03/06 11:51:28 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ static void	fillselect(t_acz *az, int sizex, int sizey)
 	}
 }
 
+static void	freesel(t_acz *az)
+{
+	int i;
+
+	i = -1;
+	while (++i < az->info->selsizey && az->info->selmap[i] != NULL)
+		az->info->selmap[i] != NULL ? free(az->info->selmap[i]) : 0;
+	az->info->selmap != NULL ? free(az->info->selmap) : 0;
+}
+
 void		parseselect(t_acz *az)
 {
 	int i;
@@ -81,7 +91,7 @@ void		parseselect(t_acz *az)
 		return ;
 	if (az->info->selmap != NULL)
 	{
-		free(az->info->selmap);
+		freesel(az);
 		az->info->selmap = NULL;
 	}
 	((az->info->selmap = (int**)malloc(sizeof(int*) * j)) == NULL ?
