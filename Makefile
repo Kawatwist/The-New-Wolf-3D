@@ -6,11 +6,11 @@
 #    By: lomasse <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 19:24:01 by lomasse           #+#    #+#              #
-#    Updated: 2019/03/05 21:07:53 by lomasse          ###   ########.fr        #
+#    Updated: 2019/03/06 10:49:10 by lomasse          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= Wolf3D
+NAME			= wolf3d
 
 SRC_PATH		= ./srcs/
 
@@ -44,7 +44,7 @@ $(NAME): $(OBJS)
 
 all : $(NAME)
 
-weshalors :
+cake : $(NAME)
 	@clear ; cat texture/portal.txt ; echo "\n\n" ; cat texture/cake.txt ;
 
 clean :
